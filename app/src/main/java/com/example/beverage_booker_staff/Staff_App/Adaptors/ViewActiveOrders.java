@@ -14,13 +14,18 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
+public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.RecyclerViewHolder> {
 
     private ArrayList<OrderItems> orderItems;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+    }
+
+    //start order button listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
     public interface OnClickListener {
@@ -38,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             super(itemView);
             mOrderID = itemView.findViewById(R.id.orderID);
             mOrderStatus = itemView.findViewById(R.id.orderStatus);
-
+            mStartOrder = itemView.findViewById(R.id.buttonStartOrder);
             mStartOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -51,17 +56,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 }
             });
 
-                }
+        }
     }
 
-    public RecyclerAdapter(ArrayList<OrderItems> listItems) {
+    public ViewActiveOrders(ArrayList<OrderItems> listItems) {
         orderItems = listItems;
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_active_orders_item, parent, false);
         RecyclerViewHolder rvh = new RecyclerViewHolder(v);
         return rvh;
     }
@@ -79,11 +84,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public int getItemCount() {
         return orderItems.size();
-    }
-
-    //start order button listener
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
     }
 }
 

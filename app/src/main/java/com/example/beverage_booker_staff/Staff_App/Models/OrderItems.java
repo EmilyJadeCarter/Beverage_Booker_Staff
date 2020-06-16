@@ -19,4 +19,8 @@ public class OrderItems {
     public String getStatus() {
         return Status;
     }
+
+    public int getOrderId() {
+        return orderID;
+    }
 }

@@ -8,9 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Staff_App.Activities.ViewOrderListActivity" />
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Staff_App.Activities.ViewCartItemsActivity">
+<!--            android:parentActivityName=".Staff_App.Activities.ViewActiveOrdersActivity"-->
+            ></activity>
+        <activity android:name=".Staff_App.Activities.ViewActiveOrdersActivity" />
         <activity android:name=".Staff_App.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,5 +22,8 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

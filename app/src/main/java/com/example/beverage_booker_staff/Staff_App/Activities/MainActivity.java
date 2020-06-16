@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (!loginResponse.isError()) {
 
-                    Intent intent = new Intent(MainActivity.this, ViewOrderListActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ViewActiveOrdersActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         validateID();
-        Intent intent = new Intent(MainActivity.this, ViewOrderListActivity.class);
+        Intent intent = new Intent(MainActivity.this, ViewActiveOrdersActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 

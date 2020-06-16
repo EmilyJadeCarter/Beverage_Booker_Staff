@@ -9,15 +9,16 @@
     <Button
         android:id="@+id/button_ValidateId"
         android:layout_width="wrap_content"
+        android:inputType="number"
         android:layout_height="wrap_content"
         android:layout_marginStart="321dp"
         android:layout_marginLeft="321dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="322dp"
         android:layout_marginRight="322dp"
         android:text="Click to View Orders"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="261dp"
         android:layout_marginLeft="261dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="260dp"
         android:layout_marginRight="260dp"
         android:ems="10"
@@ -37,7 +38,7 @@
         android:inputType="numberSigned"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
