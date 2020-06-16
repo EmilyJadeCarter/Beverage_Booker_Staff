@@ -27,7 +27,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private ArrayList<CartItems> mCartItems;
     private RecyclerView mRecyclerView;
     private ViewCartItems mRecyclerAdapter;
-    private String orderNum ;
+    private String orderNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +55,14 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             public void onItemClick(int position) {
 
                 String itemID = String.valueOf(mCartItems.get(position).getItemID());
-                System.out.println("position: " +position);
-                System.out.println("Item ID: " +itemID);
+                System.out.println("position: " + position);
+                System.out.println("Item ID: " + itemID);
                 checkItemOff();
 
                 Call<List<CartItems>> call = RetrofitClient
                         .getInstance()
                         .getApi()
                         .getCartItems(Integer.parseInt(orderNum));
-
 
 
                 call.enqueue(new Callback<List<CartItems>>() {
@@ -83,32 +82,33 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
 
-        Call<List<OrderItems>> call = RetrofitClient
+        Call<List<CartItems>> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getOrderItems();
+                .getCartItems(Integer.parseInt(orderNum));
 
-        call.enqueue(new Callback<List<OrderItems>>() {
+        call.enqueue(new Callback<List<CartItems>>() {
             @Override
-            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
-//                if (response.code() == 200) {
-//                    for (int i = 0; i < response.body().size(); i++) {
-//                        mCartItems.add(response.body().get(i));
-//                    }
-//
-//                    mRecyclerAdapter.notifyDataSetChanged();
-//                }
+            public void onResponse(Call<List<CartItems>> call, Response<List<CartItems>> response) {
+                if (response.code() == 200) {
+                    for (int i = 0; i < response.body().size(); i++) {
+                        mCartItems.add(response.body().get(i));
+                    }
+
+                    mRecyclerAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<List<CartItems>> call, Throwable t) {
+
             }
+
+
+
         });
-
     }
-
     private void checkItemOff() {
-      System.out.println("This item has been checked");
+        System.out.println("This item has been checked");
     }
 }
