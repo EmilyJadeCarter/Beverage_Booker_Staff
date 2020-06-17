@@ -26,13 +26,13 @@ public interface Api {
     );
 
     //Get Menu items from database
-    @GET("getorderitems")
-    Call<List<OrderItems>> getOrderItems();
+    @GET("getorderslist")
+    Call<List<OrderItems>> getOrderList();
 
     //Get Cart items from database
-    @GET("getitemscart")
-    Call<List<CartItems>> getCartItems(
-            @Query("orderID") int orderNum
+    @GET("getorderitems")
+    Call<List<CartItems>> getOrderItems(
+            @Query("cartID") int cartID
     );
 
 }

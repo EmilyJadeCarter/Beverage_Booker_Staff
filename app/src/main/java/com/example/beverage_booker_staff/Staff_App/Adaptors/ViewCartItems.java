@@ -17,33 +17,36 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerViewHolder> {
+
     private ArrayList<CartItems> cartItems;
     private ViewCartItems.OnItemClickListener mListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
     //finish order button listener
     public void setOnItemClickListener(ViewCartItems.OnItemClickListener listener) {
         mListener = listener;
     }
 
-//    public interface OnClickListener {
-//        void onItemClick(int position);
-//    }
+    public interface OnClickListener {
+        void onItemClick(int position);
+    }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         TextView mItemID;
         TextView mItemTitle;
         TextView mItemQuantity;
+
         CheckBox mDone;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemID = itemView.findViewById(R.id.textView_itemID);
             mItemTitle = itemView.findViewById(R.id.textView_itemTitle);
-            mItemQuantity = itemView.findViewById(R.id.textView_Quantity);
+            mItemQuantity = itemView.findViewById(R.id.itemQuantityValue);
             mDone = itemView.findViewById(R.id.checkBox_complete);
             mDone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,9 +69,9 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
 
     @NonNull
     @Override
-    public ViewCartItems.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_individual_item, parent, false);
-        ViewCartItems.RecyclerViewHolder rvh = new ViewCartItems.RecyclerViewHolder(v);
+        RecyclerViewHolder rvh = new RecyclerViewHolder(v);
         return rvh;
     }
 
@@ -79,7 +82,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
 
         holder.mItemID.setText(String.valueOf(currentItem.getItemID()));
         holder.mItemTitle.setText(currentItem.getItemTitle());
-        holder.mItemQuantity.setText(String.valueOf(currentItem.getItemQuantity()));
+        holder.mItemQuantity.setText(String.valueOf(currentItem.getQuantity()));
     }
 
     @Override

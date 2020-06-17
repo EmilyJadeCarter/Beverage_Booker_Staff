@@ -3,6 +3,7 @@ package com.example.beverage_booker_staff.Staff_App.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +23,8 @@ import java.util.List;
 
 public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewActiveOrders.OnItemClickListener {
 
-    public static final String EXTRA_TEXT = "com.example.beverage_booker_staff.EXTRA_TEXT";
+    public static final String ORDER_ID = "com.example.beverage_booker_staff.ORDER_ID";
+    public static final String CART_ID = "com.example.beverage_booker_staff.CART_ID";
 
 
     private ArrayList<OrderItems> mOrders;
@@ -45,48 +47,21 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
 
         //listener for start order
         mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
-
             @Override
             public void onItemClick(int position) {
 
-                String orderID = String.valueOf(mOrders.get(position).getOrderId());
-                System.out.println("position: " +position);
-                System.out.println("Item ID: " +orderID);
-                openOrder(orderID);
-
-                Call<List<OrderItems>> call = RetrofitClient
-                        .getInstance()
-                        .getApi()
-                        .getOrderItems();
-
-                call.enqueue(new Callback<List<OrderItems>>() {
-                    @Override
-                    public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
-
-                        if (response.code() == 303) {
-                            Toast.makeText(ViewActiveOrdersActivity.this, "Item added to cart", Toast.LENGTH_LONG).show();
-
-                        } else if (response.code() == 304) {
-                            Toast.makeText(ViewActiveOrdersActivity.this, "Item already in cart",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-
-                        Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(),
-                                Toast.LENGTH_LONG).show();
-
-                    }
-                });
+                String orderID = String.valueOf(mOrders.get(position).getOrderID());
+                String cartID = String.valueOf(mOrders.get(position).getCartID());
+                System.out.println("position: " + position);
+                System.out.println("Item ID: " + orderID);
+                openOrder(orderID, cartID);
             }
         });
 
         Call<List<OrderItems>> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getOrderItems();
+                .getOrderList();
 
         call.enqueue(new Callback<List<OrderItems>>() {
             @Override
@@ -105,7 +80,6 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
                 Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
 
@@ -114,11 +88,13 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     }
 
 
-    private void openOrder(String orderID) {
-        String id = orderID;
+    private void openOrder(String orderID, String cartID) {
 
-        Intent intent = new Intent(this, ViewCartItemsActivity.class );
-        intent.putExtra(EXTRA_TEXT, id);
+        Intent intent = new Intent(this, ViewCartItemsActivity.class);
+        intent.putExtra(ORDER_ID, orderID);
+        intent.putExtra(CART_ID, cartID);
         startActivity(intent);
     }
 }
+
+

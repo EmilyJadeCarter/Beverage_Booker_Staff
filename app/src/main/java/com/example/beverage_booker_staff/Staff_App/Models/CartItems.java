@@ -4,14 +4,14 @@ public class CartItems {
 
     private int itemID;
     private String itemTitle;
-    private int itemQuantity;
+    private int quantity;
 
 
-    public CartItems(int id, String title, int quantity){
+    public CartItems(int itemID, String itemTitle, int itemQuantity){
 
-        this.itemID = id;
-        this.itemTitle = title;
-        this.itemQuantity = quantity;
+        this.itemID = itemID;
+        this.itemTitle = itemTitle;
+        this.quantity = quantity;
     }
 
     public int getItemID() {
@@ -22,8 +22,8 @@ public class CartItems {
         return itemTitle;
     }
 
-    public int getItemQuantity() {
-        return itemQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 }
 

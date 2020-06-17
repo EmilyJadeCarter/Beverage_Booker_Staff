@@ -12,7 +12,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Staff_App.Activities.ViewCartItemsActivity">
 <!--            android:parentActivityName=".Staff_App.Activities.ViewActiveOrdersActivity"-->
-            ></activity>
+            </activity>
         <activity android:name=".Staff_App.Activities.ViewActiveOrdersActivity" />
         <activity android:name=".Staff_App.Activities.MainActivity">
             <intent-filter>
