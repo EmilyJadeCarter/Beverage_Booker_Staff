@@ -8,6 +8,7 @@ import retrofit2.Response;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,31 +16,42 @@ import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
 import com.example.beverage_booker_staff.Staff_App.Models.LoginResponse;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    private EditText staffID;
+    private EditText editTextStaffID;
+    private Button loginStaffButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        staffID = findViewById(R.id.editTextStaffID);
+        editTextStaffID = findViewById(R.id.editTextStaffID);
+        loginStaffButton = findViewById(R.id.button_ValidateId);
 
-        findViewById(R.id.button_ValidateId).setOnClickListener(this);
+        loginStaffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateID();
+            }
+        });
     }
 
     private void validateID() {
 
-        String id = staffID.getText().toString().trim();
+        String id = editTextStaffID.getText().toString().trim();
 
         if (id.isEmpty()) {
-            staffID.setError("ID is required");
+            editTextStaffID.setError("ID is required");
+            editTextStaffID.requestFocus();
             return;
         }
-        if (id.length() < 5) {
-            staffID.setError("ID length is incorrect");
+        if (id.length() != 4) {
+            editTextStaffID.setError("ID must be 4 digits");
+            editTextStaffID.requestFocus();
+            return;
         }
+
         Call<LoginResponse> call = RetrofitClient
                 .getInstance().getApi().staffValidate(id);
         call.enqueue(new Callback<LoginResponse>() {
@@ -67,16 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
-
-    @Override
-    public void onClick(View v) {
-        validateID();
-        Intent intent = new Intent(MainActivity.this, ViewActiveOrdersActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-
-    }
-
 
 }
 

@@ -20,6 +20,8 @@ import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewActiveOrders.OnItemClickListener {
 
@@ -31,9 +33,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     private RecyclerView mRecyclerView;
     private ViewActiveOrders mRecyclerAdapter;
 
+    private Timer myTimer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
 
@@ -44,6 +49,13 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
         mOrders = new ArrayList<>();
         mRecyclerAdapter = new ViewActiveOrders(mOrders);
         mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                mOrders.clear();
 
         //listener for start order
         mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
@@ -58,30 +70,34 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
             }
         });
 
-        Call<List<OrderItems>> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .getOrderList();
 
-        call.enqueue(new Callback<List<OrderItems>>() {
-            @Override
-            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
-                if (response.code() == 200) {
-                    for (int i = 0; i < response.body().size(); i++) {
-                        mOrders.add(response.body().get(i));
+                Call<List<OrderItems>> call = RetrofitClient
+                        .getInstance()
+                        .getApi()
+                        .getOrderList();
+
+                call.enqueue(new Callback<List<OrderItems>>() {
+                    @Override
+                    public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
+                        if (response.code() == 200) {
+                            for (int i = 0; i < response.body().size(); i++) {
+                                mOrders.add(response.body().get(i));
+                            }
+
+                            mRecyclerAdapter.notifyDataSetChanged();
+                        }
                     }
 
-                    mRecyclerAdapter.notifyDataSetChanged();
-                }
+
+                    @Override
+                    public void onFailure(Call<List<OrderItems>> call, Throwable t) {
+                        Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
-            @Override
-            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        }, 0, 5000);
     }
-
 
     @Override
     public void onItemClick(int position) {
