@@ -4,12 +4,12 @@ public class Deliveries {
 
     private int userID;
     private int cartID;
-    private int streetNumber;
+    private String streetNumber;
     private String streetName;
     private int postCode;
     private String cityTown;
 
-    public Deliveries(int userID, int cartID, int streetNumber, String streetName, int postCode, String cityTown) {
+    public Deliveries(int userID, int cartID, String streetNumber, String streetName, int postCode, String cityTown) {
 
         this.userID = userID;
         this.cartID = cartID;
@@ -27,7 +27,7 @@ public class Deliveries {
         return cartID;
     }
 
-    public int getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
