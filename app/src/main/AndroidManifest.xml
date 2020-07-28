@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.beverage_booker_staff">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Staff_App.Activities.DeliveriesActivity"></activity>
+        <activity android:name=".Staff_App.Activities.MainMenuActivity" />
         <activity android:name=".Staff_App.Activities.ViewCartItemsActivity">
-<!--            android:parentActivityName=".Staff_App.Activities.ViewActiveOrdersActivity"-->
-            </activity>
+
+            <!-- android:parentActivityName=".Staff_App.Activities.ViewActiveOrdersActivity" -->
+        </activity>
         <activity android:name=".Staff_App.Activities.ViewActiveOrdersActivity" />
         <activity android:name=".Staff_App.Activities.MainActivity">
             <intent-filter>
@@ -22,8 +28,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

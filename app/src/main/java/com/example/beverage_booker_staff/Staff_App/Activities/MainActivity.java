@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!loginResponse.isError()) {
 
-                    Intent intent = new Intent(MainActivity.this, ViewActiveOrdersActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 

@@ -2,8 +2,8 @@ package com.example.beverage_booker_staff.Staff_App.API;
 
 
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
+import com.example.beverage_booker_staff.Staff_App.Models.Deliveries;
 import com.example.beverage_booker_staff.Staff_App.Models.LoginResponse;
-import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public interface Api {
             @Field("staffID") String id
     );
 
-    //Get Menu items from database
+    //Get Orders list from database
     @GET("getorderslist")
     Call<List<OrderItems>> getOrderList();
 
@@ -35,4 +35,15 @@ public interface Api {
             @Query("cartID") int cartID
     );
 
+    //Get Menu items from database
+    @GET("getdeliverieslist")
+    Call<List<Deliveries>> getDeliveriesList();
+
+    //Mark Order as delivered
+    @FormUrlEncoded
+    @POST("markdelivered")
+    Call<ResponseBody> markDelivered(
+            @Field("userID") int userID,
+            @Field("cartID") int cartID
+    );
 }
