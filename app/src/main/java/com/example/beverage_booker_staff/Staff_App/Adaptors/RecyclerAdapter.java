@@ -23,7 +23,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     DecimalFormat currency = new DecimalFormat("###0.00");
 
     public interface OnItemClickListener {
-        void onItemClick(int selection);
+        void onItemClick(int selection, int position);
     }
 
     //modify or delete
@@ -54,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     if (itemListener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            itemListener.onItemClick(1);
+                            itemListener.onItemClick(1, position);
                         }
                     }
                 }
@@ -66,7 +66,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     if (itemListener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            itemListener.onItemClick(2);
+                            itemListener.onItemClick(2, position);
                         }
                     }
                 }

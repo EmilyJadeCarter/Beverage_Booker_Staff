@@ -28,7 +28,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private ArrayList<MenuItem> menuItems;
-    
+
     private Button addMenuItem;
 
     @Override
@@ -57,7 +57,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
         //modify and delete buttons
         recyclerAdapter.setOnButtonClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int selection) {
+            public void onItemClick(int selection, int position) {
                 if(selection == 1) {
                     GoToDelivery(); //mod men item, FOR TESTING
                 }
