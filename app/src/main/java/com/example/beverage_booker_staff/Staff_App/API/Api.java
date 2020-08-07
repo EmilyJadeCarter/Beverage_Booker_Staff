@@ -51,4 +51,11 @@ public interface Api {
     //Get Menu items from database
     @GET("getitems")
     Call<List<MenuItem>> getItems();
+
+    //Delete item from database
+    @FormUrlEncoded
+    @POST("deletemenuitem")
+    Call<ResponseBody> deleteMenuItem(
+            @Field("itemID") int itemID
+    );
 }

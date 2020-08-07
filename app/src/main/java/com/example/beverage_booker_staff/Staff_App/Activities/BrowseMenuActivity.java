@@ -1,5 +1,6 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,7 @@ import com.example.beverage_booker_staff.Staff_App.Adaptors.RecyclerAdapter;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
 import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +31,9 @@ public class BrowseMenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private ArrayList<MenuItem> menuItems;
+    MenuItem itemClicked;
+    int itemID;
+    String itemTitle;
 
     private Button addMenuItem;
 
@@ -58,11 +64,16 @@ public class BrowseMenuActivity extends AppCompatActivity {
         recyclerAdapter.setOnButtonClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int selection, int position) {
+                // here is where data should be handled
+                itemClicked = menuItems.get(position);
+                itemID = menuItems.get(position).getId();
+                itemTitle = itemClicked.getName();
                 if(selection == 1) {
-                    GoToDelivery(); //mod men item, FOR TESTING
+                    GoToDelivery(); //modify men item, FOR TESTING
                 }
                 else if(selection == 2){
-                    GoToMainMenu(); //dete men item, FOR TESTING
+                    popupConfirmationOfDeletion();
+                    //GoToMainMenu(); //delete men item, FOR TESTING
                 }
             }
         });
@@ -106,5 +117,50 @@ public class BrowseMenuActivity extends AppCompatActivity {
     private void GoToMainMenu(){
         Intent intent = new Intent(this, MainMenuActivity.class );
         startActivity(intent);
+    }
+
+    // This is a popup menu that allows the user to confirm a deletion of an item, they can cancel as well.
+    private void popupConfirmationOfDeletion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("You are about to delete " + itemTitle + " from the database");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Here is where the program interacts with the database to delete an item
+                Call<ResponseBody> call = RetrofitClient
+                        .getInstance()
+                        .getApi()
+                        .deleteMenuItem(itemID);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.code() == 201) {
+                            Toast.makeText(BrowseMenuActivity.this, "Item Deleted", Toast.LENGTH_LONG).show();
+                        } else if (response.code() == 402) {
+                            Toast.makeText(BrowseMenuActivity.this, "Item Failed To Delete", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                // Here the program refreshes the activity allowing for the refreshed version of items when a user deletes one.
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.show();
     }
 }
