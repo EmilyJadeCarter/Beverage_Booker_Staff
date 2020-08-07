@@ -13,6 +13,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private Button OrdersButton;
     private Button DeliveriesButton;
+    private Button MenuButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,15 @@ public class MainMenuActivity extends AppCompatActivity {
                 viewDeliveries();
             }
         });
+
+        //Menu Button
+        MenuButton = findViewById(R.id.MenuButton);
+        MenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewMenu();
+            }
+        });
     }
 
     private void viewActiveOrders() {
@@ -45,6 +55,11 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void viewDeliveries() {
         Intent intent = new Intent(this, DeliveriesActivity.class );
+        startActivity(intent);
+    }
+
+    private void viewMenu() {
+        Intent intent = new Intent(this, BrowseMenuActivity.class );
         startActivity(intent);
     }
 }

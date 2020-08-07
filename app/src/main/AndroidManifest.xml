@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Staff_App.Activities.DeliveriesActivity"></activity>
         <activity android:name=".Staff_App.Activities.MainMenuActivity" />
+        <activity android:name=".Staff_App.Activities.BrowseMenuActivity" />
         <activity android:name=".Staff_App.Activities.ViewCartItemsActivity">
 
             <!-- android:parentActivityName=".Staff_App.Activities.ViewActiveOrdersActivity" -->
