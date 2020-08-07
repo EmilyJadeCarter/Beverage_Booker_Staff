@@ -28,8 +28,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private ArrayList<MenuItem> menuItems;
-
-    //View Cart Button
+    
     private Button addMenuItem;
 
     @Override
@@ -41,7 +40,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //View Cart Button
+        //add menu item button
         addMenuItem = findViewById(R.id.addMenuItem);
         addMenuItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +54,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
         recyclerAdapter = new RecyclerAdapter(menuItems);
         recyclerView.setAdapter(recyclerAdapter);
 
-        //Listener for modify and delete buttons
+        //modify and delete buttons
         recyclerAdapter.setOnButtonClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int selection) {
