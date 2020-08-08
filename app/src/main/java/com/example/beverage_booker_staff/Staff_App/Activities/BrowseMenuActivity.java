@@ -51,7 +51,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
         addMenuItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuItemForm();
+                MenuItemFormAdd();
             }
 
         });
@@ -64,16 +64,14 @@ public class BrowseMenuActivity extends AppCompatActivity {
         recyclerAdapter.setOnButtonClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int selection, int position) {
-                // here is where data should be handled
                 itemClicked = menuItems.get(position);
                 itemID = menuItems.get(position).getId();
                 itemTitle = itemClicked.getName();
                 if(selection == 1) {
-                    GoToDelivery(); //modify men item, FOR TESTING
+                    MenuItemFormModify();
                 }
                 else if(selection == 2){
                     popupConfirmationOfDeletion();
-                    //GoToMainMenu(); //delete men item, FOR TESTING
                 }
             }
         });
@@ -101,25 +99,15 @@ public class BrowseMenuActivity extends AppCompatActivity {
         });
     }
 
-    // This is where a user will add a new item
-    private void openMenuItemForm() {
-        //Intent intent = new Intent(this, MenuItemFormActivity.class );
-        //startActivity(intent);
+    private void MenuItemFormAdd(){
+        //TODO Implement Add Item Form
     }
 
-    //FOR TESTING
-    private void GoToDelivery(){
-        Intent intent = new Intent(this, DeliveriesActivity.class );
-        startActivity(intent);
+    private void MenuItemFormModify(){
+        //TODO Implement Modify Item Form (same as add but with preexisting data)
     }
 
-    //FOR TESTING
-    private void GoToMainMenu(){
-        Intent intent = new Intent(this, MainMenuActivity.class );
-        startActivity(intent);
-    }
-
-    // This is a popup menu that allows the user to confirm a deletion of an item, they can cancel as well.
+    // This is a popup menu that allows the user to confirm a deletion of an item, they can cancel as well
     private void popupConfirmationOfDeletion() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation");
