@@ -31,7 +31,10 @@ public class BrowseMenuIntegrationTest {
 
     /**
      * This tests conducts a run through of the program interacting with
-     * all applicable activities tied to BrowseMenu
+     * all applicable activities tied to BrowseMenu, the prerequisites for this
+     * test are a staff member exists with the id 0001 and an entry in the items
+     * database exists with a name of "banana", description of "its a banana"
+     * and a price of 12.5.
      */
     @Test
     public void BrowseMenuIntegrationTest() {
@@ -51,8 +54,6 @@ public class BrowseMenuIntegrationTest {
         onView(withId(R.id.MenuButton))
                 .check(doesNotExist());
         onView(withId(R.id.addMenuItem))
-                .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.itemID), hasSibling(withText("1"))))
                 .check(matches(isDisplayed()));
         onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("banana"))))
                 .check(matches(isDisplayed()));
