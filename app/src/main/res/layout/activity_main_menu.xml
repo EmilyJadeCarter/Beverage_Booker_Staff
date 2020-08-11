@@ -22,4 +22,13 @@ tools:context=".Staff_App.Activities.MainMenuActivity">
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Deliveries" />
+
+    <Button
+        android:id="@+id/MenuButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Menu" />
 </RelativeLayout>

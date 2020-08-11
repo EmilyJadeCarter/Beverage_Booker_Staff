@@ -5,6 +5,7 @@ import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.Deliveries;
 import com.example.beverage_booker_staff.Staff_App.Models.LoginResponse;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
 
 import java.util.List;
 
@@ -45,5 +46,16 @@ public interface Api {
     Call<ResponseBody> markDelivered(
             @Field("userID") int userID,
             @Field("cartID") int cartID
+    );
+
+    //Get Menu items from database
+    @GET("getitems")
+    Call<List<MenuItem>> getItems();
+
+    //Delete item from database
+    @FormUrlEncoded
+    @POST("deletemenuitem")
+    Call<ResponseBody> deleteMenuItem(
+            @Field("itemID") int itemID
     );
 }

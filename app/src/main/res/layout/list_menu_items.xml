@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="4dp">
+
+        <TextView
+            android:id="@+id/itemID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="2dp"
+            android:text="ID"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="2dp" />
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Name"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/itemDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="200dp"
+            android:text="Desc"
+            android:layout_marginRight="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="200dp"
+            android:layout_marginRight="200dp"
+            android:text="Price" />
+
+        <Button
+            android:id="@+id/modifyMenuItem"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="4dp"
+            android:text="Modify"
+            android:textSize="10dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentRight="true" />
+
+        <Button
+            android:id="@+id/deleteMenuItem"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="4dp"
+            android:text="Delete"
+            android:textSize="10dp"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentRight="true" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginStart="210dp"
+            android:layout_marginLeft="240dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
