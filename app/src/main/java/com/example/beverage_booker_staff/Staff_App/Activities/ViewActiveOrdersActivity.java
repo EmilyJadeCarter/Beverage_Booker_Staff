@@ -34,7 +34,6 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     private ViewActiveOrders mRecyclerAdapter;
 
     private Timer myTimer;
-    private Boolean lock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +102,20 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     public void onItemClick(int position) {
     }
 
+    public Boolean locked(){
+        //change true to a real if later.
+        //need to get the locked database using something
+        if(true){
+            return false;
+        }
+        return true;
+    }
     
 
     private void openOrder(String orderID, String cartID) {
-
+        if(locked()==true){
+            Toast.makeText(ViewActiveOrdersActivity.this, "A user is already on this order.", Toast.LENGTH_LONG).show();
+        }
         Intent intent = new Intent(this, ViewCartItemsActivity.class);
         intent.putExtra(ORDER_ID, orderID);
         intent.putExtra(CART_ID, cartID);
