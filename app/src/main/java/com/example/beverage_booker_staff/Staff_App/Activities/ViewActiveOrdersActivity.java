@@ -34,7 +34,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     private ViewActiveOrders mRecyclerAdapter;
 
     private Timer myTimer;
-
+    private Boolean lock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +103,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     public void onItemClick(int position) {
     }
 
+    
 
     private void openOrder(String orderID, String cartID) {
 
