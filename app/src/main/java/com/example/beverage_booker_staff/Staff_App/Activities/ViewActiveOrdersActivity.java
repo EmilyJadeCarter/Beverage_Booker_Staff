@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewActiveOrders.OnItemClickListener {
+public class ViewActiveOrdersActivity extends AppCompatActivity {
 
     public static final String ORDER_ID = "com.example.beverage_booker_staff.ORDER_ID";
     public static final String CART_ID = "com.example.beverage_booker_staff.CART_ID";
@@ -103,10 +103,6 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
             }
 
         }, 0, 5000);
-    }
-
-    @Override
-    public void onItemClick(int position) {
     }
 
     private void addToQueue(final String orderID, final String cartID){
