@@ -102,19 +102,19 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     public void onItemClick(int position) {
     }
 
-    public Boolean locked(){
-        //change true to a real if later.
-        //need to get the locked database using something
+    public Boolean isLocked(String orderID){
+        //need call for finding match in database and if so
         if(true){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     
 
     private void openOrder(String orderID, String cartID) {
-        if(locked()==true){
+        if(isLocked(orderID)==true){
             Toast.makeText(ViewActiveOrdersActivity.this, "A user is already on this order.", Toast.LENGTH_LONG).show();
+            return;
         }
         Intent intent = new Intent(this, ViewCartItemsActivity.class);
         intent.putExtra(ORDER_ID, orderID);

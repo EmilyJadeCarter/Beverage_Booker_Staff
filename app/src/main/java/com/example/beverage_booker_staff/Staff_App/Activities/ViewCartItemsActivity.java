@@ -95,4 +95,10 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private void checkItemOff() {
         System.out.println("This item has been checked");
     }
+
+    //Unlock the Order if unseen, better it being ordered twice then it being permanently locked.
+    public void onStop() {
+        super.onStop();
+        //replace locked status boolean with unlocked so from 1 to 0.
+    }
 }
