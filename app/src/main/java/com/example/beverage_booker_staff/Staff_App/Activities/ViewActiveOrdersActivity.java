@@ -29,6 +29,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
 
     public static final String ORDER_ID = "com.example.beverage_booker_staff.ORDER_ID";
     public static final String CART_ID = "com.example.beverage_booker_staff.CART_ID";
+    public static final String ASSIGNED_STAFF_ID = "com.example.beverage_booker_staff.ASSIGNED_STAFF_ID";
 
 
     private ArrayList<OrderItems> mOrders;
@@ -137,6 +138,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ViewCartItemsActivity.class);
             intent.putExtra(ORDER_ID, orderID);
             intent.putExtra(CART_ID, cartID);
+            intent.putExtra(ASSIGNED_STAFF_ID, assignedStaffID);
             startActivity(intent);
         } else {
             return;

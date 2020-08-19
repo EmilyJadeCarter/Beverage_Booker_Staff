@@ -10,6 +10,7 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewActiveOrders;
 import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewCartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.Models.Staff;
+import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +33,22 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private ViewCartItems mRecyclerAdapter;
     private String orderNum;
     private String cartID;
+    private Staff activeStaff = SharedPrefManager.getInstance(ViewCartItemsActivity.this).getStaff();
+    private int activeStaffID;
+    private Button completeOrderButton;
+    private Button unassignOrderButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activeStaffID = activeStaff.getStaffID();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_view);
 
         Intent intent = getIntent();
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
+        activeStaffID = intent.getIntExtra(ViewActiveOrdersActivity.ASSIGNED_STAFF_ID, 0);
         System.out.println(cartID);
 
         TextView orderID = findViewById(R.id.orderID);
@@ -57,7 +67,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(int position) {
-
                 String itemID = String.valueOf(mCartItems.get(position).getItemID());
                 System.out.println("position: " + position);
                 System.out.println("Item ID: " + itemID);

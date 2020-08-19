@@ -39,7 +39,6 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         TextView mItemID;
         TextView mItemTitle;
         TextView mItemQuantity;
-
         CheckBox mDone;
 
         RecyclerViewHolder(@NonNull View itemView) {

@@ -61,5 +61,17 @@
         app:layout_constraintStart_toEndOf="@+id/orderID"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/ButtonUnassignOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="664dp"
+        android:layout_marginRight="16dp"
+        android:text="UnAssign Order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/orderID"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
