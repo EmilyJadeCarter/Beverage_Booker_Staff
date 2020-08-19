@@ -4,19 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
 import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewActiveOrders;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.Models.Staff;
+import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +34,16 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     private ArrayList<OrderItems> mOrders;
     private RecyclerView mRecyclerView;
     private ViewActiveOrders mRecyclerAdapter;
-
     private Timer myTimer;
-
+    private Staff activeStaff = SharedPrefManager.getInstance(ViewActiveOrdersActivity.this).getStaff();
+    private String orderID;
+    private String cartID;
+    private int assignedStaffID;
+    private int activeStaffID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activeStaffID = activeStaff.getStaffID();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
@@ -47,14 +53,13 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mOrders = new ArrayList<>();
-        mRecyclerAdapter = new ViewActiveOrders(mOrders);
+        mRecyclerAdapter = new ViewActiveOrders(this, mOrders);
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
         myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-
                 mOrders.clear();
 
         //listener for start order
@@ -62,14 +67,17 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
             @Override
             public void onItemClick(int position) {
 
-                String orderID = String.valueOf(mOrders.get(position).getOrderID());
-                String cartID = String.valueOf(mOrders.get(position).getCartID());
+                orderID = String.valueOf(mOrders.get(position).getOrderID());
+                cartID = String.valueOf(mOrders.get(position).getCartID());
+                assignedStaffID = mOrders.get(position).getAssignedStaff();
                 System.out.println("position: " + position);
-                System.out.println("Item ID: " + orderID);
-                openOrder(orderID, cartID);
+                System.out.println("Order ID: " + orderID);
+                System.out.println("Cart ID: " + cartID);
+                System.out.println("assignedStaff: "+ assignedStaffID);
+                addToQueue(orderID, cartID);
+                //openOrder(orderID, cartID);
             }
         });
-
 
                 Call<List<OrderItems>> call = RetrofitClient
                         .getInstance()
@@ -83,11 +91,9 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
                             for (int i = 0; i < response.body().size(); i++) {
                                 mOrders.add(response.body().get(i));
                             }
-
                             mRecyclerAdapter.notifyDataSetChanged();
                         }
                     }
-
 
                     @Override
                     public void onFailure(Call<List<OrderItems>> call, Throwable t) {
@@ -103,14 +109,41 @@ public class ViewActiveOrdersActivity extends AppCompatActivity implements ViewA
     public void onItemClick(int position) {
     }
 
+    private void addToQueue(final String orderID, final String cartID){
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .addToQueue(activeStaffID, orderID, cartID);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 201) {
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Order added to queue", Toast.LENGTH_LONG).show();
+                    openOrder(orderID, cartID);
+                } else if (response.code() == 402) {
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG).show();
+                } else if (response.code() == 403) {
+                    //Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue", Toast.LENGTH_LONG).show();
+                    openOrder(orderID, cartID);
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        return;
+    }
 
     private void openOrder(String orderID, String cartID) {
-
-        Intent intent = new Intent(this, ViewCartItemsActivity.class);
-        intent.putExtra(ORDER_ID, orderID);
-        intent.putExtra(CART_ID, cartID);
-        startActivity(intent);
+        if(activeStaffID == assignedStaffID) {
+            Intent intent = new Intent(this, ViewCartItemsActivity.class);
+            intent.putExtra(ORDER_ID, orderID);
+            intent.putExtra(CART_ID, cartID);
+            startActivity(intent);
+        } else {
+            return;
+        }
     }
 }
-
 

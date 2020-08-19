@@ -1,13 +1,17 @@
 package com.example.beverage_booker_staff.Staff_App.Adaptors;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 
@@ -15,9 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.RecyclerViewHolder> {
-
     private ArrayList<OrderItems> orderItems;
     private OnItemClickListener mListener;
+    private int activeStaff;
+    private int red = Color.parseColor("#33FF0000");
+    private int green = Color.parseColor("#3300FF00");
+    private int yellow = Color.parseColor("#33FFFF00");
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -33,17 +40,18 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-
         TextView mOrderID;
         TextView mOrderStatus;
-
         Button mStartOrder;
+        RelativeLayout mRelativeLayout;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mOrderID = itemView.findViewById(R.id.orderID);
             mOrderStatus = itemView.findViewById(R.id.orderStatus);
             mStartOrder = itemView.findViewById(R.id.buttonStartOrder);
+            mRelativeLayout = itemView.findViewById(R.id.relativeLayout);
+
             mStartOrder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -55,14 +63,13 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
                     }
                 }
             });
-
         }
     }
 
-    public ViewActiveOrders(ArrayList<OrderItems> listItems) {
+    public ViewActiveOrders(Context context, ArrayList<OrderItems> listItems) {
+        activeStaff = SharedPrefManager.getInstance(context).getStaff().getStaffID();
         orderItems = listItems;
     }
-
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -78,6 +85,19 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
 
         holder.mOrderID.setText(String.valueOf(currentItem.getOrderID()));
         holder.mOrderStatus.setText(currentItem.getStatus());
+
+        if(currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != activeStaff){
+            holder.mStartOrder.setEnabled(false);
+            holder.mStartOrder.setText("In Progress");
+            holder.mRelativeLayout.setBackgroundColor(red);
+        } else if (currentItem.getAssignedStaff() == activeStaff) {
+            holder.mStartOrder.setText("Continue Order");
+            holder.mRelativeLayout.setBackgroundColor(yellow);
+            holder.mStartOrder.setEnabled(true);
+        } else {
+            holder.mStartOrder.setText("Start Order");
+            holder.mRelativeLayout.setBackgroundColor(green);
+        }
 
     }
 

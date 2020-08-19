@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
 import com.example.beverage_booker_staff.Staff_App.Models.LoginResponse;
+import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void validateID() {
-
         String id = editTextStaffID.getText().toString().trim();
 
         if (id.isEmpty()) {
@@ -54,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         Call<LoginResponse> call = RetrofitClient
                 .getInstance().getApi().staffValidate(id);
+
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
 
                 if (!loginResponse.isError()) {
+                    SharedPrefManager.getInstance(MainActivity.this)
+                            .saveStaff(loginResponse.getStaff());
 
                     Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -77,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
 }
 
 
