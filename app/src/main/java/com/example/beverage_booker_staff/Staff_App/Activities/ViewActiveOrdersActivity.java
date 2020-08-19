@@ -118,9 +118,10 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG).show();
-                } else if (response.code() == 403) {
-                    //Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue", Toast.LENGTH_LONG).show();
+                } else if (response.code() == 403 && assignedStaffID == activeStaffID) {
                     openOrder(orderID, cartID);
+                } else if (response.code() == 403 && assignedStaffID != activeStaffID){
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue and assigned to another staff member", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
