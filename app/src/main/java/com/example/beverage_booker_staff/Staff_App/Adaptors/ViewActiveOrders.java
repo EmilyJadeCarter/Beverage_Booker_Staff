@@ -97,6 +97,7 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
         } else {
             holder.mStartOrder.setText("Start Order");
             holder.mRelativeLayout.setBackgroundColor(green);
+            holder.mStartOrder.setEnabled(true);
         }
 
     }
