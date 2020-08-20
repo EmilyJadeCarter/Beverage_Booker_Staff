@@ -57,7 +57,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         myTimer.schedule(new TimerTask() {
                              @Override
                              public void run() {
-                                 activeChecker();
+                                 //activeChecker();
                              }
                          }, 0, 2000);
 
@@ -126,38 +126,40 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         }
     }
 
-    private void activeChecker() {
-        Call<List<OrderItems>> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .getOrderList();
-
-        call.enqueue(new Callback<List<OrderItems>>() {
-            @Override
-            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
-                if (response.code() == 200) {
-                    for (int i = 0; i < response.body().size(); i++) {
-                        assignedStaffID = response.body().get(i).getAssignedStaff();
-                        if(assignedStaffID != 0) {
-                            if(assignedStaffID != 1) {
-                                if (activeStaffID != assignedStaffID) {
-                                    returnToOrders();
-                                    myTimer.cancel();
-                                }
-                            }
-                            return;
-                        }
-                        return;
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+//    private void activeChecker() {
+//        Call<List<OrderItems>> call = RetrofitClient
+//                .getInstance()
+//                .getApi()
+//                .getOrderList();
+//
+//        call.enqueue(new Callback<List<OrderItems>>() {
+//            @Override
+//            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
+//                if (response.code() == 200) {
+//                    for (int i = 0; i < response.body().size(); i++) {
+//                        assignedStaffID = response.body().get(i).getAssignedStaff();
+//                        if(assignedStaffID != 0) {
+//                            if(assignedStaffID != 1) {
+//                                if (activeStaffID != assignedStaffID) {
+//                                    myTimer.cancel();
+//                                    returnToOrders();
+//                                }
+//                            }
+//                            System.out.println("it was 1" + assignedStaffID);
+//                            return;
+//                        }
+//                        System.out.println("it was 0" + assignedStaffID);
+//                        return;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
+//                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 
 
     private void unassignStaff() {

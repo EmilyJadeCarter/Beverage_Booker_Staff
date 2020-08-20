@@ -68,7 +68,7 @@ public interface Api {
             @Field("cartID") String cartID
     );
 
-    //Removes order from
+    //Make order available
     @FormUrlEncoded
     @POST("makeorderavailable")
     Call<ResponseBody> makeOrderAvailable(
@@ -77,7 +77,7 @@ public interface Api {
             @Field("cartID") String cartID
     );
 
-    //Removes order from
+    //assign staff to order
     @FormUrlEncoded
     @POST("assignstafftoorder")
     Call<ResponseBody> assignStaffToOrder(

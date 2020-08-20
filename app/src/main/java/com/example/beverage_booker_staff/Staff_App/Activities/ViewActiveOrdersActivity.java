@@ -75,8 +75,8 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 System.out.println("Order ID: " + orderID);
                 System.out.println("Cart ID: " + cartID);
                 System.out.println("assignedStaff: "+ assignedStaffID);
+                myTimer.cancel();
                 addToQueue();
-                //openOrder(orderID, cartID);
             }
         });
 
@@ -103,7 +103,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 });
             }
 
-        }, 0, 5000);
+        }, 0, 1000);
     }
 
     private void addToQueue(){
