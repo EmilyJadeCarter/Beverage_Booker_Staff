@@ -86,11 +86,11 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
         holder.mOrderID.setText(String.valueOf(currentItem.getOrderID()));
         holder.mOrderStatus.setText(currentItem.getStatus());
 
-        if(currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != activeStaff){
+        if(currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != 1 && currentItem.getAssignedStaff() != activeStaff){
             holder.mStartOrder.setEnabled(false);
             holder.mStartOrder.setText("In Progress");
             holder.mRelativeLayout.setBackgroundColor(red);
-        } else if (currentItem.getAssignedStaff() == activeStaff) {
+        } else if (currentItem.getAssignedStaff() == 1 || currentItem.getAssignedStaff() == activeStaff) {
             holder.mStartOrder.setText("Continue Order");
             holder.mRelativeLayout.setBackgroundColor(yellow);
             holder.mStartOrder.setEnabled(true);

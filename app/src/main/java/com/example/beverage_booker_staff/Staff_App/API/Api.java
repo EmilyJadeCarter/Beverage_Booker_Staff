@@ -67,4 +67,22 @@ public interface Api {
             @Field("orderID") String orderID,
             @Field("cartID") String cartID
     );
+
+    //Removes order from
+    @FormUrlEncoded
+    @POST("makeorderavailable")
+    Call<ResponseBody> makeOrderAvailable(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //Removes order from
+    @FormUrlEncoded
+    @POST("assignstafftoorder")
+    Call<ResponseBody> assignStaffToOrder(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
 }

@@ -75,7 +75,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 System.out.println("Order ID: " + orderID);
                 System.out.println("Cart ID: " + cartID);
                 System.out.println("assignedStaff: "+ assignedStaffID);
-                addToQueue(orderID, cartID);
+                addToQueue();
                 //openOrder(orderID, cartID);
             }
         });
@@ -106,7 +106,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         }, 0, 5000);
     }
 
-    private void addToQueue(final String orderID, final String cartID){
+    private void addToQueue(){
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
@@ -114,15 +114,14 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
+                if (response.code() == 201 && assignedStaffID == 0) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Order added to queue", Toast.LENGTH_LONG).show();
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG).show();
-                } else if (response.code() == 403 && assignedStaffID == activeStaffID) {
-                    openOrder(orderID, cartID);
-                } else if (response.code() == 403 && assignedStaffID != activeStaffID){
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue and assigned to another staff member", Toast.LENGTH_LONG).show();
+                } else if (response.code() == 403 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)){
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue - resuming order", Toast.LENGTH_LONG).show();
+                    assignStaffToOrder();
                 }
             }
             @Override
@@ -133,16 +132,37 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         return;
     }
 
-    private void openOrder(String orderID, String cartID) {
-        if(activeStaffID == assignedStaffID) {
-            Intent intent = new Intent(this, ViewCartItemsActivity.class);
-            intent.putExtra(ORDER_ID, orderID);
-            intent.putExtra(CART_ID, cartID);
-            intent.putExtra(ASSIGNED_STAFF_ID, assignedStaffID);
-            startActivity(intent);
-        } else {
-            return;
-        }
+    private void assignStaffToOrder() {
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .assignStaffToOrder(activeStaffID, orderID, cartID);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 201 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)) {
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Staff member assigned to order", Toast.LENGTH_LONG).show();
+                    openOrder(orderID, cartID);
+                } else if (response.code() == 402) {
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Staff member failed to be assigned to order", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+    private void openOrder(String orderID, String cartID) {
+        Intent intent = new Intent(this, ViewCartItemsActivity.class);
+        intent.putExtra(ORDER_ID, orderID);
+        intent.putExtra(CART_ID, cartID);
+        System.out.println(assignedStaffID);
+        intent.putExtra(ASSIGNED_STAFF_ID, assignedStaffID);
+        startActivity(intent);
+    }
+
+
 }
 
