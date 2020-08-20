@@ -141,7 +141,6 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)) {
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Staff member assigned to order", Toast.LENGTH_LONG).show();
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Staff member failed to be assigned to order", Toast.LENGTH_LONG).show();

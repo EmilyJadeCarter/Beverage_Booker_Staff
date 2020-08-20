@@ -43,6 +43,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private Button completeOrderButton;
     private Button unassignOrderButton;
     Timer myTimer = new Timer();
+    private boolean backButtonClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         unassignOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                backButtonClicked = true;
                 unassignStaff();
             }
         });
@@ -119,7 +121,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
+        if(backButtonClicked != true){
+            unassignStaff();
+        }
     }
 
     private void activeChecker() {
@@ -137,8 +141,8 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                         if(assignedStaffID != 0) {
                             if(assignedStaffID != 1) {
                                 if (activeStaffID != assignedStaffID) {
-                                    myTimer.cancel();
                                     returnToOrders();
+                                    myTimer.cancel();
                                 }
                             }
                             return;
@@ -164,9 +168,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    Toast.makeText(ViewCartItemsActivity.this, "You have left the order", Toast.LENGTH_LONG).show();
-                } else if (response.code() == 402) {
+                if (response.code() == 402) {
                     Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
                 }
             }
