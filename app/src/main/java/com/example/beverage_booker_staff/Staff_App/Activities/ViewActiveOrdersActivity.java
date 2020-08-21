@@ -41,13 +41,11 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
     private String cartID;
     private int assignedStaffID;
     private int activeStaffID;
-    private boolean lock;
     private int orderPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         activeStaffID = activeStaff.getStaffID();
-        lock = false;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
