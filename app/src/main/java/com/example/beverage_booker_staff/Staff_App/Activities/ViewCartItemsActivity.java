@@ -78,6 +78,14 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
 
+        completeOrderButton = findViewById(R.id.button_Complete);
+        completeOrderButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                completeOrder();
+            }
+        });
+
         mRecyclerAdapter.setOnItemClickListener(new ViewCartItems.OnItemClickListener() {
 
             @Override
@@ -172,15 +180,19 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void completeOrder(){
+        //add order to completedOrders table
+
+        //remove order from orders table
+
+        //remove order from staffqueue table
+
+        returnToOrders();
+    }
+
     private void returnToOrders() {
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
         Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
-    }
-
-    //Unlock the Order if unseen, better it being ordered twice then it being permanently locked.
-    public void onStop() {
-        super.onStop();
-        //replace locked status boolean with unlocked so from 1 to 0.
     }
 }
