@@ -42,9 +42,8 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private int assignedStaffID;
     private Button completeOrderButton;
     private Button unassignOrderButton;
-    Timer myTimer = new Timer();
     private boolean backButtonClicked = false;
-    private int test;
+    private int orderPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +53,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
-        test = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
+        orderPosition = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
 
-        myTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                activeChecker();
-            }
-        }, 0, 2000);
+        activeChecker();
 
         TextView orderID = findViewById(R.id.orderID);
 
@@ -136,11 +130,10 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
                 if (response.code() == 200) {
-                    assignedStaffID = response.body().get(test).getAssignedStaff();
+                    assignedStaffID = response.body().get(orderPosition).getAssignedStaff();
                     if (assignedStaffID != 0) {
                         if (assignedStaffID != 1) {
                             if (activeStaffID != assignedStaffID) {
-                                myTimer.cancel();
                                 returnToOrders();
                             }
                         }
