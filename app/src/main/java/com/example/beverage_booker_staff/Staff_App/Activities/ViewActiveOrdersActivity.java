@@ -78,7 +78,6 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                         System.out.println("Order ID: " + orderID);
                         System.out.println("Cart ID: " + cartID);
                         System.out.println("assignedStaff: " + assignedStaffID);
-                        myTimer.cancel();
                         addToQueue();
                     }
                 });
