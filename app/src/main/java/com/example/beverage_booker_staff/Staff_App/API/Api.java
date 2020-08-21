@@ -85,4 +85,11 @@ public interface Api {
             @Field("orderID") String orderID,
             @Field("cartID") String cartID
     );
+
+    //add to completedorders
+    @FormUrlEncoded
+    @POST("addcompletedorder")
+    Call<ResponseBody> addCompletedOrder(
+            @Field("orderID") String orderID
+    );
 }

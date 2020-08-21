@@ -182,7 +182,22 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
     public void completeOrder(){
         //add order to completedOrders table
-
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .addCompletedOrder(orderNum);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 402) {
+                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
         //remove order from orders table
 
         //remove order from staffqueue table
