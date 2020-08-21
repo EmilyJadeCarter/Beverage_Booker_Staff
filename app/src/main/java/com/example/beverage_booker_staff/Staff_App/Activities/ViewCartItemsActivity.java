@@ -44,6 +44,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private Button unassignOrderButton;
     Timer myTimer = new Timer();
     private boolean backButtonClicked = false;
+    private int test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +54,14 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
+        test = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
 
         myTimer.schedule(new TimerTask() {
-                             @Override
-                             public void run() {
-                                 //activeChecker();
-                             }
-                         }, 0, 2000);
+            @Override
+            public void run() {
+                activeChecker();
+            }
+        }, 0, 2000);
 
         TextView orderID = findViewById(R.id.orderID);
 
@@ -93,7 +95,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
 
-
         Call<List<CartItems>> call = RetrofitClient
                 .getInstance()
                 .getApi()
@@ -106,7 +107,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                     for (int i = 0; i < response.body().size(); i++) {
                         mCartItems.add(response.body().get(i));
                     }
-
                     mRecyclerAdapter.notifyDataSetChanged();
                 }
             }
@@ -121,46 +121,41 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(backButtonClicked != true){
+        if (backButtonClicked != true) {
             unassignStaff();
         }
     }
 
-//    private void activeChecker() {
-//        Call<List<OrderItems>> call = RetrofitClient
-//                .getInstance()
-//                .getApi()
-//                .getOrderList();
-//
-//        call.enqueue(new Callback<List<OrderItems>>() {
-//            @Override
-//            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
-//                if (response.code() == 200) {
-//                    for (int i = 0; i < response.body().size(); i++) {
-//                        assignedStaffID = response.body().get(i).getAssignedStaff();
-//                        if(assignedStaffID != 0) {
-//                            if(assignedStaffID != 1) {
-//                                if (activeStaffID != assignedStaffID) {
-//                                    myTimer.cancel();
-//                                    returnToOrders();
-//                                }
-//                            }
-//                            System.out.println("it was 1" + assignedStaffID);
-//                            return;
-//                        }
-//                        System.out.println("it was 0" + assignedStaffID);
-//                        return;
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-//                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
+    private void activeChecker() {
+        Call<List<OrderItems>> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getOrderList();
 
+        call.enqueue(new Callback<List<OrderItems>>() {
+            @Override
+            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
+                if (response.code() == 200) {
+                    assignedStaffID = response.body().get(test).getAssignedStaff();
+                    if (assignedStaffID != 0) {
+                        if (assignedStaffID != 1) {
+                            if (activeStaffID != assignedStaffID) {
+                                myTimer.cancel();
+                                returnToOrders();
+                            }
+                        }
+                        return;
+                    }
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     private void unassignStaff() {
         Call<ResponseBody> call = RetrofitClient
@@ -174,6 +169,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                     Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();

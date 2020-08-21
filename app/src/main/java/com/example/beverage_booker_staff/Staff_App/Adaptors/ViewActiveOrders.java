@@ -70,6 +70,7 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
         activeStaff = SharedPrefManager.getInstance(context).getStaff().getStaffID();
         orderItems = listItems;
     }
+
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -86,7 +87,7 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
         holder.mOrderID.setText(String.valueOf(currentItem.getOrderID()));
         holder.mOrderStatus.setText(currentItem.getStatus());
 
-        if(currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != 1 && currentItem.getAssignedStaff() != activeStaff){
+        if (currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != 1 && currentItem.getAssignedStaff() != activeStaff) {
             holder.mStartOrder.setEnabled(false);
             holder.mStartOrder.setText("In Progress");
             holder.mRelativeLayout.setBackgroundColor(red);

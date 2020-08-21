@@ -29,7 +29,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
 
     public static final String ORDER_ID = "com.example.beverage_booker_staff.ORDER_ID";
     public static final String CART_ID = "com.example.beverage_booker_staff.CART_ID";
-    public static final String ASSIGNED_STAFF_ID = "com.example.beverage_booker_staff.ASSIGNED_STAFF_ID";
+    public static final String ORDER_POSITION = "com.example.beverage_booker_staff.ORDER_POSITION";
 
 
     private ArrayList<OrderItems> mOrders;
@@ -41,10 +41,13 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
     private String cartID;
     private int assignedStaffID;
     private int activeStaffID;
+    private boolean lock;
+    private int orderPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         activeStaffID = activeStaff.getStaffID();
+        lock = false;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
@@ -63,22 +66,24 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
             public void run() {
                 mOrders.clear();
 
-        //listener for start order
-        mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
+                //listener for start order
+                mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
 
-                orderID = String.valueOf(mOrders.get(position).getOrderID());
-                cartID = String.valueOf(mOrders.get(position).getCartID());
-                assignedStaffID = mOrders.get(position).getAssignedStaff();
-                System.out.println("position: " + position);
-                System.out.println("Order ID: " + orderID);
-                System.out.println("Cart ID: " + cartID);
-                System.out.println("assignedStaff: "+ assignedStaffID);
-                myTimer.cancel();
-                addToQueue();
-            }
-        });
+                        orderPosition = position;
+
+                        orderID = String.valueOf(mOrders.get(position).getOrderID());
+                        cartID = String.valueOf(mOrders.get(position).getCartID());
+                        assignedStaffID = mOrders.get(position).getAssignedStaff();
+                        System.out.println("position: " + position);
+                        System.out.println("Order ID: " + orderID);
+                        System.out.println("Cart ID: " + cartID);
+                        System.out.println("assignedStaff: " + assignedStaffID);
+                        myTimer.cancel();
+                        addToQueue();
+                    }
+                });
 
                 Call<List<OrderItems>> call = RetrofitClient
                         .getInstance()
@@ -106,7 +111,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         }, 0, 1000);
     }
 
-    private void addToQueue(){
+    private void addToQueue() {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
@@ -119,11 +124,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG).show();
-                } else if (response.code() == 403 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)){
+                } else if (response.code() == 403 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue - resuming order", Toast.LENGTH_LONG).show();
                     assignStaffToOrder();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
@@ -146,6 +152,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Staff member failed to be assigned to order", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
@@ -157,11 +164,8 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewCartItemsActivity.class);
         intent.putExtra(ORDER_ID, orderID);
         intent.putExtra(CART_ID, cartID);
-        System.out.println(assignedStaffID);
-        intent.putExtra(ASSIGNED_STAFF_ID, assignedStaffID);
+        intent.putExtra(ORDER_POSITION, orderPosition);
         startActivity(intent);
     }
-
-
 }
 
