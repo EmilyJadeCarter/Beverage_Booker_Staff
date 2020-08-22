@@ -83,6 +83,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 completeOrder();
+                deleteOrder();
+                deleteStaffQueue();
+                returnToOrders();
             }
         });
 
@@ -198,44 +201,46 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    public void deleteOrder(){
         //remove order from orders table
-        Call<ResponseBody> call1 = RetrofitClient
+        Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .deleteOrder(orderNum);
-        call1.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call1, Response<ResponseBody> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 402) {
                     Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
-            public void onFailure(Call<ResponseBody> call1, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    public void deleteStaffQueue(){
         //remove order from staffQueue table
-        Call<ResponseBody> call2 = RetrofitClient
+        Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .deleteStaffQueue(orderNum);
-        call2.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call2, Response<ResponseBody> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 402) {
                     Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
-            public void onFailure(Call<ResponseBody> call2, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-        returnToOrders();
     }
 
     private void returnToOrders() {
