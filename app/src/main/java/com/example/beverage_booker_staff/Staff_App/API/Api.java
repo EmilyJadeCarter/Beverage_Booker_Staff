@@ -97,7 +97,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("deleteorder")
     Call<ResponseBody> deleteOrder(
-            @Field("orderID") String orderID
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
     );
 
     //add to completedOrders
@@ -105,5 +106,14 @@ public interface Api {
     @POST("deletestaffqueue")
     Call<ResponseBody> deleteStaffQueue(
             @Field("orderID") String orderID
+    );
+
+    //update cartitem status
+    @FormUrlEncoded
+    @POST("updatecartitemstatus")
+    Call<ResponseBody> updateCartItemStatus(
+            @Field("cartID") String cartID,
+            @Field("itemID") String itemID,
+            @Field("itemStatus") String itemStatus
     );
 }

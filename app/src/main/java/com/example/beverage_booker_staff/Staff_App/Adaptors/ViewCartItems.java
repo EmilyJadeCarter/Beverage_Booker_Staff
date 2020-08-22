@@ -1,14 +1,18 @@
 package com.example.beverage_booker_staff.Staff_App.Adaptors;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
+import com.example.beverage_booker_staff.Staff_App.Activities.ViewCartItemsActivity;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 
 import java.util.ArrayList;
@@ -16,8 +20,14 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerViewHolder> {
 
+    Context mContext;
     private ArrayList<CartItems> cartItems;
     private ViewCartItems.OnItemClickListener mListener;
 
@@ -50,6 +60,11 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
             mDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*if(mDone.isChecked()==true){
+                        updateItemStatus(mItemID, 1);}
+                    else if(mDone.isChecked()==false){
+                        updateItemStatus(mItemID, 0);
+                    }*/
                     if (mListener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
@@ -61,8 +76,8 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
 
         }
     }
-
     public ViewCartItems(ArrayList<CartItems> listItems) {
+        this.mContext=mContext;
         cartItems = listItems;
     }
 
@@ -89,4 +104,24 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         return cartItems.size();
     }
 
+    /*public void updateItemStatus(TextView itemID, int i){
+        String cartID = ViewCartItemsActivity.getCartID();
+        //update cart item status from checkbox
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .updateCartItemStatus(cartID, itemID.toString(), String.valueOf(i));
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 402) {
+                    Toast.makeText(mContext, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }*/
 }

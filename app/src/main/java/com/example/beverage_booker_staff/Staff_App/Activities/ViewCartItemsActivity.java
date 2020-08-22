@@ -208,7 +208,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .deleteOrder(orderNum);
+                .deleteOrder(orderNum, cartID);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
