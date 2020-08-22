@@ -86,10 +86,24 @@ public interface Api {
             @Field("cartID") String cartID
     );
 
-    //add to completedorders
+    //add to completedOrders
     @FormUrlEncoded
     @POST("addcompletedorder")
     Call<ResponseBody> addCompletedOrder(
+            @Field("orderID") String orderID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("deleteorder")
+    Call<ResponseBody> deleteOrder(
+            @Field("orderID") String orderID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("deletestaffqueue")
+    Call<ResponseBody> deleteStaffQueue(
             @Field("orderID") String orderID
     );
 }
