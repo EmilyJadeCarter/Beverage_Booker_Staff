@@ -58,4 +58,17 @@ public interface Api {
     Call<ResponseBody> deleteMenuItem(
             @Field("itemID") int itemID
     );
+
+    //send order complete notification
+    //Delete item from database
+    @FormUrlEncoded
+    @POST("sendCompleteNotify")
+    Call<ResponseBody> sendNotificationComplete(
+            @Field("userID") int itemID
+
+    );
+
+
+
+
 }

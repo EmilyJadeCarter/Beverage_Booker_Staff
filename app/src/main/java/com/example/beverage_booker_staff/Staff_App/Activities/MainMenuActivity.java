@@ -20,6 +20,13 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+//        try {
+//            firebaseAuth();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
         //Orders Button
         OrdersButton = findViewById(R.id.OrdersButton);
         OrdersButton.setOnClickListener(new View.OnClickListener() {
@@ -62,4 +69,16 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BrowseMenuActivity.class );
         startActivity(intent);
     }
+
+//    public void firebaseAuth() throws IOException {
+//        FirebaseOptions options = new FirebaseOptions.Builder()
+//                .setCredentials(GoogleCredentials.getApplicationDefault())
+//                .setDatabaseUrl("https://beveragebookers.firebaseio.com/")
+//                .build();
+//
+//        FirebaseApp.initializeApp(options);
+//    }
+
+
+
 }
