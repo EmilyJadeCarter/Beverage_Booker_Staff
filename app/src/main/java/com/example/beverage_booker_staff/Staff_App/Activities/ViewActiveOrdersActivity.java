@@ -105,7 +105,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 });
             }
 
-        }, 0, 1000);
+        }, 0, 3000);
     }
 
     private void addToQueue() {
