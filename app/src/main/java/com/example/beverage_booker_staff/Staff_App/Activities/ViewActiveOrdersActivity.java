@@ -63,8 +63,8 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         //listener for start order
         mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) throws InterruptedException {
-                myTimer.cancel(); //stops the timer so the timer so nothing happens during the onclick
+            public void onItemClick(int position) {
+                myTimer.cancel(); //stops the timer so nothing happens during the onclick
 
                 orderPosition = position;
                 // prevents the indexoutofbounds error.
@@ -106,7 +106,6 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     for (int i = 0; i < response.body().size(); i++) {
                         mOrders.add(response.body().get(i));
                         bodySize = response.body().size();
-                        mRecyclerAdapter.notifyDataSetChanged();
                     }
                     mRecyclerAdapter.notifyDataSetChanged();
                 }
