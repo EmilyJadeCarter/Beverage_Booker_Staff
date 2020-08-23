@@ -36,7 +36,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ViewActiveOrders mRecyclerAdapter;
     private Timer myTimer;
-    private Staff activeStaff = SharedPrefManager.getInstance(ViewActiveOrdersActivity.this).getStaff();
+    private Staff activeStaff;
     private String orderID;
     private String cartID;
     private int assignedStaffID;
@@ -45,6 +45,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activeStaff = SharedPrefManager.getInstance(ViewActiveOrdersActivity.this).getStaff();
         activeStaffID = activeStaff.getStaffID();
 
         super.onCreate(savedInstanceState);
@@ -105,7 +106,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 });
             }
 
-        }, 0, 3000);
+        }, 0, 6000);
     }
 
     private void addToQueue() {

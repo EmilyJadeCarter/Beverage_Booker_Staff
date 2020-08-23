@@ -37,7 +37,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private ViewCartItems mRecyclerAdapter;
     private String orderNum;
     private String cartID;
-    private Staff activeStaff = SharedPrefManager.getInstance(ViewCartItemsActivity.this).getStaff();
+    private Staff activeStaff;
     private int activeStaffID;
     private int assignedStaffID;
     private Button completeOrderButton;
@@ -47,6 +47,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activeStaff = SharedPrefManager.getInstance(ViewCartItemsActivity.this).getStaff();
         activeStaffID = activeStaff.getStaffID();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_view);
