@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.Notifications.NotifyCloud;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -19,13 +20,6 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
-//        try {
-//            firebaseAuth();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
 
         //Orders Button
         OrdersButton = findViewById(R.id.OrdersButton);
@@ -57,6 +51,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void viewActiveOrders() {
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class );
+        NotifyCloud.sendNotificationComplete(2);
         startActivity(intent);
     }
 
@@ -69,16 +64,6 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BrowseMenuActivity.class );
         startActivity(intent);
     }
-
-//    public void firebaseAuth() throws IOException {
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.getApplicationDefault())
-//                .setDatabaseUrl("https://beveragebookers.firebaseio.com/")
-//                .build();
-//
-//        FirebaseApp.initializeApp(options);
-//    }
-
 
 
 }

@@ -19,6 +19,7 @@ import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewActiveOrders;
 import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewCartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.Notifications.NotifyCloud;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_view);
-
         Intent intent = getIntent();
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
