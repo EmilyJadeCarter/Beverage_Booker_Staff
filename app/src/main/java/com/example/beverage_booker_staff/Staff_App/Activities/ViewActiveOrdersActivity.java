@@ -42,6 +42,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
     private int assignedStaffID;
     private int activeStaffID;
     private int orderPosition;
+    private int bodySize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,54 +60,63 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
         mRecyclerAdapter = new ViewActiveOrders(this, mOrders);
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
+        //listener for start order
+        mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) throws InterruptedException {
+                myTimer.cancel(); //stops the timer so the timer so nothing happens during the onclick
+
+                orderPosition = position;
+                // prevents the indexoutofbounds error.
+                if (mOrders.size() == bodySize) {
+                    orderID = String.valueOf(mOrders.get(position).getOrderID());
+                    cartID = String.valueOf(mOrders.get(position).getCartID());
+                    assignedStaffID = mOrders.get(position).getAssignedStaff();
+                    System.out.println("position: " + position);
+                    System.out.println("Order ID: " + orderID);
+                    System.out.println("Cart ID: " + cartID);
+                    System.out.println("assignedStaff: " + assignedStaffID);
+                    addToQueue();
+                } else {
+                    Toast.makeText(ViewActiveOrdersActivity.this, "Please Tap Again", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                mOrders.clear();
+                updateOrderList();
+            }
+        }, 0, 4000);
+    }
 
-                //listener for start order
-                mRecyclerAdapter.setOnItemClickListener(new ViewActiveOrders.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
+    private final void updateOrderList() {
+        Call<List<OrderItems>> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getOrderList();
 
-                        orderPosition = position;
-
-                        orderID = String.valueOf(mOrders.get(position).getOrderID());
-                        cartID = String.valueOf(mOrders.get(position).getCartID());
-                        assignedStaffID = mOrders.get(position).getAssignedStaff();
-                        System.out.println("position: " + position);
-                        System.out.println("Order ID: " + orderID);
-                        System.out.println("Cart ID: " + cartID);
-                        System.out.println("assignedStaff: " + assignedStaffID);
-                        addToQueue();
+        call.enqueue(new Callback<List<OrderItems>>() {
+            @Override
+            public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
+                if (response.code() == 200) {
+                    mOrders.clear();
+                    for (int i = 0; i < response.body().size(); i++) {
+                        mOrders.add(response.body().get(i));
+                        bodySize = response.body().size();
+                        mRecyclerAdapter.notifyDataSetChanged();
                     }
-                });
-
-                Call<List<OrderItems>> call = RetrofitClient
-                        .getInstance()
-                        .getApi()
-                        .getOrderList();
-
-                call.enqueue(new Callback<List<OrderItems>>() {
-                    @Override
-                    public void onResponse(Call<List<OrderItems>> call, Response<List<OrderItems>> response) {
-                        if (response.code() == 200) {
-                            for (int i = 0; i < response.body().size(); i++) {
-                                mOrders.add(response.body().get(i));
-                            }
-                            mRecyclerAdapter.notifyDataSetChanged();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-                        Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                    mRecyclerAdapter.notifyDataSetChanged();
+                }
             }
 
-        }, 0, 6000);
+            @Override
+            public void onFailure(Call<List<OrderItems>> call, Throwable t) {
+                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void addToQueue() {
@@ -119,6 +129,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201 && assignedStaffID == 0) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Order added to queue", Toast.LENGTH_LONG).show();
+                    myTimer.cancel();
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG).show();
@@ -145,6 +156,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)) {
+                    myTimer.cancel();
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
                     Toast.makeText(ViewActiveOrdersActivity.this, "Staff member failed to be assigned to order", Toast.LENGTH_LONG).show();

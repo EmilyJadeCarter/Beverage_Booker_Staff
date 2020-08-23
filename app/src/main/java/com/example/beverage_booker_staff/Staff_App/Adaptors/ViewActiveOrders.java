@@ -27,7 +27,7 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
     private int yellow = Color.parseColor("#33FFFF00");
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position) throws InterruptedException;
     }
 
     //start order button listener
@@ -51,24 +51,13 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
             mOrderStatus = itemView.findViewById(R.id.orderStatus);
             mStartOrder = itemView.findViewById(R.id.buttonStartOrder);
             mRelativeLayout = itemView.findViewById(R.id.relativeLayout);
-
-            mStartOrder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            mListener.onItemClick(position);
-                        }
-                    }
-                }
-            });
         }
     }
 
     public ViewActiveOrders(Context context, ArrayList<OrderItems> listItems) {
         activeStaff = SharedPrefManager.getInstance(context).getStaff().getStaffID();
         orderItems = listItems;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -81,11 +70,27 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
 
     //Pass values to the views
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, final int position) {
         OrderItems currentItem = orderItems.get(position);
 
         holder.mOrderID.setText(String.valueOf(currentItem.getOrderID()));
         holder.mOrderStatus.setText(currentItem.getStatus());
+
+        holder.mStartOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    int pos = position;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        try {
+                            mListener.onItemClick(pos);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
 
         if (currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != 1 && currentItem.getAssignedStaff() != activeStaff) {
             holder.mStartOrder.setEnabled(false);
