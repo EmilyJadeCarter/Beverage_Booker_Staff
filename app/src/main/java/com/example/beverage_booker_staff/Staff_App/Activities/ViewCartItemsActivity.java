@@ -21,6 +21,8 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,6 +44,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private Button unassignOrderButton;
     private boolean backButtonClicked = false;
     private int orderPosition;
+    private Timer myTimer;
 
     private int itemStatus;
 
@@ -92,13 +95,17 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
 
+        //updateCompleteButton(-1);
+
         mRecyclerAdapter.setOnItemClickListener(new ViewCartItems.OnItemClickListener() {
 
             @Override
             public void onItemClick(int position) {
                 String itemID = String.valueOf(mCartItems.get(position).getItemID());
+                int itemStatus = mCartItems.get(position).getItemStatus();
                 System.out.println("position: " + position);
                 System.out.println("Item ID: " + itemID);
+                //updateCompleteButton(itemStatus);
 
             }
         });
@@ -125,6 +132,26 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*private void updateCompleteButton(int itemStatus){
+        int cartSize = 3;
+        System.out.println("Cartsize is: "+cartSize);
+        int tickCount = 0;
+        if(itemStatus==1){
+            tickCount++;
+        }
+        else if(itemStatus==0){
+            tickCount--;
+        }
+        if(tickCount==cartSize) {
+            completeOrderButton.setEnabled(true);
+            System.out.println("Enabled");
+        }
+        else {
+            completeOrderButton.setEnabled(false);
+            System.out.println("Disabled");
+        }
+    }*/
 
     private void activeChecker() {
         Call<List<OrderItems>> call = RetrofitClient
@@ -248,6 +275,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     public static String getCartID(){
         return sCartID;
     }
+
+
+
     @Override
     protected void onStop() {
         super.onStop();
