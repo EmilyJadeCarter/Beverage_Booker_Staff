@@ -34,6 +34,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private ViewCartItems mRecyclerAdapter;
     private String orderNum;
     private String cartID;
+    private static String sCartID;
     private Staff activeStaff;
     private int activeStaffID;
     private int assignedStaffID;
@@ -53,6 +54,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
+        sCartID = cartID;
         orderPosition = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
 
 
@@ -243,6 +245,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
     }
 
+    public static String getCartID(){
+        return sCartID;
+    }
     @Override
     protected void onStop() {
         super.onStop();

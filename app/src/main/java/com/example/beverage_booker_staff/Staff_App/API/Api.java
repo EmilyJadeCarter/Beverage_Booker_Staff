@@ -113,7 +113,7 @@ public interface Api {
     @POST("updatecartitemstatus")
     Call<ResponseBody> updateCartItemStatus(
             @Field("cartID") String cartID,
-            @Field("itemID") String itemID,
-            @Field("itemStatus") String itemStatus
+            @Field("itemID") int itemID,
+            @Field("itemStatus") int itemStatus
     );
 }

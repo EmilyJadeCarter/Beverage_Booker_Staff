@@ -7,14 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
+import com.example.beverage_booker_staff.Staff_App.Activities.ViewCartItemsActivity;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerViewHolder> {
 
@@ -51,13 +59,13 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
             mDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*if(mDone.isChecked()==true){
-                        updateItemStatus(mItemID, 1);}
-                    else if(mDone.isChecked()==false){
-                        updateItemStatus(mItemID, 0);
-                    }*/
                     if (mListener != null) {
                         int position = getAdapterPosition();
+                        if(mDone.isChecked()==true){
+                            updateItemStatus(position, 1);}
+                        else if(mDone.isChecked()==false){
+                            updateItemStatus(position, 0);
+                        }
                         if (position != RecyclerView.NO_POSITION) {
                             mListener.onItemClick(position);
                         }
@@ -94,7 +102,12 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
 
         if (itemStatus == 1) {
             holder.mDone.setChecked(true);
-        } 
+            System.out.println("True");
+        }
+        else if (itemStatus == 0) {
+            holder.mDone.setChecked(false);
+            System.out.println("False");
+        }
 
     }
 
@@ -103,13 +116,16 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         return cartItems.size();
     }
 
-    /*public void updateItemStatus(TextView itemID, int i){
-        String cartID = ViewCartItemsActivity.getCartID();
+    public void updateItemStatus(int position, int itemStatus){
         //update cart item status from checkbox
+        String cartID = ViewCartItemsActivity.getCartID();
+        CartItems itemCart = cartItems.get(position);
+        int itemID = itemCart.getItemID();
+
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .updateCartItemStatus(cartID, itemID.toString(), String.valueOf(i));
+                .updateCartItemStatus(cartID, itemID, itemStatus);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -122,5 +138,5 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
                 Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }*/
+    }
 }
