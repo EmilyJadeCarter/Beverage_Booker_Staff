@@ -37,7 +37,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private ViewCartItems mRecyclerAdapter;
     private String orderNum;
     private String cartID;
-    private Staff activeStaff = SharedPrefManager.getInstance(ViewCartItemsActivity.this).getStaff();
+    private Staff activeStaff;
     private int activeStaffID;
     private int assignedStaffID;
     private Button completeOrderButton;
@@ -47,6 +47,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activeStaff = SharedPrefManager.getInstance(ViewCartItemsActivity.this).getStaff();
         activeStaffID = activeStaff.getStaffID();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_view);
@@ -73,7 +74,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         unassignOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backButtonClicked = true;
                 unassignStaff();
             }
         });
@@ -121,14 +121,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (backButtonClicked != true) {
-            unassignStaff();
-        }
     }
 
     private void activeChecker() {
@@ -179,6 +171,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        backButtonClicked = true;
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
     }
@@ -247,5 +240,13 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
         Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (backButtonClicked == false && activeStaffID == assignedStaffID) {
+            unassignStaff();
+        }
     }
 }
