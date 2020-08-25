@@ -93,7 +93,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         holder.mItemQuantity.setText(String.valueOf(currentItem.getQuantity()));
 
         if (itemStatus == 1) {
-            holder.mDone.isChecked();
+            holder.mDone.setChecked(true);
         } 
 
     }
