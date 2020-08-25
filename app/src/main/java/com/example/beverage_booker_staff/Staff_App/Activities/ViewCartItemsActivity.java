@@ -1,14 +1,5 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
-import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewActiveOrders;
 import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewCartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
@@ -27,8 +21,11 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewCartItemsActivity extends AppCompatActivity {
 
@@ -45,6 +42,8 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private boolean backButtonClicked = false;
     private int orderPosition;
 
+    private int itemStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         activeStaff = SharedPrefManager.getInstance(ViewCartItemsActivity.this).getStaff();
@@ -55,6 +54,8 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
         orderPosition = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
+
+
 
         activeChecker();
 

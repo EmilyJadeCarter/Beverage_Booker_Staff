@@ -5,6 +5,7 @@ public class CartItems {
     private int itemID;
     private String itemTitle;
     private int quantity;
+    private int itemStatus;
 
 
     public CartItems(int itemID, String itemTitle, int itemQuantity){
@@ -24,6 +25,10 @@ public class CartItems {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public int getItemStatus() {
+        return itemStatus;
     }
 }
 
