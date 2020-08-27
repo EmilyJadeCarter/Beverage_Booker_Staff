@@ -1,5 +1,6 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -86,10 +88,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         completeOrderButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                completeOrder();
-                deleteOrder();
-                deleteStaffQueue();
-                returnToOrders();
+                popupConfirmationConfirmOrder();
             }
         });
 
@@ -251,7 +250,27 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         return sCartID;
     }
 
-
+    private void popupConfirmationConfirmOrder() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Are you sure the order is complete");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                completeOrder();
+                deleteOrder();
+                deleteStaffQueue();
+                returnToOrders();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
+    }
 
     @Override
     protected void onStop() {
