@@ -31,7 +31,6 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
     private ArrayList<CartItems> cartItems;
     private ViewCartItems.OnItemClickListener mListener;
     private int ticks;
-    private int cartSize;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -52,14 +51,12 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         TextView mItemTitle;
         TextView mItemQuantity;
         CheckBox mDone;
-        Button completeOrderButton;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemID = itemView.findViewById(R.id.textView_itemID);
             mItemTitle = itemView.findViewById(R.id.textView_itemTitle);
             mItemQuantity = itemView.findViewById(R.id.itemQuantityValue);
-            completeOrderButton = itemView.findViewById(R.id.button_Complete);
             mDone = itemView.findViewById(R.id.checkBox_complete);
             mDone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,20 +114,6 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
             System.out.println("False");
             ticks = ticks - 1;
         }
-
-        cartSize = cartItems.size();
-        System.out.println("Cartsize is: "+cartSize);
-        System.out.println("ticks: "+ticks);
-
-        if(ticks==cartSize) {
-            holder.completeOrderButton.setEnabled(true);
-            System.out.println("Enabled");
-        }
-        else {
-            holder.completeOrderButton.setEnabled(false);
-            System.out.println("Disabled");
-        }
-
     }
 
     @Override

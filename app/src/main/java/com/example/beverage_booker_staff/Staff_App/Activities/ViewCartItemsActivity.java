@@ -44,9 +44,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private Button unassignOrderButton;
     private boolean backButtonClicked = false;
     private int orderPosition;
-    private int cartSize;
     private int itemStatus;
-    private int tickCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +102,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 System.out.println("itemStatus is "+itemStatus);
                 System.out.println("position: " + position);
                 System.out.println("Item ID: " + itemID);
-                updateCompleteButton();
-
             }
         });
 
@@ -130,22 +126,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        updateCompleteButton();
-    }
-
-    private void updateCompleteButton(){
-        cartSize = 3;
-        System.out.println("Cartsize is: "+cartSize);
-        System.out.println("ticks: "+tickCount);
-
-        if(tickCount==cartSize) {
-            completeOrderButton.setEnabled(true);
-            System.out.println("Enabled");
-        }
-        else {
-            completeOrderButton.setEnabled(false);
-            System.out.println("Disabled");
-        }
     }
 
     private void activeChecker() {
