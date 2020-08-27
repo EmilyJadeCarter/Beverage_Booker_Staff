@@ -44,9 +44,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private Button unassignOrderButton;
     private boolean backButtonClicked = false;
     private int orderPosition;
-    private Timer myTimer;
-
+    private int cartSize;
     private int itemStatus;
+    private int tickCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +95,16 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
 
-        //updateCompleteButton(-1);
-
         mRecyclerAdapter.setOnItemClickListener(new ViewCartItems.OnItemClickListener() {
 
             @Override
             public void onItemClick(int position) {
                 String itemID = String.valueOf(mCartItems.get(position).getItemID());
-                int itemStatus = mCartItems.get(position).getItemStatus();
+                itemStatus = Integer.valueOf(mCartItems.get(position).getItemStatus());
+                System.out.println("itemStatus is "+itemStatus);
                 System.out.println("position: " + position);
                 System.out.println("Item ID: " + itemID);
-                //updateCompleteButton(itemStatus);
+                updateCompleteButton();
 
             }
         });
@@ -131,18 +130,14 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        updateCompleteButton();
     }
 
-    /*private void updateCompleteButton(int itemStatus){
-        int cartSize = 3;
+    private void updateCompleteButton(){
+        cartSize = 3;
         System.out.println("Cartsize is: "+cartSize);
-        int tickCount = 0;
-        if(itemStatus==1){
-            tickCount++;
-        }
-        else if(itemStatus==0){
-            tickCount--;
-        }
+        System.out.println("ticks: "+tickCount);
+
         if(tickCount==cartSize) {
             completeOrderButton.setEnabled(true);
             System.out.println("Enabled");
@@ -151,7 +146,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             completeOrderButton.setEnabled(false);
             System.out.println("Disabled");
         }
-    }*/
+    }
 
     private void activeChecker() {
         Call<List<OrderItems>> call = RetrofitClient
