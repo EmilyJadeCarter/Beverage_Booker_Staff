@@ -58,4 +58,62 @@ public interface Api {
     Call<ResponseBody> deleteMenuItem(
             @Field("itemID") int itemID
     );
+
+    //Adds order to queue
+    @FormUrlEncoded
+    @POST("addtoqueue")
+    Call<ResponseBody> addToQueue(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //Make order available
+    @FormUrlEncoded
+    @POST("makeorderavailable")
+    Call<ResponseBody> makeOrderAvailable(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //assign staff to order
+    @FormUrlEncoded
+    @POST("assignstafftoorder")
+    Call<ResponseBody> assignStaffToOrder(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("addcompletedorder")
+    Call<ResponseBody> addCompletedOrder(
+            @Field("orderID") String orderID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("deleteorder")
+    Call<ResponseBody> deleteOrder(
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("deletestaffqueue")
+    Call<ResponseBody> deleteStaffQueue(
+            @Field("orderID") String orderID
+    );
+
+    //update cartitem status
+    @FormUrlEncoded
+    @POST("updatecartitemstatus")
+    Call<ResponseBody> updateCartItemStatus(
+            @Field("cartID") String cartID,
+            @Field("itemID") int itemID,
+            @Field("itemStatus") int itemStatus
+    );
 }
