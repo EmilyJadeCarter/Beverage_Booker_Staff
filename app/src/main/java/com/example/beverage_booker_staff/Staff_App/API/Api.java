@@ -58,4 +58,31 @@ public interface Api {
     Call<ResponseBody> deleteMenuItem(
             @Field("itemID") int itemID
     );
+
+    //Adds order to queue
+    @FormUrlEncoded
+    @POST("addtoqueue")
+    Call<ResponseBody> addToQueue(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //Make order available
+    @FormUrlEncoded
+    @POST("makeorderavailable")
+    Call<ResponseBody> makeOrderAvailable(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //assign staff to order
+    @FormUrlEncoded
+    @POST("assignstafftoorder")
+    Call<ResponseBody> assignStaffToOrder(
+            @Field("staffID") int staffID,
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
 }

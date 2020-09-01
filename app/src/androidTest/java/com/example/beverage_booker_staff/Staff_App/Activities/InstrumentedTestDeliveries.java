@@ -41,7 +41,7 @@ public class InstrumentedTestDeliveries {
     @Test
     public void isButtonsForMainMenuDisplayed() {
         onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("0001"), closeSoftKeyboard());
+                .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
         onView(withId(R.id.OrdersButton))
@@ -57,7 +57,7 @@ public class InstrumentedTestDeliveries {
     @Test
     public void isDeliveriesButtonFunctioning() {
         onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("0001"), closeSoftKeyboard());
+                .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
         onView(withId(R.id.DeliveriesButton))
@@ -72,7 +72,7 @@ public class InstrumentedTestDeliveries {
     public void isFieldsForDeliveriesActivityDisplayed() {
 
         onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("0001"), closeSoftKeyboard());
+                .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
         onView(withId(R.id.DeliveriesButton))
