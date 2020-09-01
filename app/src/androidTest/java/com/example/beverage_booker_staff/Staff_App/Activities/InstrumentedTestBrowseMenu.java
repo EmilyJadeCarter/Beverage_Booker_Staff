@@ -32,7 +32,7 @@ public class InstrumentedTestBrowseMenu {
      * From main menu this test click menu button and ensures the screen changed
      * by checking and making sure every category of item is displayed properly
      * in which it checks all components related to banana. he prerequisites for this
-     * test are a staff member exists with the id 0001 and an entry in the items
+     * test are a staff member exists with the id 1001 and an entry in the items
      * database exists with a name of "banana", description of "its a banana"
      * and a price of 12.5.
      */
