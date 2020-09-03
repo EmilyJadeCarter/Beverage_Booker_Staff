@@ -34,6 +34,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
     MenuItem itemClicked;
     int itemID;
     String itemTitle;
+    int milkstat;
 
     private Button addMenuItem;
 
@@ -67,6 +68,8 @@ public class BrowseMenuActivity extends AppCompatActivity {
                 itemClicked = menuItems.get(position);
                 itemID = menuItems.get(position).getId();
                 itemTitle = itemClicked.getName();
+                milkstat = itemClicked.getMilk(); //works which means everything else will work
+
                 if(selection == 1) {
                     MenuItemFormModify();
                 }
@@ -79,7 +82,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
         Call<List<MenuItem>> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getItems();
+                .getItemsForStaffMenu();
 
         call.enqueue(new Callback<List<MenuItem>>() {
             @Override
@@ -105,6 +108,8 @@ public class BrowseMenuActivity extends AppCompatActivity {
 
     private void MenuItemFormModify(){
         //TODO Implement Modify Item Form (same as add but with preexisting data)
+        // would probably be best to use intents to send the data of the item clicked
+        // data is attainable from the lines 64 stuff.
     }
 
     // This is a popup menu that allows the user to confirm a deletion of an item, they can cancel as well

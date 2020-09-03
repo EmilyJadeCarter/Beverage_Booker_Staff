@@ -49,8 +49,8 @@ public interface Api {
     );
 
     //Get Menu items from database
-    @GET("getitems")
-    Call<List<MenuItem>> getItems();
+    @GET("getitemsforstaffmenu")
+    Call<List<MenuItem>> getItemsForStaffMenu();
 
     //Delete item from database
     @FormUrlEncoded
