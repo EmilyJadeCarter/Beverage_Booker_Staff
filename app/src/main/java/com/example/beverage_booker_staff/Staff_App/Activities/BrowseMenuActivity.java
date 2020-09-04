@@ -34,7 +34,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
     MenuItem itemClicked;
     int itemID;
     String itemTitle;
-    int milkstat;
+    String type;
 
     private Button addMenuItem;
 
@@ -68,7 +68,8 @@ public class BrowseMenuActivity extends AppCompatActivity {
                 itemClicked = menuItems.get(position);
                 itemID = menuItems.get(position).getId();
                 itemTitle = itemClicked.getName();
-                milkstat = itemClicked.getMilk(); //works which means everything else will work
+                type = itemClicked.getItemType(); //works which means everything else will work
+                System.out.println("Item Type: " + type);
 
                 if(selection == 1) {
                     MenuItemFormModify();
@@ -103,7 +104,8 @@ public class BrowseMenuActivity extends AppCompatActivity {
     }
 
     private void MenuItemFormAdd(){
-        //TODO Implement Add Item Form
+        Intent intent = new Intent(this, ItemTypeSelectionActivity.class);
+        startActivity(intent);
     }
 
     private void MenuItemFormModify(){

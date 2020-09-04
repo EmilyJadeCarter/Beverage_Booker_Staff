@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/typeSelectTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Select New Item Type"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_below="@id/typeSelectTitle"
+        android:id="@+id/foodMenuButton"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Food"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_below="@id/foodMenuButton"
+        android:id="@+id/drinkMenuButton"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Drink"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

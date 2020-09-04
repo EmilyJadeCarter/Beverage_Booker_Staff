@@ -21,6 +21,8 @@
             <!-- android:parentActivityName=".Staff_App.Activities.ViewActiveOrdersActivity" -->
         </activity>
         <activity android:name=".Staff_App.Activities.ViewActiveOrdersActivity" />
+        <activity android:name=".Staff_App.Activities.ItemTypeSelectionActivity" />
+        <activity android:name=".Staff_App.Activities.ItemFormActivity" />
         <activity android:name=".Staff_App.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
