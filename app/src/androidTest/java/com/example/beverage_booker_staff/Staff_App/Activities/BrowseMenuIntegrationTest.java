@@ -32,7 +32,7 @@ public class BrowseMenuIntegrationTest {
     /**
      * This tests conducts a run through of the program interacting with
      * all applicable activities tied to BrowseMenu, the prerequisites for this
-     * test are a staff member exists with the id 0001 and an entry in the items
+     * test are a staff member exists with the id 1001 and an entry in the items
      * database exists with a name of "banana", description of "its a banana"
      * and a price of 12.5.
      */
@@ -40,7 +40,7 @@ public class BrowseMenuIntegrationTest {
     public void BrowseMenuIntegrationTest() {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
-                .perform(typeText("0001"));
+                .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
 

@@ -70,7 +70,7 @@ public class InstrumentedViewActiveOrderTest {
     @Test
     public void StaffLogin_SuccessfulLogin() {
         onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("0001"), closeSoftKeyboard());
+                .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
     }
@@ -82,7 +82,7 @@ public class InstrumentedViewActiveOrderTest {
     @Test
     public void ViewActiveOrder_CheckFields() {
         onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("0001"), closeSoftKeyboard());
+                .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
         onView(withId(R.id.textViewOrderIDTitle))
@@ -101,7 +101,7 @@ public class InstrumentedViewActiveOrderTest {
     @Test
     public void ViewCartItems_CheckFields_CheckItems() {
         onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("0001"), closeSoftKeyboard());
+                .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
         onView(withId(R.id.buttonStartOrder))

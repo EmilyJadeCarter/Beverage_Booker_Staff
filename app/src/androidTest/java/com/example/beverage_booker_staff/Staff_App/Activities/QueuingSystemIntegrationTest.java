@@ -24,19 +24,17 @@ import static org.hamcrest.core.AllOf.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class DeleteMenuItemIntegrationTest {
+public class QueuingSystemIntegrationTest {
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule
             = new ActivityScenarioRule<>(MainActivity.class);
-
-
     /**
-     * This test ensures that the popup menu appears when the delete button for
-     * banana is clicked. The program then clicks cancel The prerequisites for
-     * this test is that an item named test exists.
+     * This test is a run through of the program to make sure the integration
+     * of the queuing system is implemented correctly with links working and components
+     * displaying correctly.
      */
     @Test
-    public void DeleteMenuItemIntegrationTest() {
+    public void QueuingSystemIntegrationTest() {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
                 .perform(typeText("1001"));
@@ -46,40 +44,19 @@ public class DeleteMenuItemIntegrationTest {
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
-        onView(withId(R.id.MenuButton))
+        onView(withId(R.id.OrdersButton))
                 .perform(click());
 
-        //BrowseMenuActivity
-        onView(withId(R.id.MenuButton))
+        //ViewOrderActivity
+        onView(withId(R.id.OrdersButton))
                 .check(doesNotExist());
-        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("test"))))
-                .perform(click());
-
-        //BrowseMenuActivity with delete menu item popup
-        onView(withText("Confirmation"))
+        onView(withId(R.id.textViewStaffTitle))
                 .check(matches(isDisplayed()));
-        onView(withText("Cancel"))
+        onView(allOf(ViewMatchers.withId(R.id.buttonStartOrder), hasSibling(withText("16"))))
                 .perform(click());
 
-        //BrowseMenuActivity
-        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("test"))))
+        //OrderIndividualItem
+        onView(allOf(ViewMatchers.withId(R.id.textView_itemTitle), hasSibling(withText("Blueberry Muffin"))))
                 .check(matches(isDisplayed()));
-        onView(withText("Confirmation"))
-                .check(doesNotExist());
-        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("test"))))
-                .perform(click());
-
-        //BrowseMenuActivity with delete menu item popup
-        onView(withText("Confirmation"))
-                .check(matches(isDisplayed()));
-        onView(withText("Confirm"))
-                .perform(click());
-
-        //BrowseMenuActivity
-        onView(withText("Confirmation"))
-                .check(doesNotExist());
-        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("test"))))
-                .check(doesNotExist());
-
     }
 }
