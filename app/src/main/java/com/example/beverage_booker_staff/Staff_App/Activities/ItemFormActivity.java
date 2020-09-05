@@ -38,6 +38,7 @@ public class ItemFormActivity extends AppCompatActivity {
     CheckBox heatedStatus;
     Button addButton;
 
+    int itemID;
     String itemTitle;
     String itemShortDesc;
     String itemPriceString;
@@ -55,11 +56,9 @@ public class ItemFormActivity extends AppCompatActivity {
     int frappeOption;
     int heatedOption;
 
-    //TODO itemType needs to do something not sure what
-    // but maybe there is a way to hide things so then there is only some stuff shown,
-    // e.g. if itemType == food then disable all the options to do with beverages
-    // (this could be bad might cause problems with spacing between things - research needed) or
-    // make a new page for it since that wouldn't be too time consuming either.
+    boolean fieldEnteredChecker;
+
+    boolean modifyButtonClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +68,52 @@ public class ItemFormActivity extends AppCompatActivity {
         Intent intent = getIntent();
         itemType = intent.getStringExtra(ItemTypeSelectionActivity.ITEM_TYPE);
 
+        fieldEnteredChecker = false;
+        modifyButtonClicked = false;
+
+        // text fields
         title = findViewById(R.id.editTextTitle);
         shortDesc = findViewById(R.id.editTextShortDesc);
         price = findViewById(R.id.editTextPrice);
         time = findViewById(R.id.editTextTime);
 
+        // checkboxes
         milkStatus = findViewById(R.id.milkOption);
         sugarStatus = findViewById(R.id.sugarOption);
         decafStatus = findViewById(R.id.decafOption);
         extrasStatus = findViewById(R.id.extrasOption);
         frappeStatus = findViewById(R.id.frappeOption);
         heatedStatus = findViewById(R.id.heatingOption);
+
+        // if modify was clicked - this sets all the next page to correspond with options
+        if(intent.getIntExtra(BrowseMenuActivity.ITEM_ID, 0) != 0) {
+            modifyButtonClicked = true;
+            itemID = intent.getIntExtra(BrowseMenuActivity.ITEM_ID, 0);
+            title.setText(intent.getStringExtra(BrowseMenuActivity.ITEM_TITLE));
+            shortDesc.setText(intent.getStringExtra(BrowseMenuActivity.ITEM_DESC));
+            price.setText(String.valueOf(intent.getDoubleExtra(BrowseMenuActivity.ITEM_PRICE, 0)));
+            time.setText(String.valueOf(intent.getIntExtra(BrowseMenuActivity.ITEM_TIME, 0)));
+
+            if(intent.getIntExtra(BrowseMenuActivity.ITEM_MILK, 0) == 1) {
+                milkStatus.setChecked(true);
+            }
+            if(intent.getIntExtra(BrowseMenuActivity.ITEM_SUGAR, 0) == 1) {
+                sugarStatus.setChecked(true);
+            }
+            if(intent.getIntExtra(BrowseMenuActivity.ITEM_DECAF, 0) == 1) {
+                decafStatus.setChecked(true);
+            }
+            if(intent.getIntExtra(BrowseMenuActivity.ITEM_EXTRAS, 0) == 1) {
+                extrasStatus.setChecked(true);
+            }
+            if(intent.getIntExtra(BrowseMenuActivity.ITEM_FRAPPE, 0) == 1) {
+                frappeStatus.setChecked(true);
+            }
+            if(intent.getIntExtra(BrowseMenuActivity.ITEM_HEATED, 0) == 1) {
+                heatedStatus.setChecked(true);
+            }
+            itemType = intent.getStringExtra(BrowseMenuActivity.ITEM_TYPE);
+        }
 
         if(itemType.equals("food")) {
             optionTitle = findViewById(R.id.optionTitle);
@@ -93,14 +127,15 @@ public class ItemFormActivity extends AppCompatActivity {
             heatedStatus.setVisibility(View.GONE);
         }
 
-
         addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkEditTextVariables();
                 checkboxAssignment();
-                addItemToList();
+                if(fieldEnteredChecker == true) {
+                    addItemToList();
+                }
             }
         });
     }
@@ -133,6 +168,7 @@ public class ItemFormActivity extends AppCompatActivity {
         } else {
             itemTimeInt = Integer.parseInt(time.getText().toString().trim());
         }
+        fieldEnteredChecker = true;
     }
 
     private void checkboxAssignment() {
@@ -175,28 +211,54 @@ public class ItemFormActivity extends AppCompatActivity {
     }
 
     private void addItemToList() {
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .addMenuItem(itemTitle, itemShortDesc, itemPriceDouble, milkOption, sugarOption, decafOption,
-                        extrasOption, frappeOption, heatedOption, itemType, itemTimeInt);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    Toast.makeText(ItemFormActivity.this, "Item added to list", Toast.LENGTH_LONG).show();
-                } else if (response.code() == 402) {
-                    Toast.makeText(ItemFormActivity.this, "Item failed to be added to list", Toast.LENGTH_LONG).show();
-                } else if (response.code() == 403){
-                    Toast.makeText(ItemFormActivity.this, "Item title already exists", Toast.LENGTH_LONG).show();
+        if (modifyButtonClicked == false) {
+            Call<ResponseBody> call = RetrofitClient
+                    .getInstance()
+                    .getApi()
+                    .addMenuItem(itemTitle, itemShortDesc, itemPriceDouble, milkOption, sugarOption, decafOption,
+                            extrasOption, frappeOption, heatedOption, itemType, itemTimeInt);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 201) {
+                        Toast.makeText(ItemFormActivity.this, "Item added to list", Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 402) {
+                        Toast.makeText(ItemFormActivity.this, "Item failed to be added to list", Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 403) {
+                        Toast.makeText(ItemFormActivity.this, "Item title already exists", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ItemFormActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-        return;
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(ItemFormActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            return;
+        } else {
+            Call<ResponseBody> call = RetrofitClient
+                    .getInstance()
+                    .getApi()
+                    .modifyMenuItem(itemID, itemTitle, itemShortDesc, itemPriceDouble, milkOption, sugarOption, decafOption,
+                            extrasOption, frappeOption, heatedOption, itemType, itemTimeInt);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 201) {
+                        Toast.makeText(ItemFormActivity.this, "Item was modified", Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 402) {
+                        Toast.makeText(ItemFormActivity.this, "Item failed to modify", Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 403) {
+                        Toast.makeText(ItemFormActivity.this, "Item title already exist", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(ItemFormActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            return;
+        }
     }
 }

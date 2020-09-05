@@ -102,4 +102,22 @@ public interface Api {
             @Field("itemType") String itemType,
             @Field("itemTimeInt") int itemTimeInt
     );
+
+    //modify menu item
+    @FormUrlEncoded
+    @POST("modifymenuitem")
+    Call<ResponseBody> modifyMenuItem(
+            @Field("itemID") int itemID,
+            @Field("itemTitle") String itemTitle,
+            @Field("itemShortDesc") String itemShortDesc,
+            @Field("itemPriceDouble") double itemPriceDouble,
+            @Field("milkOption") int milkOption,
+            @Field("sugarOption") int sugarOption,
+            @Field("decafOption") int decafOption,
+            @Field("extrasOption") int extrasOption,
+            @Field("frappeOption") int frappeOption,
+            @Field("heatedOption") int heatedOption,
+            @Field("itemType") String itemType,
+            @Field("itemTimeInt") int itemTimeInt
+    );
 }
