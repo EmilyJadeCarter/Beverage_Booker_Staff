@@ -98,6 +98,7 @@ public interface Api {
             @Field("decafOption") int decafOption,
             @Field("extrasOption") int extrasOption,
             @Field("frappeOption") int frappeOption,
+            @Field("heatedOption") int heatedOption,
             @Field("itemType") String itemType,
             @Field("itemTimeInt") int itemTimeInt
     );

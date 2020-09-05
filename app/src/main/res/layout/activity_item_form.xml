@@ -66,6 +66,7 @@
         android:inputType="number"/>
 
     <TextView
+        android:id="@+id/optionTitle"
         android:layout_below="@id/editTextTime"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
@@ -119,7 +120,14 @@
         android:text="frappe: Turns beverage into a frappe"
         android:textSize="20dp"/>
 
-
+    <CheckBox
+        android:id="@+id/heatingOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/optionTitle"
+        android:layout_marginTop="5dp"
+        android:text="heated: Allows for item to be heated"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/addButton"
@@ -127,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginLeft="160dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="Add"
         android:textSize="15dp" />
 </LinearLayout>

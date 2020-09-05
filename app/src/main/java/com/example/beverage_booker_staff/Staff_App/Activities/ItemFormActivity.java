@@ -29,11 +29,13 @@ public class ItemFormActivity extends AppCompatActivity {
     EditText shortDesc;
     EditText price;
     EditText time;
+    TextView optionTitle;
     CheckBox milkStatus;
     CheckBox sugarStatus;
     CheckBox decafStatus;
     CheckBox extrasStatus;
     CheckBox frappeStatus;
+    CheckBox heatedStatus;
     Button addButton;
 
     String itemTitle;
@@ -51,19 +53,13 @@ public class ItemFormActivity extends AppCompatActivity {
     int decafOption;
     int extrasOption;
     int frappeOption;
+    int heatedOption;
 
-    boolean variableChecker = false;
-
-    //TODO make the titles for each thing in the item form a proper colour and
-    // make them larger. All works up to here - title will have to be checked against
-    // the db to make sure its not already existent. Shortdesc all the way down to
-    // heated status needs to be linked up and a new request in the api will have to be
-    // created for the creation of a new item. itemType needs to do something not sure what
+    //TODO itemType needs to do something not sure what
     // but maybe there is a way to hide things so then there is only some stuff shown,
     // e.g. if itemType == food then disable all the options to do with beverages
     // (this could be bad might cause problems with spacing between things - research needed) or
     // make a new page for it since that wouldn't be too time consuming either.
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +79,19 @@ public class ItemFormActivity extends AppCompatActivity {
         decafStatus = findViewById(R.id.decafOption);
         extrasStatus = findViewById(R.id.extrasOption);
         frappeStatus = findViewById(R.id.frappeOption);
+        heatedStatus = findViewById(R.id.heatingOption);
+
+        if(itemType.equals("food")) {
+            optionTitle = findViewById(R.id.optionTitle);
+            optionTitle.setVisibility(View.GONE);
+            milkStatus.setVisibility(View.GONE);
+            sugarStatus.setVisibility(View.GONE);
+            decafStatus.setVisibility(View.GONE);
+            extrasStatus.setVisibility(View.GONE);
+            frappeStatus.setVisibility(View.GONE);
+        } else if(itemType.equals("drink")) {
+            heatedStatus.setVisibility(View.GONE);
+        }
 
 
         addButton = findViewById(R.id.addButton);
@@ -157,7 +166,12 @@ public class ItemFormActivity extends AppCompatActivity {
         } else {
             frappeOption = 0;
         }
-        variableChecker = true;
+
+        if(heatedStatus.isChecked()) {
+            heatedOption = 1;
+        } else {
+            heatedOption = 0;
+        }
     }
 
     private void addItemToList() {
@@ -165,7 +179,7 @@ public class ItemFormActivity extends AppCompatActivity {
                 .getInstance()
                 .getApi()
                 .addMenuItem(itemTitle, itemShortDesc, itemPriceDouble, milkOption, sugarOption, decafOption,
-                        extrasOption, frappeOption , itemType, itemTimeInt);
+                        extrasOption, frappeOption, heatedOption, itemType, itemTimeInt);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
