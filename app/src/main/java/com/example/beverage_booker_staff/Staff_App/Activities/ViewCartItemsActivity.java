@@ -23,8 +23,6 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -229,13 +227,43 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 402) {
+                if (response.code() == 201) {
+                    returnToOrders();
+                }
+                else if (response.code() == 402) {
                     Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void updateOrderToComplete() {
+
+        System.out.println("Check OrderNum: " + orderNum);
+
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .updateOrderStatusToComplete(orderNum);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
+                    deleteStaffQueue();
+                } else {
+                    Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }
@@ -258,10 +286,11 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                completeOrder();
-                deleteOrder();
-                deleteStaffQueue();
-                returnToOrders();
+                //completeOrder();
+                //deleteOrder();
+                updateOrderToComplete();
+                //deleteStaffQueue();
+                //returnToOrders();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

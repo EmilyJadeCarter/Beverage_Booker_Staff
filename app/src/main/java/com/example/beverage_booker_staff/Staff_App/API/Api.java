@@ -116,4 +116,11 @@ public interface Api {
             @Field("itemID") int itemID,
             @Field("itemStatus") int itemStatus
     );
+
+    //update order to completed status in orders table
+    @FormUrlEncoded
+    @POST("updateorderstatustocomplete")
+    Call<ResponseBody> updateOrderStatusToComplete(
+            @Field("orderID") String orderID
+    );
 }
