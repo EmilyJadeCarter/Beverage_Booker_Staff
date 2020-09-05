@@ -7,61 +7,119 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title: " />
+        android:text="Item Title:"
+        android:textColor="#69989E"
+        android:textSize="20dp"/>
 
     <EditText
+        android:layout_below="@id/editTextTitle"
         android:id="@+id/editTextTitle"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:hint="title" />
 
+    <TextView
+        android:layout_below="@id/editTextTitle"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Short Description:"
+        android:textColor="#69989E"
+        android:textSize="20dp"/>
+
     <EditText
         android:id="@+id/editTextShortDesc"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:hint="shortdesc" />
+        android:hint="shortDesc (Optional)" />
+
+    <TextView
+        android:layout_below="@id/editTextShortDesc"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Price:"
+        android:textColor="#69989E"
+        android:textSize="20dp"/>
 
     <EditText
         android:id="@+id/editTextPrice"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:hint="price" />
+        android:hint="price"
+        android:inputType="numberDecimal"/>
+
+    <TextView
+        android:layout_below="@id/editTextPrice"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preparation Time:"
+        android:textColor="#69989E"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:hint="time (Minutes)"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_below="@id/editTextTime"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allow Beverage Options:"
+        android:textColor="#69989E"
+        android:textSize="20dp"/>
 
     <CheckBox
         android:id="@+id/milkOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="milk" />
+        android:text="milk: Full Cream, Skim, Almond, Soy"
+        android:textSize="20dp"/>
 
     <CheckBox
         android:id="@+id/sugarOption"
+        android:layout_below="@id/milkOption"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sugar" />
+        android:text="sugar: Sugar, Sweetener"
+        android:textSize="20dp"/>
 
     <CheckBox
         android:id="@+id/decafOption"
+        android:layout_below="@id/sugarOption"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="decaf" />
+        android:text="decaf: Decaffeinates Beverage"
+        android:textSize="20dp"
+        />
 
     <CheckBox
         android:id="@+id/extrasOption"
+        android:layout_below="@id/decafOption"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="extras" />
+        android:text="extras: Vanilla, Caramel, Chocolate,
+        Cream"
+        android:textSize="20dp"/>
 
     <CheckBox
         android:id="@+id/frappeOption"
+        android:layout_below="@id/extrasOption"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="frappe" />
+        android:text="frappe: Turns beverage into a frappe"
+        android:textSize="20dp"/>
 
-    <CheckBox
-        android:id="@+id/heatedOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="heated" />
+
 
     <Button
         android:id="@+id/addButton"
@@ -69,9 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginLeft="160dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="25dp"
         android:text="Add"
         android:textSize="15dp" />
-
-
 </LinearLayout>
