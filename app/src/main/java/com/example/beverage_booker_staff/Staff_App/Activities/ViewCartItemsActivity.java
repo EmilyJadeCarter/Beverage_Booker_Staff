@@ -87,8 +87,9 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 popupConfirmationConfirmOrder();
-            }
+           }
         });
+
 
         mRecyclerAdapter.setOnItemClickListener(new ViewCartItems.OnItemClickListener() {
 
@@ -228,7 +229,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
-                    returnToOrders();
+                    //returnToOrders();
                 }
                 else if (response.code() == 402) {
                     Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
@@ -244,18 +245,20 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     public void updateOrderToComplete() {
 
         System.out.println("Check OrderNum: " + orderNum);
+        int orderID = Integer.parseInt(orderNum);
+        System.out.println("Check OrderID: " + orderID);
 
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .updateOrderStatusToComplete(orderNum);
+                .updateOrderStatusToComplete(orderID);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
                     Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
-                    deleteStaffQueue();
+
                 } else {
                     Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
                 }
@@ -263,7 +266,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -271,7 +274,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private void returnToOrders() {
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
-        Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
+        //Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
     }
 
     public static String getCartID(){
@@ -288,9 +291,35 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //completeOrder();
                 //deleteOrder();
-                updateOrderToComplete();
+                //updateOrderToComplete();
                 //deleteStaffQueue();
-                //returnToOrders();
+                returnToOrders();
+                //deleteStaffQueue();
+
+                int cartID = Integer.parseInt(getCartID());
+                System.out.println("Check : " + cartID);
+
+                Call<ResponseBody> call = RetrofitClient
+                        .getInstance()
+                        .getApi()
+                        .updateOrderStatusToComplete(cartID);
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.code() == 200) {
+                            Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
