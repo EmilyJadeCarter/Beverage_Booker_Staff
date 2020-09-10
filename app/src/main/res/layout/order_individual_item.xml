@@ -32,7 +32,8 @@
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/textView_itemID"
             android:text="Item Title"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/textView_itemID" />
 
         <TextView
             android:id="@+id/itemQuantityHeading"
