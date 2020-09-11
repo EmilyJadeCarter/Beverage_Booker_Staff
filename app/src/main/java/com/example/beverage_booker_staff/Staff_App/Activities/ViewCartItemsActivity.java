@@ -1,14 +1,6 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
-import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewActiveOrders;
 import com.example.beverage_booker_staff.Staff_App.Adaptors.ViewCartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
@@ -27,8 +23,11 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewCartItemsActivity extends AppCompatActivity {
 
@@ -37,6 +36,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private ViewCartItems mRecyclerAdapter;
     private String orderNum;
     private String cartID;
+    private static String sCartID;
     private Staff activeStaff;
     private int activeStaffID;
     private int assignedStaffID;
@@ -44,6 +44,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
     private Button unassignOrderButton;
     private boolean backButtonClicked = false;
     private int orderPosition;
+    private int itemStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,10 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         orderNum = intent.getStringExtra(ViewActiveOrdersActivity.ORDER_ID);
         cartID = intent.getStringExtra(ViewActiveOrdersActivity.CART_ID);
+        sCartID = cartID;
         orderPosition = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
+
+
 
         activeChecker();
 
@@ -78,14 +82,24 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             }
         });
 
+        completeOrderButton = findViewById(R.id.button_Complete);
+        completeOrderButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                popupConfirmationConfirmOrder();
+           }
+        });
+
+
         mRecyclerAdapter.setOnItemClickListener(new ViewCartItems.OnItemClickListener() {
 
             @Override
             public void onItemClick(int position) {
                 String itemID = String.valueOf(mCartItems.get(position).getItemID());
+                itemStatus = Integer.valueOf(mCartItems.get(position).getItemStatus());
+                System.out.println("itemStatus is "+itemStatus);
                 System.out.println("position: " + position);
                 System.out.println("Item ID: " + itemID);
-
             }
         });
 
@@ -165,10 +179,155 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void completeOrder(){
+        //add order to completedOrders table
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .addCompletedOrder(orderNum);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 402) {
+                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void deleteOrder(){
+        //remove order from orders table
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .deleteOrder(orderNum, cartID);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 402) {
+                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void deleteStaffQueue(){
+        //remove order from staffQueue table
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .deleteStaffQueue(orderNum);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 201) {
+                    //returnToOrders();
+                }
+                else if (response.code() == 402) {
+                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void updateOrderToComplete() {
+
+        System.out.println("Check OrderNum: " + orderNum);
+        int orderID = Integer.parseInt(orderNum);
+        System.out.println("Check OrderID: " + orderID);
+
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .updateOrderStatusToComplete(orderID);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void returnToOrders() {
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
-        Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
+        //Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
+    }
+
+    public static String getCartID(){
+        return sCartID;
+    }
+
+    private void popupConfirmationConfirmOrder() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Are you sure the order is complete");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //completeOrder();
+                //deleteOrder();
+                //updateOrderToComplete();
+                //deleteStaffQueue();
+                returnToOrders();
+                //deleteStaffQueue();
+
+                int cartID = Integer.parseInt(getCartID());
+                System.out.println("Check : " + cartID);
+
+                Call<ResponseBody> call = RetrofitClient
+                        .getInstance()
+                        .getApi()
+                        .updateOrderStatusToComplete(cartID);
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.code() == 200) {
+                            Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 
     @Override

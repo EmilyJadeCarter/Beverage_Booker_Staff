@@ -119,5 +119,42 @@ public interface Api {
             @Field("heatedOption") int heatedOption,
             @Field("itemType") String itemType,
             @Field("itemTimeInt") int itemTimeInt
+	
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("addcompletedorder")
+    Call<ResponseBody> addCompletedOrder(
+            @Field("orderID") String orderID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("deleteorder")
+    Call<ResponseBody> deleteOrder(
+            @Field("orderID") String orderID,
+            @Field("cartID") String cartID
+    );
+
+    //add to completedOrders
+    @FormUrlEncoded
+    @POST("deletestaffqueue")
+    Call<ResponseBody> deleteStaffQueue(
+            @Field("orderID") String orderID
+    );
+
+    //update cartitem status
+    @FormUrlEncoded
+    @POST("updatecartitemstatus")
+    Call<ResponseBody> updateCartItemStatus(
+            @Field("cartID") String cartID,
+            @Field("itemID") int itemID,
+            @Field("itemStatus") int itemStatus
+    );
+
+    //update order to completed status in orders table
+    @FormUrlEncoded
+    @POST("updateorderstatustocomplete")
+    Call<ResponseBody> updateOrderStatusToComplete(
+            @Field("cartID") int cartID
     );
 }
