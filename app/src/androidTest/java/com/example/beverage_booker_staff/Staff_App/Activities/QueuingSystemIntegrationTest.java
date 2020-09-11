@@ -34,12 +34,13 @@ public class QueuingSystemIntegrationTest {
      * displaying correctly.
      */
     @Test
-    public void QueuingSystemIntegrationTest() {
+    public void QueuingSystemIntegrationTest() throws InterruptedException {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(100);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))

@@ -28,12 +28,37 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BrowseMenuActivity extends AppCompatActivity {
+    public static final String ITEM_ID = "com.example.beverage_booker_staff.ITEM_ID";
+    public static final String ITEM_TITLE = "com.example.beverage_booker_staff.ITEM_TITLE";
+    public static final String ITEM_DESC = "com.example.beverage_booker_staff.ITEM_DESC";
+    public static final String ITEM_PRICE = "com.example.beverage_booker_staff.ITEM_PRICE";
+    public static final String ITEM_MILK = "com.example.beverage_booker_staff.ITEM_MILK";
+    public static final String ITEM_SUGAR = "com.example.beverage_booker_staff.ITEM_SUGAR";
+    public static final String ITEM_DECAF = "com.example.beverage_booker_staff.ITEM_DECAF";
+    public static final String ITEM_EXTRAS = "com.example.beverage_booker_staff.ITEM_EXTRAS";
+    public static final String ITEM_FRAPPE = "com.example.beverage_booker_staff.ITEM_FRAPPE";
+    public static final String ITEM_HEATED = "com.example.beverage_booker_staff.ITEM_HEATED";
+    public static final String ITEM_TYPE = "com.example.beverage_booker_staff.ITEM_TYPE";
+    public static final String ITEM_TIME = "com.example.beverage_booker_staff.ITEM_TIME";
+
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private ArrayList<MenuItem> menuItems;
     MenuItem itemClicked;
+
+    // menu item stuff
     int itemID;
     String itemTitle;
+    String itemDesc;
+    double itemPrice;
+    int itemMilk;
+    int itemSugar;
+    int itemDecaf;
+    int itemExtras;
+    int itemFrappe;
+    int itemHeated;
+    String itemType;
+    int itemTime;
 
     private Button addMenuItem;
 
@@ -67,6 +92,16 @@ public class BrowseMenuActivity extends AppCompatActivity {
                 itemClicked = menuItems.get(position);
                 itemID = menuItems.get(position).getId();
                 itemTitle = itemClicked.getName();
+                itemDesc = itemClicked.getDescription();
+                itemPrice = itemClicked.getPrice();
+                itemMilk = itemClicked.getMilk();
+                itemSugar = itemClicked.getSugar();
+                itemDecaf = itemClicked.getDecaf();
+                itemExtras = itemClicked.getExtras();
+                itemFrappe = itemClicked.getFrappe();
+                itemHeated = itemClicked.getHeated();
+                itemType = itemClicked.getItemType();
+                itemTime = itemClicked.getItemTime();
                 if(selection == 1) {
                     MenuItemFormModify();
                 }
@@ -79,7 +114,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
         Call<List<MenuItem>> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .getItems();
+                .getItemsForStaffMenu();
 
         call.enqueue(new Callback<List<MenuItem>>() {
             @Override
@@ -100,11 +135,26 @@ public class BrowseMenuActivity extends AppCompatActivity {
     }
 
     private void MenuItemFormAdd(){
-        //TODO Implement Add Item Form
+        Intent intent = new Intent(this, ItemTypeSelectionActivity.class);
+        startActivity(intent);
     }
 
+    // sends all item information via the intent
     private void MenuItemFormModify(){
-        //TODO Implement Modify Item Form (same as add but with preexisting data)
+        Intent intent = new Intent(this, ItemFormActivity.class);
+        intent.putExtra(ITEM_ID, itemID);
+        intent.putExtra(ITEM_TITLE, itemTitle);
+        intent.putExtra(ITEM_DESC, itemDesc);
+        intent.putExtra(ITEM_PRICE, itemPrice);
+        intent.putExtra(ITEM_MILK, itemMilk);
+        intent.putExtra(ITEM_SUGAR, itemSugar);
+        intent.putExtra(ITEM_DECAF, itemDecaf);
+        intent.putExtra(ITEM_EXTRAS, itemExtras);
+        intent.putExtra(ITEM_FRAPPE, itemFrappe);
+        intent.putExtra(ITEM_HEATED, itemHeated);
+        intent.putExtra(ITEM_TYPE, itemType);
+        intent.putExtra(ITEM_TIME, itemTime);
+        startActivity(intent);
     }
 
     // This is a popup menu that allows the user to confirm a deletion of an item, they can cancel as well
