@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Staff_App.Activities.CreateStaffActivity">
+
+    <TextView
+        android:layout_width="190dp"
+        android:layout_height="35dp"
+        android:layout_above="@id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-60dp"
+        android:text="Create Staff User"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="424dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="260dp"
+        android:layout_height="240dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="182dp"
+        android:layout_marginLeft="80dp"
+        android:layout_alignParentLeft="true">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="24dp"
+            android:layout_centerHorizontal="true"
+            android:text="Staff Level"
+            android:layout_marginStart="3dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="424dp"
+            android:layout_marginLeft="3dp" />
+
+        <EditText
+            android:id="@+id/editStaffLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:hint="staff level"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="24dp"
+            android:layout_centerHorizontal="true"
+            android:text="First Name"
+            android:layout_marginStart="3dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="424dp"
+            android:layout_marginLeft="3dp" />
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:hint="first name"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="24dp"
+            android:layout_centerHorizontal="true"
+            android:text="Last Name"
+            android:layout_marginStart="3dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="424dp"
+            android:layout_marginLeft="3dp" />
+
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:hint="last name"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewLogin"
+        android:layout_width="360dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:lineSpacingExtra="7dp"
+        android:text="Return to Login"
+        android:textAlignment="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        tools:layout_editor_absoluteX="600dp"
+        tools:layout_editor_absoluteY="556dp"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="140dp"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="160dp" />
+
+</RelativeLayout>
