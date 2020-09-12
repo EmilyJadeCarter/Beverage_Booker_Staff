@@ -164,4 +164,12 @@ public interface Api {
     Call<List<MenuItem>> getItemsForInventory(
             @Query("itemType") String itemType
     );
+
+    //update order to completed status in orders table
+    @FormUrlEncoded
+    @POST("updateinventoryitemstock")
+    Call<ResponseBody> updateInventoryItemStock(
+            @Field("itemID") int itemID,
+            @Field("itemStock") String itemStock
+    );
 }

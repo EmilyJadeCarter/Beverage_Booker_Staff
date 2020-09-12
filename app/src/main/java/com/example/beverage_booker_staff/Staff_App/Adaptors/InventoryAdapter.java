@@ -1,5 +1,7 @@
 package com.example.beverage_booker_staff.Staff_App.Adaptors;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,14 +79,34 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Recy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        MenuItem currentItem = menuItems.get(position);
+    public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, final int position) {
+        final MenuItem currentItem = menuItems.get(position);
 
         holder.itemID.setText(String.valueOf(currentItem.getId()));
         holder.itemName.setText(currentItem.getName());
-        int itemStock = currentItem.getItemStock();
-        System.out.println("Stock :" + itemStock);
         holder.itemStock.setText(String.valueOf(currentItem.getItemStock()));
+        holder.itemStock.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newStock = holder.itemStock.getText().toString();
+                System.out.println("New Stock Entered: " + newStock);
+
+                menuItems.get(position).setItemStock(newStock);
+                String checkStock = menuItems.get(position).getItemStock();
+                System.out.println("Check Stock String: " + checkStock);
+            }
+        });
 
 
     }

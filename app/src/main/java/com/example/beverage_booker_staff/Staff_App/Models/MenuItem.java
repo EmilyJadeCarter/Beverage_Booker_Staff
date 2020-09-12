@@ -15,10 +15,10 @@ public class MenuItem {
     private int heated;
     private String itemType;
     private int itemTime;
-    private int itemStock;
+    private String itemStock;
 
     public MenuItem(int id, String name, String description, double price, int quantity,
-                    int milk, int sugar, int decaf, int extras, int frappe, int heated, String itemType, int itemTime, int itemStock) {
+                    int milk, int sugar, int decaf, int extras, int frappe, int heated, String itemType, int itemTime, String itemStock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,7 +35,7 @@ public class MenuItem {
         this.itemStock = itemStock;
     }
 
-    public MenuItem(int id, String name, String itemType, int itemStock) {
+    public MenuItem(int id, String name, String itemType, String itemStock) {
         this.id = id;
         this.name = name;
         this.itemType = itemType;
@@ -97,8 +97,12 @@ public class MenuItem {
     public int getItemTime() {
         return itemTime;
     }
-    public int getItemStock() {
+    public String getItemStock() {
         return itemStock;
+    }
+
+    public void setItemStock(String itemStock) {
+        this.itemStock = itemStock;
     }
 
 
