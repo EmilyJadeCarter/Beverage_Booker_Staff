@@ -3,20 +3,20 @@ package com.example.beverage_booker_staff.Staff_App.Models;
 public class Deliveries {
 
     private int userID;
+    private String firstName;
+    private String phone;
     private int cartID;
-    private String streetNumber;
+    private String streetUnit;
     private String streetName;
-    private int postCode;
-    private String cityTown;
 
-    public Deliveries(int userID, int cartID, String streetNumber, String streetName, int postCode, String cityTown) {
+
+    public Deliveries(int userID, int cartID, String streetUnit, String streetName, int postCode, String cityTown) {
 
         this.userID = userID;
         this.cartID = cartID;
-        this.streetNumber = streetNumber;
+        this.streetUnit = streetUnit;
         this.streetName = streetName;
-        this.postCode = postCode;
-        this.cityTown = cityTown;
+
     }
 
     public int getUserID() {
@@ -27,19 +27,20 @@ public class Deliveries {
         return cartID;
     }
 
-    public String getStreetNumber() {
-        return streetNumber;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getStreetUnit() {
+        return streetUnit;
     }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public int getPostCode() {
-        return postCode;
-    }
-
-    public String getCityTown() {
-        return cityTown;
-    }
 }

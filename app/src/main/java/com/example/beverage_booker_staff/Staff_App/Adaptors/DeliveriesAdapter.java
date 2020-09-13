@@ -30,16 +30,20 @@ public class DeliveriesAdapter extends RecyclerView.Adapter<DeliveriesAdapter.Re
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mUserID;
-        TextView mStreetNumber;
+        //TextView mUserID;
+        TextView mFirstName;
+        TextView mPhone;
+        TextView mStreetUnit;
         TextView mStreetName;
+
 
         Button mDelivered;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            mUserID = itemView.findViewById(R.id.userID);
-            mStreetNumber = itemView.findViewById(R.id.streetNumber);
+            mFirstName = itemView.findViewById(R.id.textViewFirstName);
+            mPhone = itemView.findViewById(R.id.textViewPhone);
+            mStreetUnit = itemView.findViewById(R.id.streetUnit);
             mStreetName = itemView.findViewById(R.id.streetName);
             mDelivered = itemView.findViewById(R.id.buttonDelivered);
 
@@ -72,8 +76,10 @@ public class DeliveriesAdapter extends RecyclerView.Adapter<DeliveriesAdapter.Re
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Deliveries currentDelivery = deliveries.get(position);
 
-        holder.mUserID.setText(String.valueOf(currentDelivery.getUserID()));
-        holder.mStreetNumber.setText(String.valueOf(currentDelivery.getStreetNumber()));
+        //holder.mUserID.setText(String.valueOf(currentDelivery.getUserID()));
+        holder.mFirstName.setText(currentDelivery.getFirstName());
+        holder.mPhone.setText(currentDelivery.getPhone());
+        holder.mStreetUnit.setText(String.valueOf(currentDelivery.getStreetUnit()));
         holder.mStreetName.setText(currentDelivery.getStreetName());
     }
 
