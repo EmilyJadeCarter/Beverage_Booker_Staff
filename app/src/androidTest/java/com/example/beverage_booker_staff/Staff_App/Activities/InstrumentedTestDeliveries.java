@@ -1,7 +1,5 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
@@ -39,13 +37,19 @@ public class InstrumentedTestDeliveries {
      * Checks the fields for the Main Menu Activity are correctly displayed.
      */
     @Test
-    public void isButtonsForMainMenuDisplayed() {
+    public void isButtonsForMainMenuDisplayed() throws InterruptedException {
+
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
+
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(1000);
+
+
         onView(withId(R.id.OrdersButton))
                 .check(matches(isDisplayed()));
+
         onView(withId(R.id.DeliveriesButton))
                 .check(matches(isDisplayed()));
     }
@@ -55,11 +59,15 @@ public class InstrumentedTestDeliveries {
      * Checks the deliveries button is functioning correctly.
      */
     @Test
-    public void isDeliveriesButtonFunctioning() {
+    public void isDeliveriesButtonFunctioning() throws InterruptedException {
+
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
+
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(1000);
+
         onView(withId(R.id.DeliveriesButton))
                 .perform(click());
     }
@@ -69,19 +77,32 @@ public class InstrumentedTestDeliveries {
      * Checks that the fields for the delivery are displayed correctly.
      */
     @Test
-    public void isFieldsForDeliveriesActivityDisplayed() {
+    public void isFieldsForDeliveriesActivityDisplayed() throws InterruptedException {
 
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
+
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(1000);
+
         onView(withId(R.id.DeliveriesButton))
                 .perform(click());
+        Thread.sleep(1000);
+
         onView(withId(R.id.relativeLayout))
                 .check(matches(isDisplayed()));
-        Espresso.onView(withId(R.id.recyclerView3)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        onView(allOf(ViewMatchers.withId(R.id.recyclerView), hasSibling(withText("123"))))
-                .perform(click());
 
+        onView(allOf(ViewMatchers.withId(R.id.textViewFirstName), hasSibling(withText("Steve"))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(ViewMatchers.withId(R.id.textViewPhone), hasSibling(withText("0400111222"))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(ViewMatchers.withId(R.id.streetUnit), hasSibling(withText("12"))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(ViewMatchers.withId(R.id.streetName), hasSibling(withText("17 Brown St"))))
+                .check(matches(isDisplayed()));
     }
 }

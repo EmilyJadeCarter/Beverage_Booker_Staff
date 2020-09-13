@@ -15,19 +15,6 @@
         android:layout_margin="4dp"
         android:layout_marginTop="25dp">
 
-
-        <TextView
-            android:id="@+id/textViewPhone"
-            android:layout_width="134dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
-            android:text="Mobile"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textViewFirstName"
             android:layout_width="73dp"
@@ -38,6 +25,18 @@
             android:text="Name"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewPhone"
+            android:layout_width="134dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Mobile"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
