@@ -158,4 +158,13 @@ public interface Api {
     Call<ResponseBody> updateOrderStatusToComplete(
             @Field("cartID") int cartID
     );
+
+    //create staff user
+    @FormUrlEncoded
+    @POST("createstaff")
+    Call<ResponseBody> createStaff(
+            @Field("staffLevel") int staffLevel,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName
+    );
 }
