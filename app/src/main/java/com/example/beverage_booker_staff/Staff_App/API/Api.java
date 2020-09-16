@@ -158,4 +158,18 @@ public interface Api {
     Call<ResponseBody> updateOrderStatusToComplete(
             @Field("cartID") int cartID
     );
+
+    //Get  items from database for inventory
+    @GET("getitems")
+    Call<List<MenuItem>> getItemsForInventory(
+            @Query("itemType") String itemType
+    );
+
+    //update order to completed status in orders table
+    @FormUrlEncoded
+    @POST("updateinventoryitemstock")
+    Call<ResponseBody> updateInventoryItemStock(
+            @Field("itemID") int itemID,
+            @Field("itemStock") String itemStock
+    );
 }

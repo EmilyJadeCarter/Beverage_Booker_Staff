@@ -1,11 +1,11 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beverage_booker_staff.R;
 
@@ -14,6 +14,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button OrdersButton;
     private Button DeliveriesButton;
     private Button MenuButton;
+    private Button inventoryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +47,34 @@ public class MainMenuActivity extends AppCompatActivity {
                 viewMenu();
             }
         });
+
+        //Inventory Button
+        inventoryButton = findViewById(R.id.inventoryButton);
+        inventoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewInventory();
+            }
+        });
     }
 
     private void viewActiveOrders() {
-        Intent intent = new Intent(this, ViewActiveOrdersActivity.class );
+        Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
     }
 
     private void viewDeliveries() {
-        Intent intent = new Intent(this, DeliveriesActivity.class );
+        Intent intent = new Intent(this, DeliveriesActivity.class);
         startActivity(intent);
     }
 
     private void viewMenu() {
-        Intent intent = new Intent(this, BrowseMenuActivity.class );
+        Intent intent = new Intent(this, BrowseMenuActivity.class);
+        startActivity(intent);
+    }
+
+    private void viewInventory() {
+        Intent intent = new Intent(this, InventoryActivity.class);
         startActivity(intent);
     }
 }
