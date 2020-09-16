@@ -1,5 +1,6 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
+
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
@@ -22,22 +23,52 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class InstrumentedTestDeliveries {
+public class InstrumentedTestViewInventory {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Checks that the Inventory Button in the Main Menu is displayed
+     */
+    @Test
+    public void isInventoryButtonDisplayed() {
 
+        onView(withId(R.id.editTextStaffID))
+                .perform(replaceText("1001"), closeSoftKeyboard());
+
+        onView(withId(R.id.button_ValidateId))
+                .perform(click());
+
+        onView(withId(R.id.inventoryButton))
+                .check(matches(isDisplayed()));
+    }
 
 
     /**
-     * Checks the fields for the Main Menu Activity are correctly displayed.
+     * Checks that the Inventory Button in the Main Menu is working
      */
     @Test
-    public void isButtonsForMainMenuDisplayed() throws InterruptedException {
+    public void isInventoryButtonFunctioning() {
+
+        onView(withId(R.id.editTextStaffID))
+                .perform(replaceText("1001"), closeSoftKeyboard());
+
+        onView(withId(R.id.button_ValidateId))
+                .perform(click());
+
+        onView(withId(R.id.inventoryButton))
+                .perform(click());
+    }
+
+
+    /**
+     * Checks that the Inventory fields are displaying correctly for a menu item
+     */
+    @Test
+    public void isFieldsForInventoryDisplayed() throws InterruptedException {
 
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
@@ -46,63 +77,25 @@ public class InstrumentedTestDeliveries {
                 .perform(click());
         Thread.sleep(1000);
 
-
-        onView(withId(R.id.OrdersButton))
-                .check(matches(isDisplayed()));
-
-        onView(withId(R.id.DeliveriesButton))
-                .check(matches(isDisplayed()));
-    }
-
-
-    /**
-     * Checks the deliveries button is functioning correctly.
-     */
-    @Test
-    public void isDeliveriesButtonFunctioning() throws InterruptedException {
-
-        onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("1001"), closeSoftKeyboard());
-
-        onView(withId(R.id.button_ValidateId))
+        onView(withId(R.id.inventoryButton))
                 .perform(click());
         Thread.sleep(1000);
 
-        onView(withId(R.id.DeliveriesButton))
-                .perform(click());
+        onView(withId(R.id.recyclerViewInventory))
+                .check(matches(isDisplayed()));
+
+        onView(withId(R.id.textViewInventoryTitle))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemID), hasSibling(withText("9"))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemName), hasSibling(withText("Blueberry Muffin"))))
+                .check(matches(isDisplayed()));
+
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("30"))))
+                .check(matches(isDisplayed()));
+
     }
 
-
-    /**
-     * Checks that the fields for the delivery are displayed correctly.
-     */
-    @Test
-    public void isFieldsForDeliveriesActivityDisplayed() throws InterruptedException {
-
-        onView(withId(R.id.editTextStaffID))
-                .perform(replaceText("1001"), closeSoftKeyboard());
-
-        onView(withId(R.id.button_ValidateId))
-                .perform(click());
-        Thread.sleep(1000);
-
-        onView(withId(R.id.DeliveriesButton))
-                .perform(click());
-        Thread.sleep(1000);
-
-        onView(withId(R.id.relativeLayout))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.textViewFirstName), hasSibling(withText("Steve"))))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.textViewPhone), hasSibling(withText("0400111222"))))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.streetUnit), hasSibling(withText("12"))))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.streetName), hasSibling(withText("17 Brown St"))))
-                .check(matches(isDisplayed()));
-    }
 }

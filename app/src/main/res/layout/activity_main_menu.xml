@@ -9,26 +9,37 @@ tools:context=".Staff_App.Activities.MainMenuActivity">
         android:id="@+id/OrdersButton"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="400dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="445dp"
         android:layout_centerHorizontal="true"
         android:text="Orders" />
-
-    <Button
-        android:id="@+id/DeliveriesButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="325dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Deliveries" />
 
     <Button
         android:id="@+id/MenuButton"
         android:layout_width="150dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="250dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="295dp"
         android:layout_centerHorizontal="true"
         android:text="Menu" />
+
+    <Button
+        android:id="@+id/inventoryButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="218dp"
+        android:layout_centerHorizontal="true"
+        android:text="Inventory" />
+
+    <Button
+        android:id="@+id/DeliveriesButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="370dp"
+        android:layout_centerHorizontal="true"
+
+        android:text="Deliveries" />
+
 </RelativeLayout>
