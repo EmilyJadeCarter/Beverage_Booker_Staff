@@ -9,23 +9,21 @@
         android:layout_height="wrap_content"
         android:text="Item Title:"
         android:textColor="#69989E"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <EditText
-        android:layout_below="@id/editTextTitle"
         android:id="@+id/editTextTitle"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:hint="title" />
 
     <TextView
-        android:layout_below="@id/editTextTitle"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Short Description:"
         android:textColor="#69989E"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/editTextShortDesc"
@@ -34,97 +32,88 @@
         android:hint="shortDesc (Optional)" />
 
     <TextView
-        android:layout_below="@id/editTextShortDesc"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Item Price:"
         android:textColor="#69989E"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/editTextPrice"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:hint="price"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal" />
 
     <TextView
-        android:layout_below="@id/editTextPrice"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Preparation Time:"
         android:textColor="#69989E"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/editTextTime"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:hint="time (Minutes)"
-        android:inputType="number"/>
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/optionTitle"
-        android:layout_below="@id/editTextTime"
-        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Allow Beverage Options:"
         android:textColor="#69989E"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/milkOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="milk: Full Cream, Skim, Almond, Soy"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/sugarOption"
-        android:layout_below="@id/milkOption"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="sugar: Sugar, Sweetener"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/decafOption"
-        android:layout_below="@id/sugarOption"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="decaf: Decaffeinates Beverage"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/extrasOption"
-        android:layout_below="@id/decafOption"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="extras: Vanilla, Caramel, Chocolate,
         Cream"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/frappeOption"
-        android:layout_below="@id/extrasOption"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="frappe: Turns beverage into a frappe"
-        android:textSize="20dp"/>
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/heatingOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/optionTitle"
         android:layout_marginTop="5dp"
         android:text="heated: Allows for item to be heated"
         android:textSize="20dp" />
