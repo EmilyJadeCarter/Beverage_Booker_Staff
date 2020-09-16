@@ -166,6 +166,7 @@ public interface Api {
             @Field("staffLevel") int staffLevel,
             @Field("firstName") String firstName,
             @Field("lastName") String lastName
+    );
 			
     //Get  items from database for inventory
     @GET("getitems")

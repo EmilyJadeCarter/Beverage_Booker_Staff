@@ -10,7 +10,7 @@ tools:context=".Staff_App.Activities.MainMenuActivity">
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="445dp"
+        android:layout_marginBottom="500dp"
         android:layout_centerHorizontal="true"
         android:text="Orders" />
 
@@ -19,7 +19,7 @@ tools:context=".Staff_App.Activities.MainMenuActivity">
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="295dp"
+        android:layout_marginBottom="350dp"
         android:layout_centerHorizontal="true"
         android:text="Menu" />
 
@@ -28,7 +28,7 @@ tools:context=".Staff_App.Activities.MainMenuActivity">
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="218dp"
+        android:layout_marginBottom="275dp"
         android:layout_centerHorizontal="true"
         android:text="Inventory" />
 
@@ -37,9 +37,39 @@ tools:context=".Staff_App.Activities.MainMenuActivity">
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="370dp"
+        android:layout_marginBottom="425dp"
         android:layout_centerHorizontal="true"
 
         android:text="Deliveries" />
+
+    <Button
+        android:id="@+id/addStaffButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="200dp"
+        android:layout_centerHorizontal="true"
+
+        android:text="Add Staff" />
+
+    <Button
+        android:id="@+id/deleteStaffButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="125dp"
+        android:layout_centerHorizontal="true"
+
+        android:text="Delete Staff" />
+
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="680dp"
+        android:layout_marginHorizontal="290dp"
+
+        android:text="Sign Out" />
 
 </RelativeLayout>

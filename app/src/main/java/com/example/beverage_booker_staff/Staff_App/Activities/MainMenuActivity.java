@@ -15,6 +15,9 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button DeliveriesButton;
     private Button MenuButton;
     private Button inventoryButton;
+    private Button addStaffButton;
+    private Button deleteStaffButton;
+    private Button signOutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,33 @@ public class MainMenuActivity extends AppCompatActivity {
                 viewInventory();
             }
         });
+
+        //Add Staff Button
+        addStaffButton = findViewById(R.id.addStaffButton);
+        addStaffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewAddStaff();
+            }
+        });
+
+        //Delete Staff Button
+        deleteStaffButton = findViewById(R.id.deleteStaffButton);
+        deleteStaffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewDeleteStaff();
+            }
+        });
+
+        //Sign Out Button
+        signOutButton = findViewById(R.id.signOutButton);
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
     }
 
     private void viewActiveOrders() {
@@ -75,6 +105,21 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void viewInventory() {
         Intent intent = new Intent(this, InventoryActivity.class);
+        startActivity(intent);
+    }
+
+    private void viewAddStaff() {
+        Intent intent = new Intent(this, CreateStaffActivity.class);
+        startActivity(intent);
+    }
+    //Not in my implementation
+    private void viewDeleteStaff() {
+        //Intent intent = new Intent(this, NAMEOFACTIVITYHERE.class);
+        //startActivity(intent);
+    }
+
+    private void signOut() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
