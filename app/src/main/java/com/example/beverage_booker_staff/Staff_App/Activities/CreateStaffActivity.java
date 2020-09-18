@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.beverage_booker_staff.R;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ public class CreateStaffActivity extends AppCompatActivity {
     private EditText editFirstName;
     private EditText editLastName;
     private Button registerButton;
+    private Button returnButton;
 
 
     @Override
@@ -32,6 +35,7 @@ public class CreateStaffActivity extends AppCompatActivity {
         editFirstName = findViewById(R.id.editTextFirstName);
         editLastName = findViewById(R.id.editTextLastName);
         registerButton = findViewById(R.id.buttonRegister);
+        returnButton = findViewById(R.id.buttonReturn);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,16 +43,23 @@ public class CreateStaffActivity extends AppCompatActivity {
                 createStaff();
             }
         });
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                returnToMenu();
+            }
+        });
     }
 
     private void createStaff(){
-        int staffLevel = Integer.parseInt(editStaffLevel.toString());
+        String staffLevelValue = editStaffLevel.getText().toString();
+        int staffLevel = Integer.parseInt(staffLevelValue);
         String firstName = editFirstName.toString();
         String lastName = editLastName.toString();
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .assignStaffToOrder(staffLevel, firstName, lastName);
+                .createStaff(staffLevel, firstName, lastName);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -66,5 +77,10 @@ public class CreateStaffActivity extends AppCompatActivity {
                 Toast.makeText(CreateStaffActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void returnToMenu(){
+        Intent intent = new Intent(this, ManageStaffActivity.class);
+        startActivity(intent);
     }
 }

@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Staff_App.Activities.CreateStaffActivity"></activity>
-        <activity android:name=".Staff_App.Activities.InventoryActivity"></activity>
+        <activity android:name=".Staff_App.Activities.ManageStaffActivity"></activity>
+        <activity android:name=".Staff_App.Activities.CreateStaffActivity" />
+        <activity android:name=".Staff_App.Activities.InventoryActivity" />
         <activity android:name=".Staff_App.Activities.DeliveriesActivity" />
         <activity android:name=".Staff_App.Activities.MainMenuActivity" />
         <activity android:name=".Staff_App.Activities.BrowseMenuActivity" />

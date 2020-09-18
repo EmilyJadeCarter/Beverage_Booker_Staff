@@ -1,75 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
 tools:context=".Staff_App.Activities.MainMenuActivity">
 
-    <Button
-        android:id="@+id/OrdersButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="500dp"
-        android:layout_centerHorizontal="true"
-        android:text="Orders" />
+<Button
+    android:id="@+id/OrdersButton"
+    android:layout_width="150dp"
+    android:layout_height="75dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="500dp"
+    android:layout_centerHorizontal="true"
+    android:text="Orders" />
 
-    <Button
-        android:id="@+id/MenuButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="350dp"
-        android:layout_centerHorizontal="true"
-        android:text="Menu" />
+<Button
+    android:id="@+id/MenuButton"
+    android:layout_width="150dp"
+    android:layout_height="75dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="350dp"
+    android:layout_centerHorizontal="true"
+    android:text="Menu" />
 
-    <Button
-        android:id="@+id/inventoryButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="275dp"
-        android:layout_centerHorizontal="true"
-        android:text="Inventory" />
+<Button
+    android:id="@+id/inventoryButton"
+    android:layout_width="150dp"
+    android:layout_height="75dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="275dp"
+    android:layout_centerHorizontal="true"
+    android:text="Inventory" />
 
-    <Button
-        android:id="@+id/DeliveriesButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="425dp"
-        android:layout_centerHorizontal="true"
+<Button
+    android:id="@+id/DeliveriesButton"
+    android:layout_width="150dp"
+    android:layout_height="75dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="425dp"
+    android:layout_centerHorizontal="true"
 
-        android:text="Deliveries" />
+    android:text="Deliveries" />
 
-    <Button
-        android:id="@+id/addStaffButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="200dp"
-        android:layout_centerHorizontal="true"
+<Button
+    android:id="@+id/manageStaffButton"
+    android:layout_width="150dp"
+    android:layout_height="75dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="200dp"
+    android:layout_centerHorizontal="true"
 
-        android:text="Add Staff" />
+    android:text="Manage Staff" />
 
-    <Button
-        android:id="@+id/deleteStaffButton"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="125dp"
-        android:layout_centerHorizontal="true"
+<Button
+    android:id="@+id/signOutButton"
+    android:layout_width="100dp"
+    android:layout_height="40dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="680dp"
+    android:layout_marginHorizontal="290dp"
 
-        android:text="Delete Staff" />
-
-    <Button
-        android:id="@+id/signOutButton"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="680dp"
-        android:layout_marginHorizontal="290dp"
-
-        android:text="Sign Out" />
+    android:text="Sign Out" />
 
 </RelativeLayout>

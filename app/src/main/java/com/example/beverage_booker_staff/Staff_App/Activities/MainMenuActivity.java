@@ -15,8 +15,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button DeliveriesButton;
     private Button MenuButton;
     private Button inventoryButton;
-    private Button addStaffButton;
-    private Button deleteStaffButton;
+    private Button manageStaffButton;
     private Button signOutButton;
 
     @Override
@@ -60,21 +59,12 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        //Add Staff Button
-        addStaffButton = findViewById(R.id.addStaffButton);
-        addStaffButton.setOnClickListener(new View.OnClickListener() {
+        //Manage Staff Button
+        manageStaffButton = findViewById(R.id.manageStaffButton);
+        manageStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewAddStaff();
-            }
-        });
-
-        //Delete Staff Button
-        deleteStaffButton = findViewById(R.id.deleteStaffButton);
-        deleteStaffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewDeleteStaff();
+                viewManageStaff();
             }
         });
 
@@ -112,10 +102,10 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateStaffActivity.class);
         startActivity(intent);
     }
-    //Not in my implementation
-    private void viewDeleteStaff() {
-        //Intent intent = new Intent(this, NAMEOFACTIVITYHERE.class);
-        //startActivity(intent);
+
+    private void viewManageStaff() {
+        Intent intent = new Intent(this, ManageStaffActivity.class);
+        startActivity(intent);
     }
 
     private void signOut() {
