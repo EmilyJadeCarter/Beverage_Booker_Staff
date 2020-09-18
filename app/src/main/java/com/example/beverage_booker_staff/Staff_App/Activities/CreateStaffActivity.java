@@ -54,8 +54,8 @@ public class CreateStaffActivity extends AppCompatActivity {
     private void createStaff(){
         String staffLevelValue = editStaffLevel.getText().toString();
         int staffLevel = Integer.parseInt(staffLevelValue);
-        String firstName = editFirstName.toString();
-        String lastName = editLastName.toString();
+        String firstName = editFirstName.getText().toString();
+        String lastName = editLastName.getText().toString();
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
