@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".Staff_App.Activities.ManageStaffActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewStaff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp" />
+
     <Button
         android:id="@+id/addStaffButton"
         android:layout_width="150dp"
