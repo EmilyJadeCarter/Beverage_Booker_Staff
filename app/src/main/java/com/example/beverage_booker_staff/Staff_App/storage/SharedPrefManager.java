@@ -38,7 +38,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new Staff(
                 sharedPreferences.getInt("id", 0),
-                sharedPreferences.getInt("level", 0),
+                sharedPreferences.getInt("staffLevel", 0),
                 sharedPreferences.getString("firstName", null),
                 sharedPreferences.getString("lastName", null)
 

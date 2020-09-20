@@ -8,6 +8,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.Models.Staff;
+import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -18,10 +20,19 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button manageStaffButton;
     private Button signOutButton;
 
+    private Staff activeStaff;
+    private int activeStaffLevel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        activeStaff = SharedPrefManager.getInstance(MainMenuActivity.this).getStaff();
+        activeStaffLevel = activeStaff.getStaffLevel();
+
+        System.out.println("the level is " + activeStaffLevel);
+
 
         //Orders Button
         OrdersButton = findViewById(R.id.OrdersButton);
@@ -76,6 +87,8 @@ public class MainMenuActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
+        staffRestrictionSetter();
     }
 
     private void viewActiveOrders() {
@@ -111,5 +124,26 @@ public class MainMenuActivity extends AppCompatActivity {
     private void signOut() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    private void staffRestrictionSetter() {
+        // 1 is manager access
+        // 2 is barista  access
+        // 3 is delivery driver access
+        if (activeStaffLevel == 1) {
+            return;
+        } else if (activeStaffLevel == 2) {
+            DeliveriesButton.setVisibility(View.GONE);
+            MenuButton.setVisibility(View.GONE);
+            inventoryButton.setVisibility(View.GONE);
+            manageStaffButton.setVisibility(View.GONE);
+        } else if (activeStaffLevel == 3) {
+            OrdersButton.setVisibility(View.GONE);
+            MenuButton.setVisibility(View.GONE);
+            inventoryButton.setVisibility(View.GONE);
+            manageStaffButton.setVisibility(View.GONE);
+        } else {
+            return;
+        }
     }
 }

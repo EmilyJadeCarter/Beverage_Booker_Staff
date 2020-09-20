@@ -5,61 +5,55 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".Staff_App.Activities.MainMenuActivity">
 
-<Button
-    android:id="@+id/OrdersButton"
-    android:layout_width="150dp"
-    android:layout_height="75dp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="500dp"
-    android:layout_centerHorizontal="true"
-    android:text="Orders" />
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/signOutButton"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="false"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
 
-<Button
-    android:id="@+id/MenuButton"
-    android:layout_width="150dp"
-    android:layout_height="75dp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="350dp"
-    android:layout_centerHorizontal="true"
-    android:text="Menu" />
+        <Button
+            android:id="@+id/OrdersButton"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Orders" />
 
-<Button
-    android:id="@+id/inventoryButton"
-    android:layout_width="150dp"
-    android:layout_height="75dp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="275dp"
-    android:layout_centerHorizontal="true"
-    android:text="Inventory" />
+        <Button
+            android:id="@+id/DeliveriesButton"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Deliveries" />
 
-<Button
-    android:id="@+id/DeliveriesButton"
-    android:layout_width="150dp"
-    android:layout_height="75dp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="425dp"
-    android:layout_centerHorizontal="true"
+        <Button
+            android:id="@+id/MenuButton"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Menu" />
 
-    android:text="Deliveries" />
+        <Button
+            android:id="@+id/inventoryButton"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Inventory" />
 
-<Button
-    android:id="@+id/manageStaffButton"
-    android:layout_width="150dp"
-    android:layout_height="75dp"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="200dp"
-    android:layout_centerHorizontal="true"
+        <Button
+            android:id="@+id/manageStaffButton"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:text="Manage Staff" />
 
-    android:text="Manage Staff" />
+    </LinearLayout>
 
-<Button
-    android:id="@+id/signOutButton"
-    android:layout_width="100dp"
-    android:layout_height="40dp"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="30dp"
-    android:layout_marginHorizontal="290dp"
-
-    android:text="Sign Out" />
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="290dp"
+        android:text="Sign Out" />
 
 </RelativeLayout>
