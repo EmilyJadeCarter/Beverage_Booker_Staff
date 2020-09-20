@@ -1,15 +1,15 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.Adaptors.ManageStaffAdapter;
 import com.example.beverage_booker_staff.Staff_App.Models.Staff;
 
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ManageStaffActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private ManageStaffAdapter manageStaffAdapter;
     private ArrayList<Staff> staffList;
 
     private Button addStaffButton;
