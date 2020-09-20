@@ -47,9 +47,6 @@ public class InventoryActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Update all button
-
-
         menuItems = new ArrayList<>();
         inventoryAdapter = new InventoryAdapter(menuItems);
         recyclerView.setAdapter(inventoryAdapter);
@@ -89,7 +86,7 @@ public class InventoryActivity extends AppCompatActivity {
 
     private void updateInventoryItemStock() {
 
-        System.out.println("itemID Update: " + itemID);
+
         System.out.println("Stock Int Update: " + itemStock);
 
         Call<ResponseBody> call = RetrofitClient

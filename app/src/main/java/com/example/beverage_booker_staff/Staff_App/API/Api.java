@@ -4,8 +4,9 @@ package com.example.beverage_booker_staff.Staff_App.API;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.Deliveries;
 import com.example.beverage_booker_staff.Staff_App.Models.LoginResponse;
-import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
 import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
+import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.Models.Staff;
 
 import java.util.List;
 
@@ -181,4 +182,8 @@ public interface Api {
             @Field("itemID") int itemID,
             @Field("itemStock") String itemStock
     );
+
+    //Get Staff list from database
+    @GET("getstaff")
+    Call<List<Staff>> getStaff();
 }

@@ -44,7 +44,7 @@ public class ManageStaffAdapter extends RecyclerView.Adapter<ManageStaffAdapter.
             lastName = itemView.findViewById(R.id.staffLastName);
             level = itemView.findViewById(R.id.staffLevel);
 
-            deleteStaffMemberButton = itemView.findViewById(R.id.deleteStaffButton);
+            deleteStaffMemberButton = itemView.findViewById(R.id.deleteStaffMember);
 
             deleteStaffMemberButton.setOnClickListener(new View.OnClickListener() {
                 @Override
