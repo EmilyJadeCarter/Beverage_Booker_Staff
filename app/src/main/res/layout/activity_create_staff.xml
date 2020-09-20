@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="5dp"
             android:hint="first name"
-            android:inputType="textPersonName" />
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
         <TextView
             android:layout_width="140dp"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="5dp"
             android:hint="last name"
-            android:inputType="textPersonName" />
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
     </LinearLayout>
 

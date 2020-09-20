@@ -2,13 +2,13 @@ package com.example.beverage_booker_staff.Staff_App.Models;
 
 public class Staff {
 
-    private int staffID, level;
+    private int staffID, staffLevel;
     private String firstName, lastName;
 
 
-    public Staff(int staffID, int level, String firstName, String lastName) {
+    public Staff(int staffID, int staffLevel, String firstName, String lastName) {
         this.staffID = staffID;
-        this.level = level;
+        this.staffLevel = staffLevel;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -17,8 +17,8 @@ public class Staff {
         return staffID;
     }
 
-    public int getLevel() {
-        return level;
+    public int getStaffLevel() {
+        return staffLevel;
     }
 
     public String getFirstName() {

@@ -32,7 +32,7 @@ public class ManageStaffAdapter extends RecyclerView.Adapter<ManageStaffAdapter.
         TextView staffID;
         TextView firstName;
         TextView lastName;
-        TextView level;
+        TextView staffLevel;
 
         Button deleteStaffMemberButton;
 
@@ -42,7 +42,7 @@ public class ManageStaffAdapter extends RecyclerView.Adapter<ManageStaffAdapter.
             staffID = itemView.findViewById(R.id.staffID);
             firstName = itemView.findViewById(R.id.staffFirstName);
             lastName = itemView.findViewById(R.id.staffLastName);
-            level = itemView.findViewById(R.id.staffLevel);
+            staffLevel = itemView.findViewById(R.id.staffLevel);
 
             deleteStaffMemberButton = itemView.findViewById(R.id.deleteStaffMember);
 
@@ -79,7 +79,7 @@ public class ManageStaffAdapter extends RecyclerView.Adapter<ManageStaffAdapter.
         holder.staffID.setText(String.valueOf(currentStaff.getStaffID()));
         holder.firstName.setText(currentStaff.getFirstName());
         holder.lastName.setText(currentStaff.getLastName());
-        holder.level.setText(String.valueOf(currentStaff.getLevel()));
+        holder.staffLevel.setText(String.valueOf(currentStaff.getStaffLevel()));
 
     }
 

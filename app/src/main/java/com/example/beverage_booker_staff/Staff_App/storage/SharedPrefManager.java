@@ -27,7 +27,7 @@ public class SharedPrefManager {
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("id", staff.getStaffID());
-        editor.putInt("level", staff.getLevel());
+        editor.putInt("staffLevel", staff.getStaffLevel());
         editor.putString("firstName", staff.getFirstName());
         editor.putString("lastName", staff.getLastName());
         editor.apply();

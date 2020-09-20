@@ -1,16 +1,16 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.beverage_booker_staff.R;
-import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -52,14 +52,36 @@ public class CreateStaffActivity extends AppCompatActivity {
     }
 
     private void createStaff(){
+
         String staffLevelValue = editStaffLevel.getText().toString();
-        int staffLevel = Integer.parseInt(staffLevelValue);
         String firstName = editFirstName.getText().toString();
         String lastName = editLastName.getText().toString();
+
+        if (staffLevelValue.isEmpty()) {
+            editStaffLevel.setError("Staff Level is required");
+            editStaffLevel.requestFocus();
+            return;
+        }
+
+        if (firstName.isEmpty()) {
+            editFirstName.setError("First Name is required");
+            editFirstName.requestFocus();
+            return;
+        }
+
+        if (lastName.isEmpty()) {
+            editLastName.setError("Last Name is required");
+            editLastName.requestFocus();
+            return;
+        }
+
+        int staffLevel = Integer.parseInt(staffLevelValue);
+
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
                 .createStaff(staffLevel, firstName, lastName);
+
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
