@@ -186,4 +186,11 @@ public interface Api {
     //Get Staff list from database
     @GET("getstaff")
     Call<List<Staff>> getStaff();
+
+    //Delete staff member from the staff table
+    @FormUrlEncoded
+    @POST("deletestaff")
+    Call<ResponseBody> deleteStaff(
+            @Field("staffID") int staffID
+    );
 }

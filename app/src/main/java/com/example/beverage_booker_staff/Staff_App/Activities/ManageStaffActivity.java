@@ -18,6 +18,7 @@ import com.example.beverage_booker_staff.Staff_App.Models.Staff;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,29 +86,37 @@ public class ManageStaffActivity extends AppCompatActivity {
                 Toast.makeText(ManageStaffActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-        /*//Delete Staff Button
-        deleteStaffButton = findViewById(R.id.deleteStaffButton);
-        deleteStaffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewDeleteStaff();
-            }
-        });*/
-
     }
 
     private void deleteStaffMember() {
 
-        /*System.out.println("staffID Update: " + staffID);
+        System.out.println("staffID Update: " + staffID);
 
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()
                 .getApi()
-                .deleteStaffMember(staffID);
+                .deleteStaff(staffID);
 
-             */
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 201) {
+                    Toast.makeText(ManageStaffActivity.this, "Staff member deleted", Toast.LENGTH_SHORT).show();
 
+                } else if (response.code() == 402) {
+                    Toast.makeText(ManageStaffActivity.this, "Staff member failed to delete", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     private void viewAddStaff() {
