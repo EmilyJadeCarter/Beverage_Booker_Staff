@@ -175,6 +175,10 @@ public class BrowseMenuActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 201) {
                             Toast.makeText(BrowseMenuActivity.this, "Item Deleted", Toast.LENGTH_LONG).show();
+                            Intent intent = getIntent();
+                            menuItems.clear();
+                            finish();
+                            startActivity(intent);
                         } else if (response.code() == 402) {
                             Toast.makeText(BrowseMenuActivity.this, "Item Failed To Delete", Toast.LENGTH_LONG).show();
                         }
@@ -185,10 +189,6 @@ public class BrowseMenuActivity extends AppCompatActivity {
                     }
                 });
                 // Here the program refreshes the activity allowing for the refreshed version of items when a user deletes one.
-                Intent intent = getIntent();
-                menuItems.clear();
-                finish();
-                startActivity(intent);
             }
         });
 
