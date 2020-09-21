@@ -3,14 +3,9 @@ package com.example.beverage_booker_staff.Staff_App.Activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.Button;
-
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beverage_booker_staff.R;
-import com.example.beverage_booker_staff.Staff_App.Adaptors.RecyclerAdapter;
 import com.example.beverage_booker_staff.Staff_App.API.RetrofitClient;
+import com.example.beverage_booker_staff.Staff_App.Adaptors.RecyclerAdapter;
 import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -188,6 +186,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
                 });
                 // Here the program refreshes the activity allowing for the refreshed version of items when a user deletes one.
                 Intent intent = getIntent();
+                menuItems.clear();
                 finish();
                 startActivity(intent);
             }
