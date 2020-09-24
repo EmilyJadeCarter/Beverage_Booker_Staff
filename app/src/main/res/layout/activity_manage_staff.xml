@@ -5,6 +5,7 @@
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_brown"
     tools:context=".Staff_App.Activities.ManageStaffActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,8 @@
         android:layout_marginRight="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="1dp"/>
 
     <Button
         android:id="@+id/addStaffButton"
