@@ -1,59 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".Staff_App.Activities.MainMenuActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_brown"
+    tools:context=".Staff_App.Activities.MainMenuActivity">
 
-    <LinearLayout
-        android:gravity="center_horizontal"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/menuBarInsert"
+        android:name="com.example.beverage_booker_staff.Staff_App.Activities.StaffMenuBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/signOutButton"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="false"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/OrdersButton"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Orders" />
+    <Button
+        android:id="@+id/OrdersButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="64dp"
+        android:text="Orders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menuBarInsert" />
 
-        <Button
-            android:id="@+id/DeliveriesButton"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Deliveries" />
+    <Button
+        android:id="@+id/DeliveriesButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:text="Deliveries"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrdersButton" />
 
-        <Button
-            android:id="@+id/MenuButton"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Menu" />
+    <Button
+        android:id="@+id/MenuButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:text="Menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DeliveriesButton" />
 
-        <Button
-            android:id="@+id/inventoryButton"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Inventory" />
+    <Button
+        android:id="@+id/inventoryButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:text="Inventory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MenuButton" />
 
-        <Button
-            android:id="@+id/manageStaffButton"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:text="Manage Staff" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/manageStaffButton"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:text="Manage Staff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventoryButton" />
 
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="290dp"
-        android:text="Sign Out" />
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Sign Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
