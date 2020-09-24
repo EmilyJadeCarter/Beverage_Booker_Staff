@@ -17,10 +17,6 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 public class StaffMenuBar extends Fragment {
 
     private LinearLayout homeButton;
-    private LinearLayout accountButton;
-    private LinearLayout cartButton;
-    private LinearLayout orderButton;
-    private LinearLayout deliveryButton;
     private LinearLayout signOutButton;
 
 
@@ -42,24 +38,6 @@ public class StaffMenuBar extends Fragment {
         homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 Intent intent = new Intent(StaffMenuBar.super.getActivity(), MainMenuActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-        orderButton = view.findViewById(R.id.orderButton);
-        orderButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), ViewActiveOrdersActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        deliveryButton = view.findViewById(R.id.deliveryButton);
-        deliveryButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), DeliveriesActivity.class);
                 startActivity(intent);
             }
         });
