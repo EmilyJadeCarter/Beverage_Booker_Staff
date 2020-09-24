@@ -20,7 +20,7 @@ public class StaffMenuBar extends Fragment {
     private LinearLayout accountButton;
     private LinearLayout cartButton;
     private LinearLayout orderButton;
-    private LinearLayout helpButton;
+    private LinearLayout deliveryButton;
     private LinearLayout signOutButton;
 
 
@@ -31,7 +31,7 @@ public class StaffMenuBar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_staffMenuBar, container, false);
+        View v = inflater.inflate(R.layout.fragment_menubarstaff, container, false);
         return v;
     }
 
@@ -41,39 +41,25 @@ public class StaffMenuBar extends Fragment {
          homeButton = view.findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), PrimaryMenu.class);
+                Intent intent = new Intent(StaffMenuBar.super.getActivity(), MainMenuActivity.class);
                 startActivity(intent);
             }
         });
 
-        accountButton = view.findViewById(R.id.accountButton);
-        accountButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), AccountActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        cartButton = view.findViewById(R.id.cartButton);
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), CartActivity.class);
-                startActivity(intent);
-            }
-        });
 
         orderButton = view.findViewById(R.id.orderButton);
         orderButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), OrderConfirmationActivity.class);
+                Intent intent = new Intent(StaffMenuBar.super.getActivity(), ViewActiveOrdersActivity.class);
                 startActivity(intent);
             }
         });
 
-        helpButton = view.findViewById(R.id.helpButton);
-        helpButton.setOnClickListener(new View.OnClickListener() {
+        deliveryButton = view.findViewById(R.id.deliveryButton);
+        deliveryButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                Intent intent = new Intent(StaffMenuBar.super.getActivity(), HelpActivity.class);
+                Intent intent = new Intent(StaffMenuBar.super.getActivity(), DeliveriesActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +67,7 @@ public class StaffMenuBar extends Fragment {
         signOutButton = view.findViewById(R.id.signOutButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).clear();
+                //SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).clear();
                 startActivity(new Intent(StaffMenuBar.super.getActivity(), MainActivity.class));
             }
         });
