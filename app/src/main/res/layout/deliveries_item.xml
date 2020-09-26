@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="4dp"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:background="@color/cardview_light_background">
 
         <TextView
             android:id="@+id/textViewFirstName"
@@ -72,6 +73,7 @@
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
             android:text="Delivered"
+            android:background="@drawable/button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
