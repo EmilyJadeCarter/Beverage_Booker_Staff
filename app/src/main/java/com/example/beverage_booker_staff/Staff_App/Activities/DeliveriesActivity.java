@@ -77,7 +77,7 @@ public class DeliveriesActivity extends AppCompatActivity {
             public void run() {
                 updateDeliveriesList();
             }
-        }, 0, 500);
+        }, 0, 2000);
     }
 
     private final void updateDeliveriesList() {
