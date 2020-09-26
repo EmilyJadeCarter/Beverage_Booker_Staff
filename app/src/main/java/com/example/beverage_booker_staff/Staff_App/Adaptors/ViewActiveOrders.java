@@ -16,6 +16,7 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.RecyclerViewHolder> {
@@ -43,14 +44,14 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
         TextView mOrderID;
         TextView mOrderStatus;
         Button mStartOrder;
-        RelativeLayout mRelativeLayout;
+        ConstraintLayout mConstraintLayout;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mOrderID = itemView.findViewById(R.id.orderID);
             mOrderStatus = itemView.findViewById(R.id.orderStatus);
             mStartOrder = itemView.findViewById(R.id.buttonStartOrder);
-            mRelativeLayout = itemView.findViewById(R.id.relativeLayout);
+            mConstraintLayout = itemView.findViewById(R.id.relativeLayout);
         }
     }
 
@@ -95,14 +96,14 @@ public class ViewActiveOrders extends RecyclerView.Adapter<ViewActiveOrders.Recy
         if (currentItem.getAssignedStaff() != 0 && currentItem.getAssignedStaff() != 1 && currentItem.getAssignedStaff() != activeStaff) {
             holder.mStartOrder.setEnabled(false);
             holder.mStartOrder.setText("In Progress");
-            holder.mRelativeLayout.setBackgroundColor(red);
+            holder.mConstraintLayout.setBackgroundColor(red);
         } else if (currentItem.getAssignedStaff() == 1 || currentItem.getAssignedStaff() == activeStaff) {
             holder.mStartOrder.setText("Continue Order");
-            holder.mRelativeLayout.setBackgroundColor(yellow);
+            holder.mConstraintLayout.setBackgroundColor(yellow);
             holder.mStartOrder.setEnabled(true);
         } else {
             holder.mStartOrder.setText("Start Order");
-            holder.mRelativeLayout.setBackgroundColor(green);
+            holder.mConstraintLayout.setBackgroundColor(green);
             holder.mStartOrder.setEnabled(true);
         }
 
