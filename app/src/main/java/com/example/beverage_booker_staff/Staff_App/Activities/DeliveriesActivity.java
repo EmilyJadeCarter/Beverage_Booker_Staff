@@ -33,6 +33,8 @@ public class DeliveriesActivity extends AppCompatActivity {
 
     private Timer deliveryTimer;
 
+    private int bodySize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,27 +48,28 @@ public class DeliveriesActivity extends AppCompatActivity {
         mAdapter = new DeliveriesAdapter(mDeliveries);
         mRecyclerView.setAdapter(mAdapter);
 
+        //Delivered Button
+        mAdapter.setOnItemClickListener(new DeliveriesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(int position) {
+                deliveryTimer.cancel();
+
+                if (mDeliveries.size() == bodySize) {
+                    int userID = mDeliveries.get(position).getUserID();
+                    System.out.println(userID);
+                    int cartID = mDeliveries.get(position).getCartID();
+                    System.out.println(cartID);
+                    markOrderDelivered(userID, cartID);
+                } else {
+                    Toast.makeText(DeliveriesActivity.this, "Please Tap Again", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         deliveryTimer = new Timer();
         deliveryTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-
-                mDeliveries.clear();
-
-                //Delivered Button
-                mAdapter.setOnItemClickListener(new DeliveriesAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClickListener(int position) {
-
-                        int userID = mDeliveries.get(position).getUserID();
-                        System.out.println(userID);
-                        int cartID = mDeliveries.get(position).getCartID();
-                        System.out.println(cartID);
-                        markOrderDelivered(userID, cartID);
-                    }
-                });
-
-
                 Call<List<Deliveries>> call = RetrofitClient
                         .getInstance()
                         .getApi()
@@ -77,8 +80,10 @@ public class DeliveriesActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Deliveries>> call, Response<List<Deliveries>> response) {
                         if (response.code() == 200) {
+                            mDeliveries.clear();
                             for (int i = 0; i < response.body().size(); i++) {
                                 mDeliveries.add(response.body().get(i));
+                                bodySize = response.body().size();
                             }
 
                             mAdapter.notifyDataSetChanged();
@@ -91,7 +96,7 @@ public class DeliveriesActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0, 500);
+        }, 0, 4000);
     }
 
     private void markOrderDelivered(int userID, int cartID) {
