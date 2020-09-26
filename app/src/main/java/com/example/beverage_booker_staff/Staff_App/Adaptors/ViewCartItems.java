@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,14 +48,41 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
 
         TextView mItemID;
         TextView mItemTitle;
+        TextView textViewSizeTitle;
+        TextView textViewSize;
+        TextView textViewMilk;
+        TextView textViewSugar;
+        TextView textViewDecaf;
+        TextView textViewVanilla;
+        TextView textViewCaramel;
+        TextView textViewChocolate;
+        TextView textViewWhippedCream;
+        TextView textViewFrappe;
+        TextView textViewHeated;
+        TextView textViewCommentTitle;
+        TextView textViewComment;
         TextView mItemQuantity;
         CheckBox mDone;
 
+
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            mItemID = itemView.findViewById(R.id.textView_itemID);
-            mItemTitle = itemView.findViewById(R.id.textView_itemTitle);
-            mItemQuantity = itemView.findViewById(R.id.itemQuantityValue);
+            //mItemID = itemView.findViewById(R.id.textView_itemID);
+            mItemTitle = itemView.findViewById(R.id.cartItemName);
+            textViewSizeTitle = itemView.findViewById(R.id.sizeTitle);
+            textViewSize = itemView.findViewById(R.id.cartItemSize);
+            textViewMilk = itemView.findViewById(R.id.cartItemMilk);
+            textViewSugar = itemView.findViewById(R.id.cartItemSugar);
+            textViewDecaf = itemView.findViewById(R.id.cartItemDecaf);
+            textViewVanilla = itemView.findViewById(R.id.cartItemVanilla);
+            textViewCaramel = itemView.findViewById(R.id.cartItemCaramel);
+            textViewChocolate = itemView.findViewById(R.id.cartItemChocolate);
+            textViewWhippedCream = itemView.findViewById(R.id.cartItemWhippedCream);
+            textViewFrappe = itemView.findViewById(R.id.cartItemFrappe);
+            textViewHeated = itemView.findViewById(R.id.cartItemHeated);
+            textViewCommentTitle = itemView.findViewById(R.id.commentTitle);
+            textViewComment = itemView.findViewById(R.id.cartItemComment);
+            mItemQuantity = itemView.findViewById(R.id.cartItemQuantity);
             mDone = itemView.findViewById(R.id.checkBox_complete);
             mDone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,12 +123,84 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
     public void onBindViewHolder(@NonNull ViewCartItems.RecyclerViewHolder holder, int position) {
         CartItems currentItem = cartItems.get(position);
 
+        String currentItemSize = currentItem.getItemSize();
+        System.out.println(currentItemSize);
+        String currentItemMilk = currentItem.getItemMilk();
+        String currentItemSugar = currentItem.getItemSugar();
+        String currentItemDecaf = currentItem.getItemDecaf();
+        String currentItemVanilla = currentItem.getItemVanilla();
+        String currentItemCaramel = currentItem.getItemCaramel();
+        String currentItemChocolate = currentItem.getItemChocolate();
+        String currentItemWhippedCream = currentItem.getItemWhippedCream();
+        String currentItemFrappe = currentItem.getItemFrappe();
+        String currentItemHeated = currentItem.getItemHeated();
+        String currentItemComment = currentItem.getItemComment();
+
         int itemStatus = currentItem.getItemStatus();
         System.out.println("ItemStatus: " + itemStatus);
 
-        holder.mItemID.setText(String.valueOf(currentItem.getItemID()));
+        //holder.mItemID.setText(String.valueOf(currentItem.getItemID()));
         holder.mItemTitle.setText(currentItem.getItemTitle());
+        holder.textViewSize.setText(currentItem.getItemSize());
         holder.mItemQuantity.setText(String.valueOf(currentItem.getQuantity()));
+
+        //Show only applicable menu option fields
+        if (!currentItemSize.equals("-")) {
+            holder.textViewSizeTitle.setVisibility(TextView.VISIBLE);
+            holder.textViewSize.setVisibility(TextView.VISIBLE);
+            holder.textViewSize.setText(currentItem.getItemSize());
+        }
+
+        if (!currentItemMilk.equals("-")) {
+            holder.textViewMilk.setVisibility(TextView.VISIBLE);
+            holder.textViewMilk.setText(currentItem.getItemMilk());
+        }
+
+        if (!currentItemSugar.equals("-")) {
+            holder.textViewSugar.setVisibility(TextView.VISIBLE);
+            holder.textViewSugar.setText(currentItem.getItemSugar());
+        }
+
+        if (!currentItemDecaf.equals("-")) {
+            holder.textViewDecaf.setVisibility(TextView.VISIBLE);
+            holder.textViewDecaf.setText(currentItem.getItemDecaf());
+        }
+
+        if (!currentItemVanilla.equals("-")) {
+            holder.textViewVanilla.setVisibility(TextView.VISIBLE);
+            holder.textViewVanilla.setText(currentItem.getItemVanilla());
+        }
+
+        if (!currentItemCaramel.equals("-")) {
+            holder.textViewCaramel.setVisibility(TextView.VISIBLE);
+            holder.textViewCaramel.setText(currentItem.getItemCaramel());
+        }
+
+        if (!currentItemChocolate.equals("-")) {
+            holder.textViewChocolate.setVisibility(TextView.VISIBLE);
+            holder.textViewChocolate.setText(currentItem.getItemChocolate());
+        }
+
+        if (!currentItemWhippedCream.equals("-")) {
+            holder.textViewWhippedCream.setVisibility(TextView.VISIBLE);
+            holder.textViewWhippedCream.setText(currentItem.getItemWhippedCream());
+        }
+
+        if (!currentItemFrappe.equals("-")) {
+            holder.textViewFrappe.setVisibility(TextView.VISIBLE);
+            holder.textViewFrappe.setText(currentItem.getItemFrappe());
+        }
+
+        if (!currentItemHeated.equals("-")) {
+            holder.textViewHeated.setVisibility(TextView.VISIBLE);
+            holder.textViewHeated.setText(currentItem.getItemHeated());
+        }
+
+        if (!currentItemComment.equals("-")) {
+            holder.textViewCommentTitle.setVisibility(TextView.VISIBLE);
+            holder.textViewComment.setVisibility(TextView.VISIBLE);
+            holder.textViewComment.setText(currentItem.getItemComment());
+        }
 
         if (itemStatus == 1) {
             holder.mDone.setChecked(true);

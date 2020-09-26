@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Beverage_Booker_Staff</string>
     <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="size">Size</string>
+    <string name="price">Price</string>
+    <string name="qty">Qty</string>
+    <string name="options">Options</string>
+    <string name="comment">Comment</string>
 </resources>
