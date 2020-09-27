@@ -20,7 +20,7 @@
     <string name="food">Food</string>
     <string name="item_title">Item Title:</string>
     <string name="time_minutes">time (Minutes)</string>
-    <string name="shortdesc_optional">shortDesc (Optional)</string>
+    <string name="shortdesc_optional">shortDesc (Optional)    </string>
     <string name="short_description">Short Description:</string>
     <string name="item_price">Item Price:</string>
     <string name="preparation_time">Preparation Time:</string>
