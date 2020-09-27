@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Beverage_Booker_Staff</string>
     <string name="id">ID</string>
+    <string name="inventory">INVENTORY</string>
+    <string name="update">Update</string>
+    <string name="stock">Stock</string>
+    <string name="name">Name</string>
+    <string name="modify">Modify</string>
+    <string name="delete">Delete</string>
+    <string name="desc">Desc</string>
+    <string name="price">Price</string>
+    <string name="add_item">Add item</string>
+    <string name="menu">MENU</string>
+
 </resources>
