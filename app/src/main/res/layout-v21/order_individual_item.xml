@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutCartItem"
         android:layout_width="match_parent"
-        android:layout_height="278dp"
+        android:layout_height="220dp"
         android:layout_margin="4dp"
         android:layout_marginTop="25dp">
 
@@ -20,20 +20,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginEnd="68dp"
-            android:layout_marginRight="68dp"
             android:buttonTint="@color/colorAccent"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayoutCartOptions"
-            android:layout_width="269dp"
-            android:layout_height="207dp"
+            android:layout_width="218dp"
+            android:layout_height="162dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -174,11 +171,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/item_size"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="normal"
             android:visibility="gone"
+            android:text="@string/item_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@+id/sizeTitle"
@@ -205,12 +202,11 @@
 
         <TextView
             android:id="@+id/cartItemComment"
-            android:layout_width="333dp"
-            android:layout_height="104dp"
+            android:layout_width="330dp"
+            android:layout_height="67dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:textStyle="normal"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -218,7 +214,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/commentTitle"
-            app:layout_constraintVertical_bias="0.347"
             tools:visibility="visible" />
 
         <TextView
@@ -241,7 +236,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
             android:text="@string/qty"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
@@ -257,7 +251,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="68dp"
-            android:layout_marginRight="68dp"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

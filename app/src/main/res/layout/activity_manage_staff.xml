@@ -20,28 +20,37 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewStaff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="50dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:paddingLeft="10dp"
+        android:paddingTop="100dp"
         android:paddingRight="10dp"
+        android:paddingBottom="15dp"
+        app:layout_behavior="#string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuBarInsert" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/addStaffButton"
+        app:layout_constraintTop_toBottomOf="@+id/menuBarInsert"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/addStaffButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="24dp"
         android:background="@drawable/button"
-        android:textColor="@color/colorPrimaryDark"
         android:text="Add Staff"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuBarInsert"
+        app:layout_constraintVertical_bias="0.013" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@
     <string name="item_price">Item Price:</string>
     <string name="preparation_time">Preparation Time:</string>
     <string name="create_staff_user">Create Staff User</string>
-    <string name="enter_your_staff_id">Enter your Staff ID</string>
+    <string name="enter_your_staff_id">Enter Staff ID</string>
     <string name="click_to_view_orders">Click to View Orders</string>
     <string name="complete_order">Complete Order</string>
     <string name="order_number">Order Number</string>
@@ -39,5 +39,7 @@
     <string name="mobile">Mobile</string>
     <string name="unit">Unit</string>
     <string name="street_name">Street Name</string>
+    <string name="orders">Orders</string>
+    <string name="item_size">item size</string>
 
 </resources>
