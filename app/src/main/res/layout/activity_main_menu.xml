@@ -18,64 +18,82 @@
 
     <Button
         android:id="@+id/OrdersButton"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="75dp"
         android:layout_marginTop="64dp"
+        android:background="@drawable/button"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Orders"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/menuBarInsert" />
 
     <Button
         android:id="@+id/DeliveriesButton"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Deliveries"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OrdersButton" />
 
     <Button
         android:id="@+id/MenuButton"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Menu"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DeliveriesButton" />
 
     <Button
         android:id="@+id/inventoryButton"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Inventory"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MenuButton" />
 
     <Button
         android:id="@+id/manageStaffButton"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Manage Staff"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inventoryButton" />
 
     <Button
         android:id="@+id/signOutButton"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_marginHorizontal="290dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@drawable/button"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Sign Out"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

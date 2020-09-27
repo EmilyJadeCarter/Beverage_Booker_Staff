@@ -33,6 +33,8 @@ public class DeliveriesActivity extends AppCompatActivity {
 
     private Timer deliveryTimer;
 
+    private int bodySize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,52 +48,64 @@ public class DeliveriesActivity extends AppCompatActivity {
         mAdapter = new DeliveriesAdapter(mDeliveries);
         mRecyclerView.setAdapter(mAdapter);
 
+        updateDeliveriesList();
+        createTimer();
+        //Delivered Button
+        mAdapter.setOnItemClickListener(new DeliveriesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(int position) {
+                deliveryTimer.cancel();
+
+                if (mDeliveries.size() == bodySize) {
+                    int userID = mDeliveries.get(position).getUserID();
+                    System.out.println(userID);
+                    int cartID = mDeliveries.get(position).getCartID();
+                    System.out.println(cartID);
+                    markOrderDelivered(userID, cartID);
+                } else {
+                    Toast.makeText(DeliveriesActivity.this, "Please Tap Again", Toast.LENGTH_LONG).show();
+                }
+                createTimer();
+            }
+        });
+    }
+
+    private void createTimer() {
         deliveryTimer = new Timer();
         deliveryTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-
-                mDeliveries.clear();
-
-                //Delivered Button
-                mAdapter.setOnItemClickListener(new DeliveriesAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClickListener(int position) {
-
-                        int userID = mDeliveries.get(position).getUserID();
-                        System.out.println(userID);
-                        int cartID = mDeliveries.get(position).getCartID();
-                        System.out.println(cartID);
-                        markOrderDelivered(userID, cartID);
-                    }
-                });
-
-
-                Call<List<Deliveries>> call = RetrofitClient
-                        .getInstance()
-                        .getApi()
-                        .getDeliveriesList();
-
-                call.enqueue(new Callback<List<Deliveries>>() {
-
-                    @Override
-                    public void onResponse(Call<List<Deliveries>> call, Response<List<Deliveries>> response) {
-                        if (response.code() == 200) {
-                            for (int i = 0; i < response.body().size(); i++) {
-                                mDeliveries.add(response.body().get(i));
-                            }
-
-                            mAdapter.notifyDataSetChanged();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Deliveries>> call, Throwable t) {
-                        Toast.makeText(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                updateDeliveriesList();
             }
-        }, 0, 500);
+        }, 0, 2000);
+    }
+
+    private final void updateDeliveriesList() {
+        Call<List<Deliveries>> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .getDeliveriesList();
+
+        call.enqueue(new Callback<List<Deliveries>>() {
+
+            @Override
+            public void onResponse(Call<List<Deliveries>> call, Response<List<Deliveries>> response) {
+                if (response.code() == 200) {
+                    mDeliveries.clear();
+                    for (int i = 0; i < response.body().size(); i++) {
+                        mDeliveries.add(response.body().get(i));
+                        bodySize = response.body().size();
+                    }
+
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Deliveries>> call, Throwable t) {
+                Toast.makeText(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void markOrderDelivered(int userID, int cartID) {

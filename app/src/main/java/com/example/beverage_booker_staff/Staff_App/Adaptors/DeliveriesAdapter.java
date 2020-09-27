@@ -46,17 +46,6 @@ public class DeliveriesAdapter extends RecyclerView.Adapter<DeliveriesAdapter.Re
             mStreetUnit = itemView.findViewById(R.id.streetUnit);
             mStreetName = itemView.findViewById(R.id.streetName);
             mDelivered = itemView.findViewById(R.id.buttonDelivered);
-
-            mDelivered.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) mListener.onItemClickListener(position);
-                    }
-                }
-            });
-
         }
     }
 
@@ -73,7 +62,7 @@ public class DeliveriesAdapter extends RecyclerView.Adapter<DeliveriesAdapter.Re
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, final int position) {
         Deliveries currentDelivery = deliveries.get(position);
 
         //holder.mUserID.setText(String.valueOf(currentDelivery.getUserID()));
@@ -81,6 +70,16 @@ public class DeliveriesAdapter extends RecyclerView.Adapter<DeliveriesAdapter.Re
         holder.mPhone.setText(currentDelivery.getPhone());
         holder.mStreetUnit.setText(String.valueOf(currentDelivery.getStreetUnit()));
         holder.mStreetName.setText(currentDelivery.getStreetName());
+
+        holder.mDelivered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    int pos = position;
+                    if (pos != RecyclerView.NO_POSITION) mListener.onItemClickListener(pos);
+                }
+            }
+        });
     }
 
     @Override

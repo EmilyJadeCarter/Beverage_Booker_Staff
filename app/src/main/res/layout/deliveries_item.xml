@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="4dp"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:background="@color/cardview_light_background">
 
         <TextView
             android:id="@+id/textViewFirstName"
@@ -23,7 +24,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="Name"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +37,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
             android:text="Mobile"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +49,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="52dp"
             android:text="Unit"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,18 +61,20 @@
             android:layout_marginLeft="72dp"
             android:layout_marginTop="52dp"
             android:text="Street Name"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonDelivered"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
             android:text="Delivered"
+            android:textSize="20sp"
+            android:background="@drawable/button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
