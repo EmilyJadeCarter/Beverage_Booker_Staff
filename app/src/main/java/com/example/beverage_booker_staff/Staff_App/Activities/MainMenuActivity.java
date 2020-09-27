@@ -18,7 +18,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button MenuButton;
     private Button inventoryButton;
     private Button manageStaffButton;
-    private Button signOutButton;
 
     private Staff activeStaff;
     private int activeStaffLevel;
@@ -76,15 +75,6 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 viewManageStaff();
-            }
-        });
-
-        //Sign Out Button
-        signOutButton = findViewById(R.id.signOutButton);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
             }
         });
 
