@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Beverage_Booker_Staff</string>
     <string name="id">ID</string>
-    <string name="name">Name</string>
-    <string name="size">Size</string>
-    <string name="price">Price</string>
+    <string name="size">Size</string>>
     <string name="qty">Qty</string>
     <string name="options">Options</string>
     <string name="comment">Comment</string>
@@ -17,5 +15,14 @@
     <string name="price">Price</string>
     <string name="add_item">Add item</string>
     <string name="menu">MENU</string>
+    <string name="select_new_item_type">Select New Item Type</string>
+    <string name="drink">Drink</string>
+    <string name="food">Food</string>
+    <string name="item_title">Item Title:</string>
+    <string name="time_minutes">time (Minutes)</string>
+    <string name="shortdesc_optional">shortDesc (Optional)</string>
+    <string name="short_description">Short Description:</string>
+    <string name="item_price">Item Price:</string>
+    <string name="preparation_time">Preparation Time:</string>
 
 </resources>

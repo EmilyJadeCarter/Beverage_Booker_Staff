@@ -37,7 +37,7 @@
         android:drawablePadding="5dp"
         android:ems="10"
         android:fontFamily="sans-serif-medium"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:hint="Enter your Staff ID"
         android:textColorHint="@color/colorAccentDark"
         android:inputType="numberSigned"
