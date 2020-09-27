@@ -25,6 +25,8 @@
             android:layout_marginRight="68dp"
             android:buttonTint="@color/colorAccent"
             android:textSize="24sp"
+            android:scaleX="2.0"
+            android:scaleY="2.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
