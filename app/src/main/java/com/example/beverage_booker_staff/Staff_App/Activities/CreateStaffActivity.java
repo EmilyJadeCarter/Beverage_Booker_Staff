@@ -87,6 +87,7 @@ public class CreateStaffActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
                     Toast.makeText(CreateStaffActivity.this, "Staff user created successfully", Toast.LENGTH_LONG).show();
+                    returnToMenu();
                 } else if (response.code() == 422) {
                     Toast.makeText(CreateStaffActivity.this, "Staff user failed to be created", Toast.LENGTH_LONG).show();
                 } else if (response.code() == 403) {

@@ -28,7 +28,7 @@
         android:gravity="center"
         android:text="@string/menu"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuBarInsert" />
@@ -36,15 +36,15 @@
     <Button
         android:id="@+id/addMenuItem"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_width="154dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/button"
         android:text="@string/add_item"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/textViewMenuTitle"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.849"
+        app:layout_constraintStart_toEndOf="@+id/textViewMenuTitle"
         app:layout_constraintTop_toBottomOf="@+id/menuBarInsert" />
 
     <androidx.recyclerview.widget.RecyclerView

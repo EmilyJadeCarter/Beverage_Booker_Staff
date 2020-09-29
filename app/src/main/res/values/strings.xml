@@ -39,7 +39,23 @@
     <string name="mobile">Mobile</string>
     <string name="unit">Unit</string>
     <string name="street_name">Street Name</string>
-    <string name="orders">Orders</string>
     <string name="item_size">item size</string>
+    <string name="logo">logo</string>
+    <string name="continueIn">continue</string>
+    <string name="orders">Orders</string>
+    <string name="deliveries">Deliveries</string>
+    <string name="manage_staff">Manage Staff</string>
+    <string name="allow_beverage_options">Allow Beverage Options:</string>
+    <string name="title">title</string>
+    <string name="heated_allows_for_item_to_be_heated">heated: Allows for item to be heated</string>
+    <string name="frappe_turns_beverage_into_a_frappe">frappe: Turns beverage into a frappe</string>
+    <string name="extras_vanilla_caramel_chocolate_cream">extras: Vanilla, Caramel, Chocolate, Cream</string>
+    <string name="decaf_decaffeinates_beverage">decaf: Decaffeinates Beverage</string>
+    <string name="sugar_sugar_sweetener">sugar: Sugar, Sweetener</string>
+    <string name="milk_full_cream_skim_almond_soy">milk: Full Cream, Skim, Almond, Soy</string>
+    <string name="add">Add</string>
+    <string name="order_id">Order ID</string>
+    <string name="order">Order #</string>
+    <string name="orderstatus">orderstatus</string>
 
 </resources>
