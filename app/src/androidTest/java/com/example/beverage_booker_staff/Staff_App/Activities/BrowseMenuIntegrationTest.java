@@ -33,37 +33,38 @@ public class BrowseMenuIntegrationTest {
      * This tests conducts a run through of the program interacting with
      * all applicable activities tied to BrowseMenu, the prerequisites for this
      * test are a staff member exists with the id 1001 and an entry in the items
-     * database exists with a name of "banana", description of "its a banana"
-     * and a price of 12.5.
+     * database exists with a name of "Flat White", price of 3.90, id of 7.
      */
     @Test
-    public void BrowseMenuIntegrationTest() {
+    public void BrowseMenuIntegrationTest() throws InterruptedException {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
         onView(withId(R.id.MenuButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //BrowseMenuActivity
         onView(withId(R.id.MenuButton))
                 .check(doesNotExist());
         onView(withId(R.id.addMenuItem))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("banana"))))
+        onView(allOf(ViewMatchers.withId(R.id.itemID), hasSibling(withText("7"))))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.itemDesc), hasSibling(withText("its a banana"))))
+        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("Flat White"))))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.itemPrice), hasSibling(withText("$12.50"))))
+        onView(allOf(ViewMatchers.withId(R.id.itemPrice), hasSibling(withText("Flat White"))))
+                .check(matches(hasSibling(withText("$3.90"))));
+        onView(allOf(ViewMatchers.withId(R.id.modifyMenuItem), hasSibling(withText("Flat White"))))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.modifyMenuItem), hasSibling(withText("banana"))))
-                .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("banana"))))
+        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("Flat White"))))
                 .check(matches(isDisplayed()));
     }
 }

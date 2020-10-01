@@ -41,26 +41,28 @@ public class AddMenuItemIntegrationTest {
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(100);
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
         onView(withId(R.id.MenuButton))
                 .perform(click());
-        Thread.sleep(100);
+        Thread.sleep(4000);
 
         //BrowseMenuActivity
         onView(withId(R.id.MenuButton))
                 .check(doesNotExist());
         onView(withId(R.id.addMenuItem))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ItemTypeSelectionActivity
         onView(withId(R.id.addMenuItem))
                 .check(doesNotExist());
         onView(withId(R.id.drinkMenuButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ItemFormActivity
         onView(withId(R.id.editTextTitle))

@@ -36,18 +36,20 @@ public class DeleteMenuItemIntegrationTest {
      * this test is that an item named test exists.
      */
     @Test
-    public void DeleteMenuItemIntegrationTest() {
+    public void DeleteMenuItemIntegrationTest() throws InterruptedException {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
         onView(withId(R.id.MenuButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //BrowseMenuActivity
         onView(withId(R.id.MenuButton))
