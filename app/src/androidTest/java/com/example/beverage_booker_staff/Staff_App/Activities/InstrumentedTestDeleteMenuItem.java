@@ -34,10 +34,11 @@ public class InstrumentedTestDeleteMenuItem {
      * banana exists.
      */
     @Test
-    public void DeleteItem_PopupAppears() {
+    public void DeleteItem_PopupAppears() throws InterruptedException {
         onView(withId(R.id.MenuButton))
                 .perform(click());
-        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("banana"))))
+        Thread.sleep(4000);
+        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("Test Item"))))
                 .perform(click());
         onView(withText("Confirmation"))
                 .check(matches(isDisplayed()));
@@ -49,10 +50,11 @@ public class InstrumentedTestDeleteMenuItem {
      * for this test is that an item named banana exists.
      */
     @Test
-    public void DeleteItem_PopupAppears_Cancel() {
+    public void DeleteItem_PopupAppears_Cancel() throws InterruptedException {
         onView(withId(R.id.MenuButton))
                 .perform(click());
-        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("banana"))))
+        Thread.sleep(4000);
+        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("Test Item"))))
                 .perform(click());
         onView(withText("Confirmation"))
                 .check(matches(isDisplayed()));
@@ -60,7 +62,7 @@ public class InstrumentedTestDeleteMenuItem {
                 .perform(click());
         onView(withText("Confirmation"))
                 .check(doesNotExist());
-        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("banana"))))
+        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("Test Item"))))
                 .check(matches(isDisplayed()));
     }
 
@@ -72,18 +74,20 @@ public class InstrumentedTestDeleteMenuItem {
      *INSERT INTO `items`(`id`, `title`, `shortdesc`, `price`, `image`) VALUES (0,"test","desc",10.50,"img")
      */
     @Test
-    public void DeleteItem_PopupAppears_Confirm() {
+    public void DeleteItem_PopupAppears_Confirm() throws InterruptedException {
         onView(withId(R.id.MenuButton))
                 .perform(click());
-        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("test"))))
+        Thread.sleep(4000);
+        onView(allOf(ViewMatchers.withId(R.id.deleteMenuItem), hasSibling(withText("Test Item"))))
                 .perform(click());
         onView(withText("Confirmation"))
                 .check(matches(isDisplayed()));
         onView(withText("Confirm"))
                 .perform(click());
+        Thread.sleep(4000);
         onView(withText("Confirmation"))
                 .check(doesNotExist());
-        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("test"))))
+        onView(allOf(ViewMatchers.withId(R.id.itemName), hasSibling(withText("Test Item"))))
                 .check(doesNotExist());
     }
 }
