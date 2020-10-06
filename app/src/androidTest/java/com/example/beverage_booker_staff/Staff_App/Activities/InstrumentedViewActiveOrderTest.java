@@ -1,5 +1,6 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
@@ -16,9 +17,11 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
+import static androidx.test.espresso.matcher.ViewMatchers.hasSibling;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.AllOf.allOf;
 
 
 @LargeTest
@@ -29,7 +32,7 @@ public class InstrumentedViewActiveOrderTest {
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
     /**
-     * These tests run in conjuntion with the Fill Cart and Place Order tests from the Customer App.
+     * These tests run in conjunction with the Fill Cart and Place Order tests from the Customer App.
      * The tests are using data from an order placed by these previous instrumented tests,
      * and can be run in order as an integration test.
      */
@@ -39,7 +42,7 @@ public class InstrumentedViewActiveOrderTest {
      * Also checks that an empty staffID or staffID of incorrect length is not logged in.
      */
     @Test
-    public void StaffLogin_InvalidData() {
+    public void a_StaffLogin_InvalidData() {
 
         onView(withId(R.id.editTextStaffID))
                 .check(matches(isDisplayed()));
@@ -68,7 +71,7 @@ public class InstrumentedViewActiveOrderTest {
      * Checks that a valid staffID is logged in correctly.
      */
     @Test
-    public void StaffLogin_SuccessfulLogin() {
+    public void b_StaffLogin_SuccessfulLogin() {
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
@@ -80,16 +83,16 @@ public class InstrumentedViewActiveOrderTest {
      * Checks the fields for the View Active Order Activity are correctly displayed.
      */
     @Test
-    public void ViewActiveOrder_CheckFields() {
+    public void c_ViewActiveOrder_CheckFields() throws InterruptedException {
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        onView(withId(R.id.textViewOrderIDTitle))
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.textViewStaffTitle))
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.buttonStartOrder))
+        Thread.sleep(4000);
+        onView(withId(R.id.OrdersButton))
+                .perform(click());
+        Thread.sleep(4000);
+        onView(withId(R.id.recyclerView))
                 .check(matches(isDisplayed()));
     }
 
@@ -99,25 +102,22 @@ public class InstrumentedViewActiveOrderTest {
      * Also checks that the order/cart items match what is meant to be in that order.
      */
     @Test
-    public void ViewCartItems_CheckFields_CheckItems() {
+    public void d_ViewCartItems_CheckFields_CheckItems() throws InterruptedException {
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        onView(withId(R.id.buttonStartOrder))
+        Thread.sleep(4000);
+        onView(withId(R.id.OrdersButton))
                 .perform(click());
-        onView(withId(R.id.textViewOrderNumberTitle))
+        Thread.sleep(4000);
+        onView(withId(R.id.recyclerView))
                 .check(matches(isDisplayed()));
-        onView(withId(R.id.button_Complete))
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.textView_itemTitle))
-                .check(matches(withText("banana")));
-        onView(withId(R.id.itemQuantityHeading))
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.itemQuantityValue))
-                .check(matches(isDisplayed()));
-        onView(withId(R.id.checkBox_complete))
-                .check(matches(isDisplayed()));
+        onView(allOf(ViewMatchers.withId(R.id.buttonStartOrder), hasSibling(withText("127"))))
+                .perform(click());
+        Thread.sleep(4000);
+        onView(withId(R.id.cartItemName))
+                .check(matches(withText("Sausage Roll")));
     }
 }
 

@@ -34,13 +34,14 @@ public class InstrumentedTestViewInventory {
      * Checks that the Inventory Button in the Main Menu is displayed
      */
     @Test
-    public void isInventoryButtonDisplayed() {
+    public void isInventoryButtonDisplayed() throws InterruptedException {
 
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(4000);
 
         onView(withId(R.id.inventoryButton))
                 .check(matches(isDisplayed()));
@@ -51,16 +52,18 @@ public class InstrumentedTestViewInventory {
      * Checks that the Inventory Button in the Main Menu is working
      */
     @Test
-    public void isInventoryButtonFunctioning() {
+    public void isInventoryButtonFunctioning() throws InterruptedException {
 
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(4000);
 
         onView(withId(R.id.inventoryButton))
                 .perform(click());
+        Thread.sleep(4000);
     }
 
 
@@ -75,11 +78,11 @@ public class InstrumentedTestViewInventory {
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.inventoryButton))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.recyclerViewInventory))
                 .check(matches(isDisplayed()));
@@ -87,13 +90,13 @@ public class InstrumentedTestViewInventory {
         onView(withId(R.id.textViewInventoryTitle))
                 .check(matches(isDisplayed()));
 
-        onView(allOf(ViewMatchers.withId(R.id.inventoryItemID), hasSibling(withText("9"))))
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemID), hasSibling(withText("26"))))
                 .check(matches(isDisplayed()));
 
         onView(allOf(ViewMatchers.withId(R.id.inventoryItemName), hasSibling(withText("Blueberry Muffin"))))
                 .check(matches(isDisplayed()));
 
-        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("30"))))
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("Blueberry Muffin")), hasSibling(withText("5"))))
                 .check(matches(isDisplayed()));
 
     }

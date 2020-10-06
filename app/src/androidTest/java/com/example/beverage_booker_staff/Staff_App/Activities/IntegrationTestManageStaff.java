@@ -38,18 +38,20 @@ public class IntegrationTestManageStaff {
      * for different circumstances.
      */
     @Test
-    public void QueuingSystemIntegrationTest() {
+    public void QueuingSystemIntegrationTest() throws InterruptedException {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
         onView(withId(R.id.manageStaffButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ManageStaffActivity
         onView(withId(R.id.manageStaffButton))
@@ -58,28 +60,29 @@ public class IntegrationTestManageStaff {
                 .check(matches(isDisplayed()));
         onView(withId(R.id.addStaffButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //CreateStaffActivity
-        onView(allOf(ViewMatchers.withId(R.id.editStaffLevel), hasSibling(withHint("staff level"))))
+        onView(allOf(ViewMatchers.withId(R.id.editStaffLevel), hasSibling(withHint("Staff level"))))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.editStaffLevel), hasSibling(withHint("staff level"))))
+        onView(allOf(ViewMatchers.withId(R.id.editStaffLevel), hasSibling(withHint("Staff level"))))
                 .perform(typeText("2"));
-        onView(allOf(ViewMatchers.withId(R.id.editTextFirstName), hasSibling(withHint("first name"))))
+        onView(allOf(ViewMatchers.withId(R.id.editTextFirstName), hasSibling(withHint("First name"))))
                 .perform(typeText("Derek"));
-        onView(allOf(ViewMatchers.withId(R.id.editTextLastName), hasSibling(withHint("last name"))))
+        onView(allOf(ViewMatchers.withId(R.id.editTextLastName), hasSibling(withHint("Last name"))))
                 .perform(typeText("Organ"));
         onView(allOf(ViewMatchers.withId(R.id.editTextLastName), hasSibling((withText("Organ")))))
                 .perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.buttonRegister))
                 .perform(click());
-        onView(withId(R.id.buttonReturn))
-                .perform(click());
+        Thread.sleep(4000);
 
         //ManageStaffActivity
         onView(allOf(ViewMatchers.withId(R.id.deleteStaffMember), hasSibling(withText("Derek"))))
                 .check(matches(isDisplayed()));
         onView(allOf(ViewMatchers.withId(R.id.deleteStaffMember), hasSibling(withText("Derek"))))
                 .perform(click());
+        Thread.sleep(4000);
         onView(allOf(ViewMatchers.withId(R.id.deleteStaffMember), hasSibling(withText("Derek"))))
                 .check(doesNotExist());
     }

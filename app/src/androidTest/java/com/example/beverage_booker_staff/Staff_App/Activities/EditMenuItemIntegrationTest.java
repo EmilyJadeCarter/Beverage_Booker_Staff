@@ -46,21 +46,21 @@ public class EditMenuItemIntegrationTest {
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(100);
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
-        Thread.sleep(100);
         onView(withId(R.id.MenuButton))
                 .perform(click());
-        Thread.sleep(100);
+        Thread.sleep(4000);
 
         //BrowseMenuActivity
         onView(withId(R.id.MenuButton))
                 .check(doesNotExist());
         onView(allOf(ViewMatchers.withId(R.id.modifyMenuItem), hasSibling(withText("Flat White"))))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ItemFormActivity
         onView(withId(R.id.editTextTitle))
@@ -70,7 +70,7 @@ public class EditMenuItemIntegrationTest {
         onView(withId(R.id.editTextPrice))
                 .check(matches((withText("3.9"))));
         onView(withId(R.id.editTextTime))
-                .check(matches((withText("5"))));
+                .check(matches((withText("2"))));
         onView(withId(R.id.milkOption))
                 .check(matches(isChecked()));
         onView(withId(R.id.sugarOption))
@@ -82,21 +82,25 @@ public class EditMenuItemIntegrationTest {
         onView(withId(R.id.frappeOption))
                 .check(matches(isNotChecked()));
 
-        onView(withId(R.id.editTextTitle))
-                .perform(typeText(" Test"), closeSoftKeyboard());
+        onView(withId(R.id.editTextShortDesc))
+                .perform(typeText("Test"), closeSoftKeyboard());
         onView(withId(R.id.addButton))
                 .perform(click());
-        Thread.sleep(100);
+        Thread.sleep(4000);
 
         //BrowseMenuActivity
-        onView(allOf(ViewMatchers.withId(R.id.modifyMenuItem), hasSibling(withText("Flat White Test"))))
+        onView(allOf(ViewMatchers.withId(R.id.itemDesc), hasSibling(withText("Test"))))
+                .check(matches(isDisplayed()));
+        onView(allOf(ViewMatchers.withId(R.id.modifyMenuItem), hasSibling(withText("Flat White"))))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ItemFormActivity
-        onView(withId(R.id.editTextTitle))
-                .perform(clearText(), typeText("Flat White"), closeSoftKeyboard());
+        onView(withId(R.id.editTextShortDesc))
+                .perform(clearText(), closeSoftKeyboard());
         onView(withId(R.id.addButton))
                 .perform(click());
+        Thread.sleep(4000);
 
     }
 

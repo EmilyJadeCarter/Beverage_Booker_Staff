@@ -40,24 +40,26 @@ public class QueuingSystemIntegrationTest {
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(100);
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
         onView(withId(R.id.OrdersButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ViewOrderActivity
         onView(withId(R.id.OrdersButton))
                 .check(doesNotExist());
         onView(withId(R.id.textViewStaffTitle))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.buttonStartOrder), hasSibling(withText("16"))))
+        onView(allOf(ViewMatchers.withId(R.id.buttonStartOrder), hasSibling(withText("128"))))
                 .perform(click());
+        Thread.sleep(4000);
 
         //OrderIndividualItem
-        onView(allOf(ViewMatchers.withId(R.id.textView_itemTitle), hasSibling(withText("Blueberry Muffin"))))
+        onView(allOf(ViewMatchers.withId(R.id.cartItemName), hasSibling(withText("Flat White"))))
                 .check(matches(isDisplayed()));
     }
 }

@@ -50,11 +50,11 @@ public class UpdateInventoryIntegrationTest {
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.inventoryButton))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.recyclerViewInventory))
                 .check(matches(isDisplayed()));
@@ -62,31 +62,28 @@ public class UpdateInventoryIntegrationTest {
         onView(withId(R.id.textViewInventoryTitle))
                 .check(matches(isDisplayed()));
 
-        onView(allOf(ViewMatchers.withId(R.id.inventoryItemID), hasSibling(withText("9"))))
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemID), hasSibling(withText("26"))))
                 .check(matches(isDisplayed()));
 
         onView(allOf(ViewMatchers.withId(R.id.inventoryItemName), hasSibling(withText("Blueberry Muffin"))))
                 .check(matches(isDisplayed()));
 
-        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("30"))))
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("26"))))
                 .check(matches(isDisplayed()));
-        Thread.sleep(1000);
 
-        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("30"))))
+        onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("26"))))
                 .perform(clearText());
-        Thread.sleep(1000);
 
         onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText(""))))
                 .perform(typeText("50"));
-        Thread.sleep(1000);
 
         onView(allOf(ViewMatchers.withId(R.id.updateInventoryItem), hasSibling(withText("50"))))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(allOf(ViewMatchers.withId(R.id.inventoryItemStock), hasSibling(withText("50"))))
                 .check(matches(isDisplayed()));
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
 
 
