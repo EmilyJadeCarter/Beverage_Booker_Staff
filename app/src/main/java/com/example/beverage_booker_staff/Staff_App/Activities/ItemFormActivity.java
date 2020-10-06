@@ -255,7 +255,7 @@ public class ItemFormActivity extends AppCompatActivity {
                 } else if (response.code() == 402) {
                     Toast.makeText(ItemFormActivity.this, "Item failed to modify", Toast.LENGTH_LONG).show();
                 } else if (response.code() == 403) {
-                    Toast.makeText(ItemFormActivity.this, "Item title already exist", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ItemFormActivity.this, "Item title already exists", Toast.LENGTH_LONG).show();
                 }
             }
 

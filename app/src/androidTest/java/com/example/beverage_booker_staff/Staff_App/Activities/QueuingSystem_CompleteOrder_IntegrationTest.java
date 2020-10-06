@@ -36,33 +36,34 @@ public class QueuingSystem_CompleteOrder_IntegrationTest {
      * for different circumstances.
      */
     @Test
-    public void QueuingSystemIntegrationTest() {
+    public void QueuingSystemIntegrationTest() throws InterruptedException {
         //MainActivity
         onView(withId(R.id.editTextStaffID))
                 .perform(typeText("1001"));
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
+        Thread.sleep(4000);
 
         //MainMenuActivity
         onView(withId(R.id.button_ValidateId))
                 .check(doesNotExist());
         onView(withId(R.id.OrdersButton))
                 .perform(click());
+        Thread.sleep(4000);
 
         //ViewOrderActivity
         onView(withId(R.id.OrdersButton))
                 .check(doesNotExist());
         onView(withId(R.id.textViewStaffTitle))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.buttonStartOrder), hasSibling(withText("25"))))
+        onView(allOf(ViewMatchers.withId(R.id.buttonStartOrder), hasSibling(withText("127"))))
                 .perform(click());
+        Thread.sleep(4000);
 
         //OrderIndividualItem
-        onView(allOf(ViewMatchers.withId(R.id.textView_itemTitle), hasSibling(withText("Drink1"))))
+        onView(allOf(ViewMatchers.withId(R.id.cartItemName), hasSibling(withText("Sausage Roll"))))
                 .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.checkBox_complete), hasSibling(withText("Drink1"))))
-                .perform(click());
-        onView(allOf(ViewMatchers.withId(R.id.button_Complete), hasSibling(withText("Complete Order"))))
+        onView(withId(R.id.button_Complete))
                 .perform(click());
 
         //OrderIndividualItem Confirmation
@@ -72,9 +73,7 @@ public class QueuingSystem_CompleteOrder_IntegrationTest {
                 .perform(click());
 
         //OrderIndividualItem Again
-        onView(allOf(ViewMatchers.withId(R.id.button_Complete), hasSibling(withText("Complete Order"))))
-                .check(matches(isDisplayed()));
-        onView(allOf(ViewMatchers.withId(R.id.button_Complete), hasSibling(withText("Complete Order"))))
+        onView(withId(R.id.button_Complete))
                 .perform(click());
 
         //OrderIndividualItem Confirmation

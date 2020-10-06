@@ -27,7 +27,7 @@ public class SharedPrefManager {
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("id", staff.getStaffID());
-        editor.putInt("level", staff.getLevel());
+        editor.putInt("staffLevel", staff.getStaffLevel());
         editor.putString("firstName", staff.getFirstName());
         editor.putString("lastName", staff.getLastName());
         editor.apply();
@@ -38,7 +38,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new Staff(
                 sharedPreferences.getInt("id", 0),
-                sharedPreferences.getInt("level", 0),
+                sharedPreferences.getInt("staffLevel", 0),
                 sharedPreferences.getString("firstName", null),
                 sharedPreferences.getString("lastName", null)
 

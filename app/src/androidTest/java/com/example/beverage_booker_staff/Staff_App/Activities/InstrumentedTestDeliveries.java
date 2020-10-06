@@ -30,22 +30,17 @@ public class InstrumentedTestDeliveries {
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
-
-
-
     /**
      * Checks the fields for the Main Menu Activity are correctly displayed.
      */
     @Test
     public void isButtonsForMainMenuDisplayed() throws InterruptedException {
-
         onView(withId(R.id.editTextStaffID))
                 .perform(replaceText("1001"), closeSoftKeyboard());
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(1000);
-
+        Thread.sleep(4000);
 
         onView(withId(R.id.OrdersButton))
                 .check(matches(isDisplayed()));
@@ -66,10 +61,11 @@ public class InstrumentedTestDeliveries {
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.DeliveriesButton))
                 .perform(click());
+        Thread.sleep(4000);
     }
 
 
@@ -84,25 +80,13 @@ public class InstrumentedTestDeliveries {
 
         onView(withId(R.id.button_ValidateId))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         onView(withId(R.id.DeliveriesButton))
                 .perform(click());
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
-        onView(withId(R.id.relativeLayout))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.textViewFirstName), hasSibling(withText("Steve"))))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.textViewPhone), hasSibling(withText("0400111222"))))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.streetUnit), hasSibling(withText("12"))))
-                .check(matches(isDisplayed()));
-
-        onView(allOf(ViewMatchers.withId(R.id.streetName), hasSibling(withText("17 Brown St"))))
+        onView(allOf(ViewMatchers.withId(R.id.streetName), hasSibling(withText("7 Brown St"))))
                 .check(matches(isDisplayed()));
     }
 }

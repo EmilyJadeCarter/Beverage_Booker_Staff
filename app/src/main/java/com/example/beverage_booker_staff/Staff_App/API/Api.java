@@ -4,8 +4,9 @@ package com.example.beverage_booker_staff.Staff_App.API;
 import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 import com.example.beverage_booker_staff.Staff_App.Models.Deliveries;
 import com.example.beverage_booker_staff.Staff_App.Models.LoginResponse;
-import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
 import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
+import com.example.beverage_booker_staff.Staff_App.Models.OrderItems;
+import com.example.beverage_booker_staff.Staff_App.Models.Staff;
 
 import java.util.List;
 
@@ -159,6 +160,15 @@ public interface Api {
             @Field("cartID") int cartID
     );
 
+    //create staff user
+    @FormUrlEncoded
+    @POST("createstaff")
+    Call<ResponseBody> createStaff(
+            @Field("staffLevel") int staffLevel,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName
+    );
+			
     //Get  items from database for inventory
     @GET("getitems")
     Call<List<MenuItem>> getItemsForInventory(
@@ -171,5 +181,16 @@ public interface Api {
     Call<ResponseBody> updateInventoryItemStock(
             @Field("itemID") int itemID,
             @Field("itemStock") String itemStock
+    );
+
+    //Get Staff list from database
+    @GET("getstaff")
+    Call<List<Staff>> getStaff();
+
+    //Delete staff member from the staff table
+    @FormUrlEncoded
+    @POST("deletestaff")
+    Call<ResponseBody> deleteStaff(
+            @Field("staffID") int staffID
     );
 }
