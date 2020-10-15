@@ -3,6 +3,7 @@ package com.example.beverage_booker_staff.Staff_App.Activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,7 +129,12 @@ public class BrowseMenuActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<MenuItem>> call, Throwable t) {
-                Toast.makeText(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
     }
@@ -174,21 +181,35 @@ public class BrowseMenuActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 201) {
-                            Toast.makeText(BrowseMenuActivity.this, "Item Deleted", Toast.LENGTH_LONG).show();
+                            Toasty.Config.getInstance()
+                                    .setTextSize(40)
+                                    .apply();
+                            Toast toast = Toasty.success(BrowseMenuActivity.this, "Order Completed", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                            toast.show();
                             Intent intent = getIntent();
                             menuItems.clear();
                             finish();
                             startActivity(intent);
                         } else if (response.code() == 402) {
-                            Toast.makeText(BrowseMenuActivity.this, "Item Failed To Delete", Toast.LENGTH_LONG).show();
+                            Toasty.Config.getInstance()
+                                    .setTextSize(40)
+                                    .apply();
+                            Toast toast = Toasty.error(BrowseMenuActivity.this, "Item Failed To Delete", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                            toast.show();
                         }
                     }
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        Toasty.Config.getInstance()
+                                .setTextSize(40)
+                                .apply();
+                        Toast toast = Toasty.error(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                        toast.show();
                     }
                 });
-                // Here the program refreshes the activity allowing for the refreshed version of items when a user deletes one.
             }
         });
 

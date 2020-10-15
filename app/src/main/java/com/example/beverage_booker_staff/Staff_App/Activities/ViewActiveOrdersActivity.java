@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,6 +12,7 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.example.beverage_booker_staff.R;
@@ -78,7 +80,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     System.out.println("assignedStaff: " + assignedStaffID);
                     addToQueue();
                 } else {
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Please Tap Again", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(ViewActiveOrdersActivity.this, "Please Tap Again", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
         });
@@ -113,7 +120,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
     }
@@ -127,20 +139,40 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201 && assignedStaffID == 0) {
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Order added to queue", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.success(ViewActiveOrdersActivity.this, "Order added to queue", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                     myTimer.cancel();
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(ViewActiveOrdersActivity.this, "Failed to add order to queue", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 } else if (response.code() == 403 && (assignedStaffID == 1 || activeStaffID == assignedStaffID)) {
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Order already in queue - resuming order", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.info(ViewActiveOrdersActivity.this, "Order already in queue - resuming order", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                     assignStaffToOrder();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
         return;
@@ -158,13 +190,23 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     myTimer.cancel();
                     openOrder(orderID, cartID);
                 } else if (response.code() == 402) {
-                    Toast.makeText(ViewActiveOrdersActivity.this, "Staff member failed to be assigned to order", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(ViewActiveOrdersActivity.this, "Staff member failed to be assigned to order", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
     }

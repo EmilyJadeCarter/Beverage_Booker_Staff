@@ -1,6 +1,7 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,7 +65,12 @@ public class DeliveriesActivity extends AppCompatActivity {
                     System.out.println(cartID);
                     markOrderDelivered(userID, cartID);
                 } else {
-                    Toast.makeText(DeliveriesActivity.this, "Please Tap Again", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(DeliveriesActivity.this, "Please Tap Again", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
                 createTimer();
             }
@@ -103,7 +110,12 @@ public class DeliveriesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Deliveries>> call, Throwable t) {
-                Toast.makeText(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
     }
@@ -120,18 +132,31 @@ public class DeliveriesActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if (response.code() == 201) {
-                    Toast.makeText(DeliveriesActivity.this, "Order Delivered", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.success(DeliveriesActivity.this, "Order Delivered", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
 
                 } else if (response.code() == 422) {
-                    Toast.makeText(DeliveriesActivity.this, "Marking order delivered failed",
-                            Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(DeliveriesActivity.this, "Marking order delivered failed", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(DeliveriesActivity.this, t.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
     }
