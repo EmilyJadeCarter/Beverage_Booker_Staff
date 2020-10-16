@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.beverage_booker_staff.R;
-import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 
 public class StaffMenuBar extends Fragment {
