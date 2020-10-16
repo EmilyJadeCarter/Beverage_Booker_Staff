@@ -102,10 +102,9 @@ public class BrowseMenuActivity extends AppCompatActivity {
                 itemHeated = itemClicked.getHeated();
                 itemType = itemClicked.getItemType();
                 itemTime = itemClicked.getItemTime();
-                if(selection == 1) {
+                if (selection == 1) {
                     MenuItemFormModify();
-                }
-                else if(selection == 2){
+                } else if (selection == 2) {
                     popupConfirmationOfDeletion();
                 }
             }
@@ -139,13 +138,13 @@ public class BrowseMenuActivity extends AppCompatActivity {
         });
     }
 
-    private void MenuItemFormAdd(){
+    private void MenuItemFormAdd() {
         Intent intent = new Intent(this, ItemTypeSelectionActivity.class);
         startActivity(intent);
     }
 
     // sends all item information via the intent
-    private void MenuItemFormModify(){
+    private void MenuItemFormModify() {
         Intent intent = new Intent(this, ItemFormActivity.class);
         intent.putExtra(ITEM_ID, itemID);
         intent.putExtra(ITEM_TITLE, itemTitle);
@@ -200,6 +199,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
                             toast.show();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Toasty.Config.getInstance()

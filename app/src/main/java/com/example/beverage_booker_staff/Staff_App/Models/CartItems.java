@@ -20,7 +20,7 @@ public class CartItems {
     private String itemComment;
 
 
-    public CartItems(int itemID, String itemTitle, int itemQuantity){
+    public CartItems(int itemID, String itemTitle, int itemQuantity) {
 
         this.itemID = itemID;
         this.itemTitle = itemTitle;

@@ -92,10 +92,9 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
                 public void onClick(View v) {
                     if (mListener != null) {
                         int position = getAdapterPosition();
-                        if(mDone.isChecked()==true){
+                        if (mDone.isChecked() == true) {
                             updateItemStatus(position, 1);
-                        }
-                        else if(mDone.isChecked()==false){
+                        } else if (mDone.isChecked() == false) {
                             updateItemStatus(position, 0);
                         }
                         if (position != RecyclerView.NO_POSITION) {
@@ -109,7 +108,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
     }
 
     public ViewCartItems(ArrayList<CartItems> listItems) {
-        this.mContext=mContext;
+        this.mContext = mContext;
         cartItems = listItems;
     }
 
@@ -209,8 +208,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
             holder.mDone.setChecked(true);
             System.out.println("True");
             ticks = ticks + 1;
-        }
-        else if (itemStatus == 0) {
+        } else if (itemStatus == 0) {
             holder.mDone.setChecked(false);
             System.out.println("False");
             ticks = ticks - 1;
@@ -222,7 +220,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         return cartItems.size();
     }
 
-    public void updateItemStatus(int position, int itemStatus){
+    public void updateItemStatus(int position, int itemStatus) {
         //update cart item status from checkbox
         String cartID = ViewCartItemsActivity.getCartID();
         CartItems itemCart = cartItems.get(position);
@@ -244,6 +242,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
                     toast.show();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toasty.Config.getInstance()

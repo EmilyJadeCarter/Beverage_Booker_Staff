@@ -53,7 +53,7 @@ public class CreateStaffActivity extends AppCompatActivity {
         });
     }
 
-    private void createStaff(){
+    private void createStaff() {
 
         String staffLevelValue = editStaffLevel.getText().toString();
         String firstName = editFirstName.getText().toString();
@@ -124,7 +124,7 @@ public class CreateStaffActivity extends AppCompatActivity {
         });
     }
 
-    private void returnToMenu(){
+    private void returnToMenu() {
         Intent intent = new Intent(this, ManageStaffActivity.class);
         startActivity(intent);
     }

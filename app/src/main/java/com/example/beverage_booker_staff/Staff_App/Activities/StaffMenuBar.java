@@ -21,7 +21,7 @@ public class StaffMenuBar extends Fragment {
     private ImageButton signOutButton;
 
 
-    public StaffMenuBar(){
+    public StaffMenuBar() {
     }
 
     @Override
@@ -33,11 +33,11 @@ public class StaffMenuBar extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-         homeButton = view.findViewById(R.id.homeButton);
+        homeButton = view.findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(StaffMenuBar.super.getActivity(), MainMenuActivity.class);
                 startActivity(intent);
             }
@@ -45,7 +45,7 @@ public class StaffMenuBar extends Fragment {
 
         signOutButton = view.findViewById(R.id.signOutButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 //SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).clear();
                 startActivity(new Intent(StaffMenuBar.super.getActivity(), MainActivity.class));
             }

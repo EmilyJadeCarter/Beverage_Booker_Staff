@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
 
 import com.example.beverage_booker_staff.R;
@@ -29,7 +30,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Recy
     public void setOnButtonClickListener(OnItemClickListener listener) {
         itemListener = listener;
     }
-
 
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
