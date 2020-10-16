@@ -158,7 +158,7 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                     Toasty.Config.getInstance()
                             .setTextSize(40)
                             .apply();
-                    Toast toast = Toasty.info(ViewActiveOrdersActivity.this, "Order already in queue - resuming order", Toast.LENGTH_LONG);
+                    Toast toast = Toasty.success(ViewActiveOrdersActivity.this, "Order in queue - resuming order", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                     toast.show();
                     assignStaffToOrder();
