@@ -216,12 +216,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //completeOrder();
-                //deleteOrder();
-                //updateOrderToComplete();
-                //deleteStaffQueue();
                 returnToOrders();
-                //deleteStaffQueue();
 
                 int cartID = Integer.parseInt(getCartID());
                 System.out.println("Check : " + cartID);
