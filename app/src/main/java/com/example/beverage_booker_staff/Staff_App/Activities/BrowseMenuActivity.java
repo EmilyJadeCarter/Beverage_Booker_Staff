@@ -184,7 +184,7 @@ public class BrowseMenuActivity extends AppCompatActivity {
                             Toasty.Config.getInstance()
                                     .setTextSize(40)
                                     .apply();
-                            Toast toast = Toasty.success(BrowseMenuActivity.this, "Order Completed", Toast.LENGTH_LONG);
+                            Toast toast = Toasty.success(BrowseMenuActivity.this, "Item Deleted", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                             toast.show();
                             Intent intent = getIntent();
