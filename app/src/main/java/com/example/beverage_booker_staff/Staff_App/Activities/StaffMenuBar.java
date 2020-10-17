@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.beverage_booker_staff.R;
+import com.example.beverage_booker_staff.Staff_App.Models.Staff;
 import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 
 
@@ -19,6 +20,7 @@ public class StaffMenuBar extends Fragment {
 
     private ImageButton homeButton;
     private ImageButton signOutButton;
+    private Staff activeStaff;
 
 
     public StaffMenuBar(){
@@ -29,6 +31,7 @@ public class StaffMenuBar extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_menubarstaff, container, false);
+
         return v;
     }
 
@@ -46,10 +49,18 @@ public class StaffMenuBar extends Fragment {
         signOutButton = view.findViewById(R.id.signOutButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                //SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).clear();
+                SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).clear();
                 startActivity(new Intent(StaffMenuBar.super.getActivity(), MainActivity.class));
             }
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(!SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).isLoggedIn()){
+            Intent intent = new Intent(super.getContext(), MainActivity.class);
+            startActivity(intent);
+        }
+    }
 }

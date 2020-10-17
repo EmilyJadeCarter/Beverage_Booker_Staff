@@ -33,6 +33,15 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public boolean isLoggedIn() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        if(sharedPreferences.getInt("id", 0) != 0)
+            return true;
+
+        return false;
+    }
+
     //Return the logged in user
     public Staff getStaff() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -43,5 +52,13 @@ public class SharedPrefManager {
                 sharedPreferences.getString("lastName", null)
 
         );
+    }
+
+    //Clear the logged in user when logging out
+    public void clear(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
     }
 }
