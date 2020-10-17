@@ -1,12 +1,15 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,8 +73,12 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     //Show the error message
-                    Toast.makeText(MainActivity.this, loginResponse.getMessage(),
-                            Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(MainActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
 

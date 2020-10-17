@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,7 +22,7 @@ public class StaffMenuBar extends Fragment {
     private Staff activeStaff;
 
 
-    public StaffMenuBar(){
+    public StaffMenuBar() {
     }
 
     @Override
@@ -36,11 +35,11 @@ public class StaffMenuBar extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-         homeButton = view.findViewById(R.id.homeButton);
+        homeButton = view.findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(StaffMenuBar.super.getActivity(), MainMenuActivity.class);
                 startActivity(intent);
             }

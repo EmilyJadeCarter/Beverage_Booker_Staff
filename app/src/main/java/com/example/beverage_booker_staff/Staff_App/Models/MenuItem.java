@@ -64,39 +64,51 @@ public class MenuItem {
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDescription() {
         return description;
     }
+
     public double getPrice() {
         return price;
     }
+
     public int getMilk() {
         return milk;
     }
+
     public int getSugar() {
         return sugar;
     }
+
     public int getDecaf() {
         return decaf;
     }
+
     public int getExtras() {
         return extras;
     }
+
     public int getFrappe() {
         return frappe;
     }
+
     public int getHeated() {
         return heated;
     }
+
     public String getItemType() {
         return itemType;
     }
+
     public int getItemTime() {
         return itemTime;
     }
+
     public String getItemStock() {
         return itemStock;
     }
@@ -110,6 +122,7 @@ public class MenuItem {
     public int getQuantity() {
         return quantity;
     }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
