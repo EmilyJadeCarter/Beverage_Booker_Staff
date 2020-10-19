@@ -57,5 +57,6 @@
     <string name="order_id">Order ID</string>
     <string name="order">Order #</string>
     <string name="orderstatus">orderstatus</string>
+    <string name="deliver_order">Deliver Order</string>
 
 </resources>
