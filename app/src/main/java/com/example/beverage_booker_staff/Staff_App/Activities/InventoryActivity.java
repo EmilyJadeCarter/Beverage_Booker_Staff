@@ -111,6 +111,7 @@ public class InventoryActivity extends AppCompatActivity {
                     Toast toast = Toasty.success(InventoryActivity.this, "Inventory item updated", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                     toast.show();
+
                 } else if (response.code() == 402) {
                     Toasty.Config.getInstance()
                             .setTextSize(40)
