@@ -84,7 +84,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(MainActivity.this, "Error while validating staff ID", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }

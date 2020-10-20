@@ -123,9 +123,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, "Error while updating the orders list", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -170,9 +173,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, "Error while adding order to queue", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
         return;
@@ -204,9 +210,12 @@ public class ViewActiveOrdersActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ViewActiveOrdersActivity.this, "Error while assigning staff to order", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
