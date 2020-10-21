@@ -131,9 +131,12 @@ public class BrowseMenuActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(BrowseMenuActivity.this, "Error while getting menu items", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -205,9 +208,12 @@ public class BrowseMenuActivity extends AppCompatActivity {
                         Toasty.Config.getInstance()
                                 .setTextSize(40)
                                 .apply();
-                        Toast toast = Toasty.error(BrowseMenuActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                        Toast toast = Toasty.error(BrowseMenuActivity.this, "Error while deleting menu item", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                         toast.show();
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
                     }
                 });
             }
