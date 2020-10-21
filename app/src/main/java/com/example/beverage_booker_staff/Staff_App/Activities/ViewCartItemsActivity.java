@@ -124,9 +124,12 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while getting order's cart items", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -159,9 +162,12 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while getting assigned staff member", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -189,9 +195,12 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while removing staff from order", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
         backButtonClicked = true;
@@ -252,9 +261,12 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                         Toasty.Config.getInstance()
                                 .setTextSize(40)
                                 .apply();
-                        Toast toast = Toasty.error(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                        Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while confirming order", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                         toast.show();
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
                     }
                 });
             }
