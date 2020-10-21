@@ -253,9 +253,12 @@ public class ItemFormActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ItemFormActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ItemFormActivity.this, "Error while adding item to list", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
         return;
@@ -301,9 +304,12 @@ public class ItemFormActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(ItemFormActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(ItemFormActivity.this, "Error while modifying item in list", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
         return;
