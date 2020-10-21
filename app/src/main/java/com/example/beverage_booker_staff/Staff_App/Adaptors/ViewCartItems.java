@@ -106,8 +106,8 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         }
     }
 
-    public ViewCartItems(ArrayList<CartItems> listItems) {
-        this.mContext = mContext;
+    public ViewCartItems(Context context, ArrayList<CartItems> listItems) {
+        mContext = context;
         cartItems = listItems;
     }
 
@@ -247,7 +247,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(mContext, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(mContext, "Error while updating checkboxes", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
             }

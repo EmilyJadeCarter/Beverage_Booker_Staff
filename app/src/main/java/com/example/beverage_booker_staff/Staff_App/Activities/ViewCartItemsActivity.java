@@ -71,7 +71,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mCartItems = new ArrayList<>();
-        mRecyclerAdapter = new ViewCartItems(mCartItems);
+        mRecyclerAdapter = new ViewCartItems(this, mCartItems);
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
         unassignOrderButton = findViewById(R.id.ButtonUnassignOrder);
