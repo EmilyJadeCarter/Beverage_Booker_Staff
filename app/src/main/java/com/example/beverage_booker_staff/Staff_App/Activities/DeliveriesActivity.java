@@ -1,5 +1,6 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
@@ -113,9 +114,12 @@ public class DeliveriesActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(DeliveriesActivity.this, "Error while updating deliveries list", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -154,9 +158,12 @@ public class DeliveriesActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(DeliveriesActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(DeliveriesActivity.this, "Error while marking order delivered", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
