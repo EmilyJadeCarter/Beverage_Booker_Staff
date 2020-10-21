@@ -117,9 +117,12 @@ public class CreateStaffActivity extends AppCompatActivity {
                 Toasty.Config.getInstance()
                         .setTextSize(40)
                         .apply();
-                Toast toast = Toasty.error(CreateStaffActivity.this, t.getMessage(), Toast.LENGTH_LONG);
+                Toast toast = Toasty.error(CreateStaffActivity.this, "Error while creating staff member", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
                 toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
