@@ -49,7 +49,9 @@ public class StaffMenuBar extends Fragment {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
                 SharedPrefManager.getInstance(StaffMenuBar.super.getActivity()).clear();
-                startActivity(new Intent(StaffMenuBar.super.getActivity(), MainActivity.class));
+                Intent intent = new Intent(StaffMenuBar.super.getActivity(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
     }
