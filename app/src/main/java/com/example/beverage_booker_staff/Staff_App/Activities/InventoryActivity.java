@@ -1,6 +1,8 @@
 package com.example.beverage_booker_staff.Staff_App.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import com.example.beverage_booker_staff.Staff_App.Models.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,7 +82,15 @@ public class InventoryActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<MenuItem>> call, Throwable t) {
-                Toast.makeText(InventoryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(InventoryActivity.this, "Error while getting inventory", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -98,15 +109,34 @@ public class InventoryActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
-                    Toast.makeText(InventoryActivity.this, "Inventory item updated", Toast.LENGTH_SHORT).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.success(InventoryActivity.this, "Inventory item updated", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
+
                 } else if (response.code() == 402) {
-                    Toast.makeText(InventoryActivity.this, "Inventory item failed to update", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(InventoryActivity.this, "Inventory item failed to update", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(InventoryActivity.this, "Error while updating stock", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
 

@@ -2,6 +2,7 @@ package com.example.beverage_booker_staff.Staff_App.Adaptors;
 
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.beverage_booker_staff.Staff_App.Models.CartItems;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,10 +91,9 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
                 public void onClick(View v) {
                     if (mListener != null) {
                         int position = getAdapterPosition();
-                        if(mDone.isChecked()==true){
+                        if (mDone.isChecked() == true) {
                             updateItemStatus(position, 1);
-                        }
-                        else if(mDone.isChecked()==false){
+                        } else if (mDone.isChecked() == false) {
                             updateItemStatus(position, 0);
                         }
                         if (position != RecyclerView.NO_POSITION) {
@@ -105,8 +106,8 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         }
     }
 
-    public ViewCartItems(ArrayList<CartItems> listItems) {
-        this.mContext=mContext;
+    public ViewCartItems(Context context, ArrayList<CartItems> listItems) {
+        mContext = context;
         cartItems = listItems;
     }
 
@@ -206,8 +207,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
             holder.mDone.setChecked(true);
             System.out.println("True");
             ticks = ticks + 1;
-        }
-        else if (itemStatus == 0) {
+        } else if (itemStatus == 0) {
             holder.mDone.setChecked(false);
             System.out.println("False");
             ticks = ticks - 1;
@@ -219,7 +219,7 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
         return cartItems.size();
     }
 
-    public void updateItemStatus(int position, int itemStatus){
+    public void updateItemStatus(int position, int itemStatus) {
         //update cart item status from checkbox
         String cartID = ViewCartItemsActivity.getCartID();
         CartItems itemCart = cartItems.get(position);
@@ -233,12 +233,23 @@ public class ViewCartItems extends RecyclerView.Adapter<ViewCartItems.RecyclerVi
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 402) {
-                    Toast.makeText(mContext, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(mContext, "An error occurred when updating databases", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(mContext, "Error while updating checkboxes", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
             }
         });
     }

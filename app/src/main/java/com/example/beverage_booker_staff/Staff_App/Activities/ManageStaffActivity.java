@@ -2,6 +2,7 @@ package com.example.beverage_booker_staff.Staff_App.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.example.beverage_booker_staff.Staff_App.Models.Staff;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,7 +85,15 @@ public class ManageStaffActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Staff>> call, Throwable t) {
-                Toast.makeText(ManageStaffActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ManageStaffActivity.this, "Error while getting staff list", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -101,16 +111,34 @@ public class ManageStaffActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
-                    Toast.makeText(ManageStaffActivity.this, "Staff member deleted", Toast.LENGTH_SHORT).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.success(ManageStaffActivity.this, "Staff member deleted", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
 
                 } else if (response.code() == 402) {
-                    Toast.makeText(ManageStaffActivity.this, "Staff member failed to delete", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(ManageStaffActivity.this, "Staff member failed to delete", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ManageStaffActivity.this, "Error while deleting staff member", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
 

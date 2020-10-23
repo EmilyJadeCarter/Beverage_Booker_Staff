@@ -3,6 +3,7 @@ package com.example.beverage_booker_staff.Staff_App.Activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.example.beverage_booker_staff.Staff_App.storage.SharedPrefManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,8 +60,6 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         sCartID = cartID;
         orderPosition = intent.getIntExtra(ViewActiveOrdersActivity.ORDER_POSITION, 0);
 
-
-
         activeChecker();
 
         TextView orderID = findViewById(R.id.orderID);
@@ -71,7 +71,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mCartItems = new ArrayList<>();
-        mRecyclerAdapter = new ViewCartItems(mCartItems);
+        mRecyclerAdapter = new ViewCartItems(this, mCartItems);
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
         unassignOrderButton = findViewById(R.id.ButtonUnassignOrder);
@@ -83,11 +83,11 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         });
 
         completeOrderButton = findViewById(R.id.button_Complete);
-        completeOrderButton.setOnClickListener(new View.OnClickListener(){
+        completeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupConfirmationConfirmOrder();
-           }
+            }
         });
 
 
@@ -97,7 +97,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 String itemID = String.valueOf(mCartItems.get(position).getItemID());
                 itemStatus = Integer.valueOf(mCartItems.get(position).getItemStatus());
-                System.out.println("itemStatus is "+itemStatus);
+                System.out.println("itemStatus is " + itemStatus);
                 System.out.println("position: " + position);
                 System.out.println("Item ID: " + itemID);
             }
@@ -121,7 +121,15 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<CartItems>> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while getting order's cart items", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -151,7 +159,15 @@ public class ViewCartItemsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<OrderItems>> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while getting assigned staff member", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -165,13 +181,26 @@ public class ViewCartItemsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 402) {
-                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
+                    Toasty.Config.getInstance()
+                            .setTextSize(40)
+                            .apply();
+                    Toast toast = Toasty.error(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.Config.getInstance()
+                        .setTextSize(40)
+                        .apply();
+                Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while removing staff from order", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                toast.show();
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
         backButtonClicked = true;
@@ -179,105 +208,12 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void completeOrder(){
-        //add order to completedOrders table
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .addCompletedOrder(orderNum);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 402) {
-                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void deleteOrder(){
-        //remove order from orders table
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .deleteOrder(orderNum, cartID);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 402) {
-                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void deleteStaffQueue(){
-        //remove order from staffQueue table
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .deleteStaffQueue(orderNum);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    //returnToOrders();
-                }
-                else if (response.code() == 402) {
-                    Toast.makeText(ViewCartItemsActivity.this, "An error occurred when updating databases", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void updateOrderToComplete() {
-
-        System.out.println("Check OrderNum: " + orderNum);
-        int orderID = Integer.parseInt(orderNum);
-        System.out.println("Check OrderID: " + orderID);
-
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .updateOrderStatusToComplete(orderID);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-                    Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
-
-                } else {
-                    Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
     private void returnToOrders() {
         Intent intent = new Intent(this, ViewActiveOrdersActivity.class);
         startActivity(intent);
-        //Toast.makeText(ViewCartItemsActivity.this, "Error: There is already someone on this order", Toast.LENGTH_LONG).show();
     }
 
-    public static String getCartID(){
+    public static String getCartID() {
         return sCartID;
     }
 
@@ -289,12 +225,7 @@ public class ViewCartItemsActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //completeOrder();
-                //deleteOrder();
-                //updateOrderToComplete();
-                //deleteStaffQueue();
                 returnToOrders();
-                //deleteStaffQueue();
 
                 int cartID = Integer.parseInt(getCartID());
                 System.out.println("Check : " + cartID);
@@ -308,16 +239,34 @@ public class ViewCartItemsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code() == 200) {
-                            Toast.makeText(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG).show();
+                            Toasty.Config.getInstance()
+                                    .setTextSize(40)
+                                    .apply();
+                            Toast toast = Toasty.success(ViewCartItemsActivity.this, "Order Completed", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                            toast.show();
 
                         } else {
-                            Toast.makeText(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG).show();
+                            Toasty.Config.getInstance()
+                                    .setTextSize(40)
+                                    .apply();
+                            Toast toast = Toasty.error(ViewCartItemsActivity.this, "There was a problem completing order", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                            toast.show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(ViewCartItemsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        Toasty.Config.getInstance()
+                                .setTextSize(40)
+                                .apply();
+                        Toast toast = Toasty.error(ViewCartItemsActivity.this, "Error while confirming order", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0, 100);
+                        toast.show();
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
                     }
                 });
             }
